@@ -1,5 +1,7 @@
 # Transpetro Ênfase 25 — banco de questões
 
+**Estudar agora → https://matheusmerlim1.github.io/transpetro-enfase-25/**
+
 Site de estudo para o **Edital nº 04 – TRANSPETRO/PSP/TERRA/NÍVEL SUPERIOR – 2026.4, Ênfase 25: Engenharia Mecânica** (Fundação Cesgranrio, prova em 29/11/2026).
 
 ## Como abrir
@@ -59,6 +61,10 @@ Abra o `data/q-<assunto>.js` correspondente e acrescente um objeto dentro do `wi
 Regras: `id` único, exatamente cinco alternativas, `nivel` entre `facil`, `medio` e `dificil`, e `tema` igual a uma das chaves de `data/edital.js`. Use `**negrito**` no texto se quiser destaque.
 
 Para criar um assunto novo, acrescente a chave em `TEMAS` (em `data/edital.js`), crie o `data/q-novo.js` e inclua a tag `<script>` correspondente no `index.html`.
+
+## O que não entra neste repositório
+
+Provas anteriores, gabaritos oficiais e editais em PDF **não são versionados** — o `.gitignore` bloqueia `*.pdf`. Este repositório contém apenas o site e as questões autorais.
 
 ## Aviso
 
