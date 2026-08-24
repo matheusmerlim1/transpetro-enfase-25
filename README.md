@@ -12,13 +12,15 @@ Há também o `transpetro-enfase-25.bundle.html`: a mesma página com tudo embut
 
 ## O que tem
 
-- **374 questões inéditas** no padrão Cesgranrio (cinco alternativas, resposta única), com gabarito comentado, memória de cálculo e nota de pegadinha.
-  - 330 de Conhecimentos Específicos, cobrindo os 18 itens do Anexo IV.
+- **552 questões inéditas** no padrão Cesgranrio (cinco alternativas, resposta única), com gabarito comentado, memória de cálculo e nota de pegadinha.
+  - 508 de Conhecimentos Específicos, cobrindo os 18 itens do Anexo IV.
   - 24 de Língua Portuguesa e 20 de Língua Inglesa.
+  - Distribuição por nível: cerca de 25% fáceis, 40% médias e 35% difíceis.
+  - As cinco alternativas de cada questão têm comprimento equivalente, para que o tamanho não entregue a resposta.
 - **Modo estudo** — filtra por assunto, dificuldade, questões nunca respondidas, questões erradas ou marcadas. Gabarito na hora.
 - **Simulado** — monta a prova real (50 específicas + 10 português + 10 inglês) em 4h30, com folha de navegação, marcação para revisão e relógio. No fim, aplica os três cortes eliminatórios do item 7.1.4.3 do edital e mostra o desempenho por bloco e por assunto.
-- **Revisão** — fila automática com o que você errou ou marcou com ★. A questão sai da fila após dois acertos seguidos.
-- **Formulário** — as relações que mais caem, organizadas pelos itens do edital.
+- **Revisão** — duas abas: **Resumo da matéria** (síntese dos 20 assuntos, pontos que precisam estar decorados e 40 exemplos resolvidos) e **fila de erros** automática, de onde a questão sai após dois acertos seguidos.
+- **Formulário** — 268 fórmulas organizadas pelos 18 itens do edital.
 - **Edital** — conteúdo programático transcrito do Anexo IV, com contagem de questões e foco de prova por item.
 
 Atalho: as teclas **A a E** respondem a questão em foco no modo estudo e no simulado.
@@ -31,7 +33,8 @@ assets/style.css                 identidade visual
 assets/app.js                    lógica (estudo, simulado, revisão, estatísticas)
 data/edital.js                   temas + transcrição do Anexo IV
 data/formulario.js               formulário
-data/q-*.js                      um arquivo por assunto (um por item do edital)
+data/q-*.js                      questões, um arquivo por assunto (os `-2` são a segunda leva)
+data/resumo.js                   resumo da matéria com exemplos resolvidos
 build.js                         gera a versão de arquivo único
 transpetro-enfase-25.bundle.html versão de arquivo único (gerada por build.js)
 ```
