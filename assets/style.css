@@ -310,6 +310,13 @@ select{
 .starbtn.on{color:var(--accent)}
 
 .qtexto{margin:0 0 .5rem;white-space:pre-wrap;color:var(--ink-2);max-width:70ch}
+/* termo sob análise no enunciado: destacado por cor, não apenas por peso */
+.termo{
+  background:var(--accent-wash);color:var(--accent);
+  font-weight:600;padding:.05em .32em;border-radius:3px;
+  border-bottom:2px solid var(--accent);
+  -webkit-box-decoration-break:clone;box-decoration-break:clone;
+}
 .qbox{
   background:var(--surface-2);border-left:2px solid var(--line-strong);
   padding:.7rem .9rem;margin:.8rem 0;
@@ -328,7 +335,7 @@ select{
 .qpergunta{font-weight:600;margin:.9rem 0 .95rem;max-width:70ch}
 
 /* folha de respostas */
-.alts{display:flex;flex-direction:column;gap:.3rem}
+.alts{display:flex;flex-direction:column;gap:.5rem}
 .alt{
   display:flex;gap:.7rem;align-items:flex-start;text-align:left;width:100%;
   background:var(--surface);border:1px solid var(--line);border-radius:3px;
@@ -359,6 +366,29 @@ select{
 .feedback.bad{border-left-color:var(--bad);background:var(--bad-wash)}
 .feedback.bad .fh{color:var(--bad)}
 .feedback p{margin:.4rem 0;font-size:.94rem;max-width:70ch}
+.gabarito{
+  display:flex;flex-direction:column;gap:.1rem;
+  margin:.2rem 0 .8rem;border-top:1px solid var(--line);padding-top:.6rem;
+}
+.g-linha{
+  display:grid;grid-template-columns:1.6rem minmax(0,1fr) 1.2rem;
+  gap:.55rem;align-items:baseline;
+  padding:.32rem .4rem;border-radius:4px;font-size:.9rem;color:var(--ink-2);
+}
+.g-linha + .g-linha{border-top:1px dotted var(--line)}
+.g-letra{
+  font-family:var(--mono);font-weight:600;font-size:.8rem;
+  color:var(--ink-3);text-align:center;
+}
+.g-marca{font-weight:700;text-align:center}
+.g-linha.g-certa{background:var(--ok-wash);color:var(--ink);font-weight:600}
+.g-linha.g-certa .g-letra,.g-linha.g-certa .g-marca{color:var(--ok)}
+.g-linha.g-errada{background:var(--bad-wash)}
+.g-linha.g-errada .g-letra,.g-linha.g-errada .g-marca{color:var(--bad)}
+.g-resumo{
+  margin-top:.5rem;padding-top:.5rem;border-top:1px solid var(--line);
+  font-family:var(--mono);font-size:.8rem;color:var(--ink-2);
+}
 .feedback .calc{
   font-size:.82rem;line-height:1.6;
   background:var(--surface);border:1px solid var(--line);
@@ -395,6 +425,37 @@ table.res th{
 }
 table.res td.num{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
 .tablewrap{overflow-x:auto}
+
+/* ===== sub-abas e resumo ===== */
+.subnav{display:flex;gap:.3rem;flex-wrap:wrap;margin:.9rem 0 1.1rem;border-bottom:1px solid var(--line)}
+.subnav button{
+  background:none;border:0;border-bottom:2px solid transparent;
+  padding:.5rem .8rem;cursor:pointer;color:var(--ink-3);
+  font-family:var(--mono);font-size:.74rem;font-weight:500;
+  text-transform:uppercase;letter-spacing:.07em;
+}
+.subnav button:hover{color:var(--ink)}
+.subnav button.active{color:var(--ink);border-bottom-color:var(--accent)}
+
+.r-sintese{color:var(--ink-2);max-width:74ch;margin:0 0 1rem}
+.r-rotulo{
+  font-family:var(--mono);font-size:.66rem;text-transform:uppercase;
+  letter-spacing:.12em;color:var(--ink-3);
+  margin:1.1rem 0 .5rem;padding-bottom:.3rem;border-bottom:1px solid var(--line);
+}
+.r-chaves{margin:0;padding-left:1.1rem}
+.r-chaves li{margin:.35rem 0;font-size:.92rem;max-width:76ch}
+.r-ex{
+  border-left:2px solid var(--accent);background:var(--surface-2);
+  padding:.7rem .9rem;margin:.6rem 0;border-radius:0 4px 4px 0;
+}
+.r-ex-t{font-family:var(--display);font-weight:600;font-size:.92rem;margin-bottom:.3rem}
+.r-ex-q{font-size:.9rem;color:var(--ink-2);margin-bottom:.5rem;max-width:74ch}
+.r-ex-s{
+  font-family:var(--mono);font-size:.84rem;line-height:1.6;white-space:pre-wrap;
+  background:var(--surface);border:1px solid var(--line);border-radius:4px;
+  padding:.55rem .7rem;overflow-x:auto;
+}
 
 /* ===== acordeões ===== */
 .fsec{margin-bottom:.4rem}

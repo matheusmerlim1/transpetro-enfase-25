@@ -178,8 +178,22 @@
   <!-- ================= REVISÃO ================= -->
   <section id="view-revisao" class="view">
     <h1>Revisão</h1>
-    <p class="lead">Questões que você errou ou marcou com ★. Uma questão sai da fila depois de dois acertos seguidos.</p>
-    <div id="revisaoLista"></div>
+
+    <div class="subnav">
+      <button data-rev="resumo" class="active">Resumo da matéria</button>
+      <button data-rev="fila">Minha fila de erros</button>
+    </div>
+
+    <div id="revResumo">
+      <p class="lead">Síntese de todo o conteúdo da prova, item a item do Anexo IV, com o que precisa
+      estar decorado e exemplos resolvidos. Boa leitura na véspera.</p>
+      <div id="resumoBox"></div>
+    </div>
+
+    <div id="revFila" class="hidden">
+      <p class="lead">Questões que você errou ou marcou com ★. Uma questão sai da fila depois de dois acertos seguidos.</p>
+      <div id="revisaoLista"></div>
+    </div>
   </section>
 
   <!-- ================= FORMULÁRIO ================= -->
@@ -204,6 +218,7 @@
 
 <script src="data/edital.js"></script>
 <script src="data/formulario.js"></script>
+<script src="data/resumo.js"></script>
 <script src="data/q-termodinamica.js"></script>
 <script src="data/q-mecflu.js"></script>
 <script src="data/q-transcal.js"></script>
@@ -222,6 +237,15 @@
 <script src="data/q-estatistica.js"></script>
 <script src="data/q-eletrotecnica.js"></script>
 <script src="data/q-seguranca.js"></script>
+<script src="data/q-dinamica-2.js"></script>
+<script src="data/q-elemmaq-2.js"></script>
+<script src="data/q-maqfluxo-2.js"></script>
+<script src="data/q-mci-2.js"></script>
+<script src="data/q-mecflu-2.js"></script>
+<script src="data/q-resmat-2.js"></script>
+<script src="data/q-termodinamica-2.js"></script>
+<script src="data/q-transcal-2.js"></script>
+<script src="data/q-vibracoes-2.js"></script>
 <script src="data/q-portugues.js"></script>
 <script src="data/q-ingles.js"></script>
 <script src="assets/app.js"></script>

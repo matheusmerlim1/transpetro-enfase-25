@@ -8,6 +8,7 @@
   var TEMAS = window.TEMAS || {};
   var EDITAL = window.EDITAL || {};
   var FORMULARIO = window.FORMULARIO || [];
+  var RESUMO = window.RESUMO || [];
 
   var DATA_PROVA = new Date(2026, 10, 29, 9, 0, 0); // 29/11/2026
 
@@ -52,6 +53,13 @@
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
   // marcação mínima: **negrito**, _itálico_
+  // no enunciado, o trecho entre ** é o termo sob análise: destaque colorido,
+  // bem mais legível que negrito no meio de um período longo
+  function fmtQ(t) {
+    return esc(t)
+      .replace(/\*\*(.+?)\*\*/g, '<mark class="termo">$1</mark>')
+      .replace(/_(.+?)_/g, "<i>$1</i>");
+  }
   function fmt(t) {
     return esc(t)
       .replace(/\*\*(.+?)\*\*/g, "<b>$1</b>")
@@ -142,12 +150,20 @@
   };
 
   /* ---------- navegação ---------- */
+  var rolagem = {};   // onde o candidato parou em cada aba
   function go(v) {
+    var atual = $(".view.active");
+    if (atual) rolagem[atual.id] = window.pageYOffset || 0;
+
     $$(".view").forEach(function (el) { el.classList.toggle("active", el.id === "view-" + v); });
     $$(".mainnav button").forEach(function (b) { b.classList.toggle("active", b.dataset.view === v); });
-    window.scrollTo(0, 0);
+
     if (v === "home") renderHome();
     if (v === "revisao") renderRevisao();
+
+    // consultar o formulário no meio de uma questão e voltar
+    // não deve fazer perder o lugar
+    if (window.scrollTo) window.scrollTo(0, rolagem["view-" + v] || 0);
   }
   $$(".mainnav button").forEach(function (b) { b.onclick = function () { go(b.dataset.view); }; });
   $$("[data-goto]").forEach(function (b) { b.onclick = function () { go(b.dataset.goto); }; });
@@ -167,9 +183,9 @@
     h += '<button class="starbtn' + (S.star[q.id] ? " on" : "") + '" title="Marcar para revisão">★</button>';
     h += "</div>";
 
-    if (q.texto) h += '<p class="qtexto">' + fmt(q.texto) + "</p>";
+    if (q.texto) h += '<p class="qtexto">' + fmtQ(q.texto) + "</p>";
     if (q.dados) h += renderDados(q.dados);
-    h += '<p class="qpergunta">' + fmt(q.enunciado) + "</p>";
+    h += '<p class="qpergunta">' + fmtQ(q.enunciado) + "</p>";
 
     h += '<div class="alts">';
     q.alternativas.forEach(function (a, i) {
@@ -191,7 +207,24 @@
     var ok = escolha === q.correta;
     var slot = $(".fbslot", root);
     var h = '<div class="feedback ' + (ok ? "ok" : "bad") + '">';
-    h += '<div class="fh">' + (ok ? "✓ Correto" : "✗ Incorreto") + " — gabarito: " + LETRAS[q.correta] + "</div>";
+    h += '<div class="fh">' + (ok ? "✓ Você acertou" : "✗ Você errou") + "</div>";
+
+    // espelho do gabarito: uma alternativa por linha, com a letra à esquerda
+    h += '<div class="gabarito">';
+    q.alternativas.forEach(function (alt, i) {
+      var cls = i === q.correta ? "g-certa" : (i === escolha ? "g-errada" : "");
+      var marca = i === q.correta ? "✓" : (i === escolha ? "✗" : "");
+      h += '<div class="g-linha ' + cls + '">' +
+             '<span class="g-letra">' + LETRAS[i] + "</span>" +
+             '<span class="g-texto">' + fmt(alt) + "</span>" +
+             '<span class="g-marca">' + marca + "</span>" +
+           "</div>";
+    });
+    h += '<div class="g-resumo">Gabarito: letra <b>' + LETRAS[q.correta] + "</b>" +
+         (escolha == null ? " · em branco"
+            : ok ? "" : " · você marcou a letra " + LETRAS[escolha]) + "</div>";
+    h += "</div>";
+
     if (q.calculo) h += renderCalculo(q.calculo);
     h += "<p>" + fmt(q.explicacao) + "</p>";
     if (q.pegadinha) h += '<p class="muted"><b>Atenção:</b> ' + fmt(q.pegadinha) + "</p>";
@@ -605,6 +638,39 @@
   }
 
   /* ============================================================
+     RESUMO GERAL DA MATÉRIA
+     ============================================================ */
+  function renderResumo() {
+    var box = $("#resumoBox");
+    if (!box) return;
+    box.innerHTML = RESUMO.map(function (r, k) {
+      var n = BANCO.filter(function (q) { return q.tema === r.tema; }).length;
+      var h = '<details class="fsec"' + (k === 0 ? " open" : "") + "><summary>" +
+        esc(temaNome(r.tema)) + ' <span class="muted">(' + n + " questões)</span></summary>" +
+        '<div class="fbody">';
+      h += '<p class="r-sintese">' + fmt(r.sintese) + "</p>";
+      h += '<div class="r-rotulo">Precisa estar decorado</div><ul class="r-chaves">' +
+        r.chaves.map(function (c) { return "<li>" + fmt(c) + "</li>"; }).join("") + "</ul>";
+      h += '<div class="r-rotulo">Exemplos resolvidos</div>';
+      r.exemplos.forEach(function (e) {
+        h += '<div class="r-ex"><div class="r-ex-t">' + fmt(e.titulo) + "</div>" +
+          '<div class="r-ex-q">' + fmt(e.enunciado) + "</div>" +
+          '<div class="r-ex-s">' + esc(e.solucao) + "</div></div>";
+      });
+      return h + "</div></details>";
+    }).join("");
+  }
+
+  $$(".subnav button").forEach(function (b) {
+    b.onclick = function () {
+      $$(".subnav button").forEach(function (x) { x.classList.toggle("active", x === b); });
+      $("#revResumo").classList.toggle("hidden", b.dataset.rev !== "resumo");
+      $("#revFila").classList.toggle("hidden", b.dataset.rev !== "fila");
+      if (b.dataset.rev === "fila") renderRevisao();
+    };
+  });
+
+  /* ============================================================
      FORMULÁRIO
      ============================================================ */
   function renderFormulario() {
@@ -647,6 +713,7 @@
 
   /* ---------- boot ---------- */
   renderHome();
+  renderResumo();
   renderFormulario();
   renderEdital();
 
