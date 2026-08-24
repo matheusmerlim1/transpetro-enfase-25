@@ -1,0 +1,27 @@
+# Credenciais e segredos
+.env
+*.env
+secrets.json
+config.local.js
+token.txt
+
+# Provas, editais e documentos pessoais
+*.pdf
+
+# Guia local de referência
+githubGuia.md
+
+# Dependências
+node_modules/
+vendor/
+package-lock.json
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Rascunhos e saídas temporárias
+tmp/
+*.bak
+data.bak/

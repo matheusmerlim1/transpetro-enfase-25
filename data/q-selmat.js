@@ -1,0 +1,185 @@
+window.BANCO.push(
+
+{ id:"SEL-01", tema:"selmat", subtema:"Critérios de seleção", nivel:"facil",
+  enunciado:"Na seleção de materiais para um equipamento industrial, o conjunto de fatores que deve ser considerado inclui, além das propriedades mecânicas,",
+  alternativas:[
+    "resistência à corrosão no meio de serviço, temperatura de operação, soldabilidade e conformabilidade, disponibilidade no mercado, exigências normativas e custo do ciclo de vida.",
+    "apenas a densidade e a cor do material.",
+    "exclusivamente o custo de aquisição do material.",
+    "somente a conformidade com a ISO 9001.",
+    "apenas o módulo de elasticidade."],
+  correta:0,
+  explicacao:"A seleção é sempre multicritério e frequentemente conflitante: o material mais resistente à corrosão costuma ser o mais caro e o de pior soldabilidade. Custo de aquisição é apenas uma parcela — a análise correta considera fabricação, montagem, inspeção, manutenção e substituição ao longo da vida útil." },
+
+{ id:"SEL-02", tema:"selmat", subtema:"Aços para tubulação", nivel:"medio",
+  enunciado:"A especificação **ASTM A106 Grau B** designa",
+  alternativas:[
+    "tubo de aço inoxidável austenítico com costura.",
+    "tubo de aço-carbono sem costura, para serviços em alta temperatura, largamente usado em tubulações de processo.",
+    "tubo de aço ao cromo-molibdênio para serviço em fluência.",
+    "tubo de aço-carbono para serviço em baixa temperatura, com requisito de ensaio de impacto.",
+    "tubo de ferro fundido nodular para adutoras."],
+  correta:1,
+  explicacao:"Referências que costumam cair em prova: **A106** (aço-carbono sem costura, alta temperatura), **API 5L** (tubulação de transporte de óleo e gás, graus X42 a X80), **A335** (aços liga Cr-Mo, tipo P11, P22, P91, para vapor de alta temperatura), **A312** (inoxidável austenítico, TP304/TP316) e **A333** (aço-carbono e liga para **baixa** temperatura, com requisito de tenacidade ao impacto)." },
+
+{ id:"SEL-03", tema:"selmat", subtema:"Aços liga", nivel:"medio",
+  enunciado:"Em tubulações de vapor superaquecido operando acima de 450 °C, os aços ao **cromo-molibdênio** (como o 2¼Cr-1Mo) são preferidos ao aço-carbono porque",
+  alternativas:[
+    "dispensam tratamento térmico após soldagem.",
+    "têm maior alongamento à temperatura ambiente.",
+    "são não magnéticos.",
+    "apresentam maior resistência à fluência e melhor resistência à oxidação e à grafitização nessas temperaturas.",
+    "são mais baratos."],
+  correta:3,
+  explicacao:"Acima de cerca de 400-450 °C, o aço-carbono perde resistência rapidamente por **fluência** (deformação lenta e contínua sob carga constante) e é suscetível à **grafitização**. O molibdênio eleva a resistência à fluência e o cromo confere resistência à oxidação. Em contrapartida, esses aços exigem **pré-aquecimento** e **tratamento térmico pós-soldagem** rigorosos, por serem temperáveis." },
+
+{ id:"SEL-04", tema:"selmat", subtema:"Aços inoxidáveis", nivel:"medio",
+  enunciado:"Sobre as famílias de aços inoxidáveis, é correto afirmar que os **austeníticos** da série 300",
+  alternativas:[
+    "não contêm níquel em sua composição.",
+    "são essencialmente não magnéticos no estado recozido, não endurecíveis por tratamento térmico, com boa soldabilidade e tenacidade, mas suscetíveis à corrosão sob tensão por cloretos.",
+    "têm o menor coeficiente de dilatação térmica entre os inoxidáveis.",
+    "possuem estrutura cúbica de corpo centrado.",
+    "são magnéticos e endurecíveis por têmpera."],
+  correta:1,
+  explicacao:"Panorama das famílias: **austeníticos** (304, 316, CFC, não magnéticos, alto Ni, endurecíveis apenas por encruamento); **ferríticos** (409, 430, CCC, magnéticos, baixo Ni, melhor resistência à CST por cloretos); **martensíticos** (410, 420, endurecíveis por têmpera, usados em facas, palhetas e válvulas); **duplex** (2205, austenoferríticos, alta resistência mecânica e à CST, PREN elevado); e os **endurecíveis por precipitação** (17-4PH).",
+  pegadinha:"Austeníticos têm coeficiente de dilatação cerca de 50% maior e condutividade térmica bem menor que o aço-carbono — o que aumenta muito as distorções na soldagem." },
+
+{ id:"SEL-05", tema:"selmat", subtema:"Aços duplex", nivel:"dificil",
+  enunciado:"Os aços inoxidáveis **duplex** (por exemplo, UNS S31803/S32205) apresentam como principais vantagens em relação aos austeníticos convencionais",
+  alternativas:[
+    "resistência mecânica cerca de duas vezes maior e alta resistência à corrosão sob tensão por cloretos e a pites, permitindo redução de espessura de parede.",
+    "menor custo de matéria-prima e maior facilidade de soldagem.",
+    "ausência de necessidade de controle do aporte térmico na soldagem.",
+    "maior resistência a temperaturas acima de 600 °C.",
+    "comportamento totalmente não magnético."],
+  correta:0,
+  explicacao:"A microestrutura balanceada (cerca de 50% ferrita, 50% austenita) confere alta resistência mecânica e ótimo desempenho em meios com cloretos — daí seu uso em água do mar, sistemas de injeção e serviços offshore. As limitações são a faixa de temperatura (aproximadamente −50 °C a 300 °C, por causa da fragilização a 475 °C e da fase sigma) e a necessidade de **controle rigoroso do aporte térmico** na soldagem, para manter o balanço de fases." },
+
+{ id:"SEL-06", tema:"selmat", subtema:"Baixas temperaturas", nivel:"medio",
+  enunciado:"Para serviço criogênico, como o armazenamento de GNL a −162 °C, o material **inadequado** entre os listados é o",
+  alternativas:[
+    "aço com 9% de níquel.",
+    "aço inoxidável austenítico AISI 304.",
+    "aço inoxidável austenítico AISI 316L.",
+    "aço-carbono comum estrutural.",
+    "liga de alumínio série 5000."],
+  correta:3,
+  explicacao:"O aço-carbono tem estrutura **CCC** e apresenta transição dúctil-frágil, tornando-se frágil bem acima das temperaturas criogênicas. Materiais adequados são os de estrutura **CFC** (austeníticos, alumínio, cobre), que não apresentam transição, e o aço com 9% Ni, cuja temperatura de transição é deslocada para muito abaixo de −196 °C.",
+  pegadinha:"O ensaio Charpy é o instrumento normativo para verificar tenacidade a baixa temperatura; a ASME exige impacto para materiais abaixo de determinada temperatura mínima de projeto (MDMT)." },
+
+{ id:"SEL-07", tema:"selmat", subtema:"Ligas de níquel", nivel:"medio",
+  enunciado:"As ligas de níquel do tipo **Inconel** (Ni-Cr-Fe) são especificadas principalmente por sua",
+  alternativas:[
+    "baixa resistência mecânica, adequada a componentes flexíveis.",
+    "grande condutividade elétrica.",
+    "excelente resistência à corrosão e à oxidação em altas temperaturas, mantendo boa resistência mecânica em condições em que os aços inoxidáveis já falhariam.",
+    "propriedade magnética elevada.",
+    "baixa densidade e alta usinabilidade."],
+  correta:2,
+  explicacao:"Referências úteis: **Inconel** (Ni-Cr-Fe, alta temperatura, fornos, palhetas de turbina a gás); **Monel** (Ni-Cu, excelente em água do mar, HF e meios redutores); **Hastelloy** (Ni-Mo-Cr, resistente a ácidos fortes e redutores); e o **Incoloy** (mais ferro, custo intermediário). São materiais caros, frequentemente aplicados como **revestimento (cladding)** sobre aço-carbono, em vez de material maciço." },
+
+{ id:"SEL-08", tema:"selmat", subtema:"Ligas de cobre", nivel:"medio",
+  enunciado:"Para tubos de trocadores de calor resfriados com água do mar, uma escolha tradicionalmente adequada é a liga de",
+  alternativas:[
+    "aço-carbono galvanizado.",
+    "bronze fosforoso, por sua elevada dureza.",
+    "ferro fundido cinzento.",
+    "latão comum (Cu-Zn) sem inibidor.",
+    "cupro-níquel 90/10 ou 70/30, pela boa resistência à corrosão marinha, à erosão e à incrustação biológica."],
+  correta:4,
+  explicacao:"As ligas cupro-níquel combinam resistência à corrosão em água do mar, boa condutividade térmica e efeito bioestático natural do cobre (reduz incrustação). O **latão comum** sofre **dezincificação** (corrosão seletiva) em água do mar — por isso se usam latões inibidos com arsênio (latão-almirantado). O bronze fosforoso é liga de mancal e mola, não de tubo de trocador.",
+  pegadinha:"Ligas de cobre têm limite de velocidade de escoamento: acima de cerca de 2-3 m/s, sofrem corrosão-erosão." },
+
+{ id:"SEL-09", tema:"selmat", subtema:"Ferros fundidos", nivel:"medio",
+  enunciado:"O ferro fundido **nodular** (dúctil) difere do ferro fundido **cinzento** principalmente por",
+  alternativas:[
+    "ter menor resistência à compressão.",
+    "não conter carbono.",
+    "ter matriz totalmente martensítica.",
+    "ser não magnético.",
+    "apresentar grafita em forma esferoidal, obtida por tratamento com magnésio, o que confere ductilidade e tenacidade muito superiores."],
+  correta:4,
+  explicacao:"No cinzento, a grafita em **lamelas** age como entalhes internos, tornando o material frágil em tração — embora excelente em amortecimento de vibrações e em compressão, por isso usado em bases de máquinas-ferramenta. O nodular tem grafita **esferoidal**, sem efeito de entalhe, alcançando alongamento de 3% a 18% — usado em tubos de adutoras, carcaças de bombas, virabrequins e conexões." },
+
+{ id:"SEL-10", tema:"selmat", subtema:"Polímeros", nivel:"medio",
+  enunciado:"O PTFE (politetrafluoretileno) é largamente empregado em juntas, sedes de válvulas e revestimentos internos porque apresenta",
+  alternativas:[
+    "excelente resistência à abrasão em serviços com sólidos.",
+    "elevada resistência mecânica e alta rigidez.",
+    "inércia química quase universal, baixíssimo coeficiente de atrito e ampla faixa de temperatura de uso, embora com baixa resistência à fluência (creep).",
+    "alta condutividade elétrica.",
+    "custo muito inferior ao do polietileno."],
+  correta:2,
+  explicacao:"O PTFE resiste a praticamente todos os produtos químicos industriais e trabalha entre cerca de −200 °C e 260 °C. Seu grande problema é o **cold flow** (escoamento a frio sob carga constante), que provoca perda de aperto em juntas flangeadas — daí o uso de PTFE expandido, cargas de enchimento (vidro, grafite) e juntas espirotelescopadas com enchimento de PTFE.",
+  pegadinha:"Em prova, associe: PEAD a linhas de água e esgoto e revestimento interno de dutos; PVC a redes de baixa pressão e temperatura; PRFV a tanques e linhas corrosivas de baixa pressão." },
+
+{ id:"SEL-11", tema:"selmat", subtema:"Elastômeros", nivel:"medio",
+  enunciado:"Para vedações (anéis O-ring) em contato com derivados de petróleo e óleos minerais, o elastômero mais tradicionalmente indicado é o",
+  alternativas:[
+    "NBR (borracha nitrílica).",
+    "borracha natural.",
+    "EPDM.",
+    "silicone.",
+    "neoprene em contato com vapor superaquecido."],
+  correta:0,
+  explicacao:"A **NBR** tem boa resistência a óleos e hidrocarbonetos, sendo a escolha padrão e econômica. O **EPDM** é excelente em água quente, vapor e produtos químicos polares, mas é **atacado por óleos**. O **FKM (Viton)** cobre altas temperaturas e serviços agressivos com hidrocarbonetos, a custo bem mais elevado. Em serviços com gás em alta pressão, deve-se considerar a **descompressão explosiva** (RGD), que exige elastômeros específicos." },
+
+{ id:"SEL-12", tema:"selmat", subtema:"Alumínio", nivel:"medio",
+  enunciado:"Entre as características que tornam as ligas de alumínio atrativas para determinadas aplicações industriais, e as limitações que restringem seu uso, estão",
+  alternativas:[
+    "alta densidade e alto módulo de elasticidade; limitação por baixo ponto de fusão.",
+    "baixa densidade, boa condutividade térmica e elétrica e resistência à corrosão atmosférica pela camada de alumina; limitações de baixa resistência a temperaturas elevadas e módulo de elasticidade cerca de 1/3 do aço.",
+    "excelente soldabilidade sem cuidados especiais; limitação por baixa condutividade.",
+    "alta resistência mecânica em altas temperaturas; limitação por custo excessivo.",
+    "alta resistência à corrosão por soda cáustica; limitação por fragilidade."],
+  correta:1,
+  explicacao:"Densidade cerca de 1/3 e módulo cerca de 1/3 do aço: para a mesma rigidez de flexão, é preciso aumentar a seção, mas ainda assim se obtém economia de peso. O alumínio é atacado por meios **fortemente alcalinos** (soda cáustica) e não deve ser usado em altas temperaturas. Sua estrutura CFC o torna adequado a serviços criogênicos." },
+
+{ id:"SEL-13", tema:"selmat", subtema:"Compósitos", nivel:"medio",
+  enunciado:"Os materiais compósitos do tipo PRFV (plástico reforçado com fibra de vidro), usados em tanques e tubulações de meios corrosivos, caracterizam-se por",
+  alternativas:[
+    "comportamento isotrópico e alta resistência à temperatura.",
+    "resistência mecânica independente da orientação das fibras.",
+    "possibilidade de reparo por soldagem convencional.",
+    "comportamento anisotrópico, com elevada relação resistência/peso, excelente resistência à corrosão, porém limitações de temperatura e de resistência ao impacto e à abrasão.",
+    "condutividade elétrica elevada, dispensando aterramento."],
+  correta:3,
+  explicacao:"A resistência do compósito depende fortemente da **orientação das fibras** em relação ao carregamento, o que é explorado no processo de enrolamento filamentar (filament winding) de tubos e vasos. Como são isolantes elétricos, exigem cuidado com **acúmulo de carga estática** no transporte de hidrocarbonetos." },
+
+{ id:"SEL-14", tema:"selmat", subtema:"Serviço ácido", nivel:"dificil",
+  enunciado:"Para uma tubulação de aço-carbono que operará em **serviço ácido** (presença de H₂S úmido), o requisito adicional mais relevante na especificação do material e do procedimento de soldagem é",
+  alternativas:[
+    "aumentar o teor de enxofre do aço-base.",
+    "usar exclusivamente eletrodos celulósicos.",
+    "aumentar a dureza da zona termicamente afetada para resistir ao ataque.",
+    "eliminar o pré-aquecimento para reduzir custos.",
+    "limitar a dureza (tipicamente a 22 HRC), controlar o carbono equivalente e prever tratamento térmico de alívio de tensões."],
+  correta:4,
+  explicacao:"Microestruturas duras (martensita não revenida) são altamente suscetíveis ao **SSC**. O controle passa por composição química limpa (baixo enxofre e fósforo, aço acalmado, com tratamento de inclusões por cálcio para evitar HIC), por procedimento de soldagem qualificado com dureza controlada e pelo **alívio de tensões pós-soldagem**, que revenido a ZTA e reduz as tensões residuais.",
+  pegadinha:"Aumentar a resistência mecânica do aço geralmente **piora** o desempenho em serviço ácido — aqui, mais forte não é melhor." },
+
+{ id:"SEL-15", tema:"selmat", subtema:"Cladding", nivel:"medio",
+  enunciado:"A técnica de **cladding** (revestimento metalúrgico) aplicada a vasos de pressão e tubulações consiste em",
+  alternativas:[
+    "efetuar cementação superficial para aumentar a dureza.",
+    "aplicar tinta epóxi de alta espessura na superfície interna.",
+    "aplicar proteção catódica por corrente impressa.",
+    "revestir um substrato de aço-carbono ou baixa liga com uma camada de material nobre (inoxidável, liga de níquel), combinando a resistência mecânica e o baixo custo do substrato com a resistência à corrosão do revestimento.",
+    "substituir integralmente o material por liga de níquel."],
+  correta:3,
+  explicacao:"O cladding pode ser obtido por laminação conjunta (roll bonding), por explosão ou por deposição de solda (weld overlay). É a solução econômica clássica quando a espessura necessária para resistência mecânica é grande e o material resistente à corrosão é caro — típico de vasos de unidades de processo e de dutos de serviço ácido." },
+
+{ id:"SEL-16", tema:"selmat", subtema:"Propriedades", nivel:"facil",
+  enunciado:"Um material que apresenta **alta tenacidade** é aquele que",
+  alternativas:[
+    "absorve grande quantidade de energia antes de fraturar, combinando resistência e ductilidade.",
+    "resiste a grandes tensões sem se deformar.",
+    "possui a maior dureza superficial.",
+    "não sofre deformação plástica.",
+    "tem o maior módulo de elasticidade."],
+  correta:0,
+  calculo:"Tenacidade ≈ área sob a curva tensão-deformação até a fratura",
+  explicacao:"Não confundir: **resistência** é a tensão que o material suporta; **rigidez** é a resistência à deformação elástica (módulo E); **dureza** é a resistência à penetração; **ductilidade** é a capacidade de deformar plasticamente; **tenacidade** é a energia absorvida até a fratura. Um vidro é resistente e rígido, mas nada tenaz. O ensaio **Charpy** mede a tenacidade ao impacto e serve para levantar a curva de transição dúctil-frágil." }
+
+);

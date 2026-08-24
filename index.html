@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transpetro Ênfase 25</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="logo">⚙</span>
+    <div>
+      <strong>TRANSPETRO 2026 · Ênfase 25</strong>
+      <small>Engenharia Mecânica — Cesgranrio · PSP/TERRA/NS 2026.4</small>
+    </div>
+  </div>
+  <nav class="mainnav">
+    <button data-view="home" class="active">Início</button>
+    <button data-view="estudo">Estudo</button>
+    <button data-view="simulado">Simulado</button>
+    <button data-view="revisao">Revisão</button>
+    <button data-view="formulario">Formulário</button>
+    <button data-view="edital">Edital</button>
+  </nav>
+  <div class="topactions">
+    <button id="themeBtn" class="icon" title="Alternar tema">◐</button>
+  </div>
+</header>
+
+<main id="app">
+
+  <!-- ================= HOME ================= -->
+  <section id="view-home" class="view active">
+    <div class="hero">
+      <div>
+        <h1>Banco de questões para o concurso da Transpetro</h1>
+        <p class="lead">Questões inéditas no padrão <strong>Cesgranrio</strong> (cinco alternativas, resposta única),
+        construídas item a item sobre o <strong>Anexo IV do Edital nº 04 – TRANSPETRO/PSP/TERRA/NÍVEL SUPERIOR – 2026.4</strong>,
+        Ênfase 25: Engenharia Mecânica. Todas com gabarito comentado.</p>
+        <div class="herobtns">
+          <button class="btn primary" data-goto="estudo">Começar a estudar</button>
+          <button class="btn" data-goto="simulado">Fazer um simulado</button>
+        </div>
+      </div>
+      <div class="countdown card" id="countdown"></div>
+    </div>
+
+    <div class="statgrid">
+      <div class="card stat"><span class="stat-n" id="stTotal">–</span><span class="stat-l">questões no banco</span></div>
+      <div class="card stat"><span class="stat-n" id="stFeitas">–</span><span class="stat-l">respondidas por você</span></div>
+      <div class="card stat"><span class="stat-n" id="stAcerto">–</span><span class="stat-l">aproveitamento geral</span></div>
+      <div class="card stat"><span class="stat-n" id="stErros">–</span><span class="stat-l">na fila de revisão</span></div>
+    </div>
+
+    <h2>Desempenho por assunto</h2>
+    <div id="temaGrid" class="temagrid"></div>
+
+    <div class="card danger-zone">
+      <div>
+        <strong>Zerar progresso</strong>
+        <p class="muted">Apaga histórico de respostas, estatísticas e fila de revisão gravados neste navegador.</p>
+      </div>
+      <button class="btn ghost" id="resetBtn">Apagar tudo</button>
+    </div>
+  </section>
+
+  <!-- ================= ESTUDO ================= -->
+  <section id="view-estudo" class="view">
+    <div id="estudoSetup">
+      <h1>Modo estudo</h1>
+      <p class="lead">Escolha os assuntos. O gabarito e o comentário aparecem logo após cada resposta.</p>
+
+      <div class="card">
+        <div class="row between">
+          <strong>Assuntos</strong>
+          <div class="btnset">
+            <button class="btn tiny" id="selAll">Marcar todos</button>
+            <button class="btn tiny" id="selNone">Desmarcar</button>
+            <button class="btn tiny" id="selEsp">Só específicas</button>
+          </div>
+        </div>
+        <div id="temaChecks" class="checkgrid"></div>
+      </div>
+
+      <div class="card">
+        <div class="optrow">
+          <label>Quantidade
+            <select id="qtdSel">
+              <option>10</option><option selected>20</option><option>30</option>
+              <option>50</option><option value="9999">Todas</option>
+            </select>
+          </label>
+          <label>Dificuldade
+            <select id="nivelSel">
+              <option value="">Todas</option>
+              <option value="facil">Fácil</option>
+              <option value="medio">Média</option>
+              <option value="dificil">Difícil</option>
+            </select>
+          </label>
+          <label>Filtro
+            <select id="filtroSel">
+              <option value="todas">Todas as questões</option>
+              <option value="ineditas">Nunca respondidas</option>
+              <option value="erradas">Que eu já errei</option>
+              <option value="marcadas">Marcadas ★</option>
+            </select>
+          </label>
+          <label class="chk"><input type="checkbox" id="embaralhar" checked> Embaralhar</label>
+        </div>
+        <button class="btn primary wide" id="startEstudo">Iniciar</button>
+        <p class="muted" id="estudoAviso"></p>
+      </div>
+    </div>
+
+    <div id="estudoRun" class="hidden">
+      <div class="runbar">
+        <button class="btn tiny ghost" id="sairEstudo">← Sair</button>
+        <div class="progresswrap"><div class="progressbar"><i id="estProg"></i></div><span id="estCount"></span></div>
+        <span id="estPlacar" class="placar"></span>
+      </div>
+      <div id="estudoQ"></div>
+    </div>
+  </section>
+
+  <!-- ================= SIMULADO ================= -->
+  <section id="view-simulado" class="view">
+    <div id="simSetup">
+      <h1>Simulado</h1>
+      <p class="lead">Reproduz a estrutura da prova: <strong>50 questões de Conhecimentos Específicos + 10 de Língua
+      Portuguesa + 10 de Língua Inglesa</strong>, em 4h30. Gabarito só no final.</p>
+
+      <div class="card">
+        <div class="optrow">
+          <label>Modelo
+            <select id="simModelo">
+              <option value="oficial">Oficial — 70 questões (50+10+10) · 4h30</option>
+              <option value="esp">Só Específicas — 50 questões · 3h20</option>
+              <option value="rapido">Rápido — 20 questões específicas · 1h20</option>
+            </select>
+          </label>
+          <label class="chk"><input type="checkbox" id="simTimer" checked> Cronômetro ativo</label>
+        </div>
+        <button class="btn primary wide" id="startSim">Iniciar simulado</button>
+      </div>
+
+      <div class="card info">
+        <strong>Critérios de eliminação do edital (item 7.1.4.3)</strong>
+        <ul>
+          <li>Aproveitamento inferior a <strong>50%</strong> em Conhecimentos Específicos → eliminado.</li>
+          <li>Aproveitamento inferior a <strong>50%</strong> em Conhecimentos Gerais → eliminado.</li>
+          <li><strong>Grau zero</strong> em Português ou em Inglês → eliminado.</li>
+        </ul>
+        <p class="muted">O relatório final aplica esses três cortes automaticamente.</p>
+      </div>
+    </div>
+
+    <div id="simRun" class="hidden">
+      <div class="runbar sticky">
+        <button class="btn tiny ghost" id="sairSim">← Abandonar</button>
+        <div class="progresswrap"><div class="progressbar"><i id="simProg"></i></div><span id="simCount"></span></div>
+        <span id="simClock" class="clock"></span>
+        <button class="btn tiny primary" id="finalizarSim">Finalizar</button>
+      </div>
+      <div id="simNavGrid" class="navgrid"></div>
+      <div id="simQ"></div>
+      <div class="row center gap">
+        <button class="btn" id="simPrev">← Anterior</button>
+        <button class="btn" id="simNext">Próxima →</button>
+      </div>
+    </div>
+
+    <div id="simResult" class="hidden"></div>
+  </section>
+
+  <!-- ================= REVISÃO ================= -->
+  <section id="view-revisao" class="view">
+    <h1>Revisão</h1>
+    <p class="lead">Questões que você errou ou marcou com ★. Uma questão sai da fila depois de dois acertos seguidos.</p>
+    <div id="revisaoLista"></div>
+  </section>
+
+  <!-- ================= FORMULÁRIO ================= -->
+  <section id="view-formulario" class="view">
+    <h1>Formulário essencial</h1>
+    <p class="lead">Relações que mais aparecem em prova, organizadas pelos itens do Anexo IV.</p>
+    <div id="formularioBox"></div>
+  </section>
+
+  <!-- ================= EDITAL ================= -->
+  <section id="view-edital" class="view">
+    <h1>O que cai na prova</h1>
+    <div id="editalBox"></div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <p>Material de estudo independente. Não é publicação oficial da Transpetro, da Petrobras ou da Fundação Cesgranrio.
+  Conteúdo programático transcrito do Anexo IV do Edital nº 04 – TRANSPETRO/PSP/TERRA/NÍVEL SUPERIOR – 2026.4.</p>
+</footer>
+
+<script src="data/edital.js"></script>
+<script src="data/formulario.js"></script>
+<script src="data/q-termodinamica.js"></script>
+<script src="data/q-mecflu.js"></script>
+<script src="data/q-transcal.js"></script>
+<script src="data/q-resmat.js"></script>
+<script src="data/q-elemmaq.js"></script>
+<script src="data/q-dinamica.js"></script>
+<script src="data/q-vibracoes.js"></script>
+<script src="data/q-maqfluxo.js"></script>
+<script src="data/q-mci.js"></script>
+<script src="data/q-ciclospot.js"></script>
+<script src="data/q-corrosao.js"></script>
+<script src="data/q-selmat.js"></script>
+<script src="data/q-metalurgia.js"></script>
+<script src="data/q-fabricacao.js"></script>
+<script src="data/q-soldagem.js"></script>
+<script src="data/q-estatistica.js"></script>
+<script src="data/q-eletrotecnica.js"></script>
+<script src="data/q-seguranca.js"></script>
+<script src="data/q-portugues.js"></script>
+<script src="data/q-ingles.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
