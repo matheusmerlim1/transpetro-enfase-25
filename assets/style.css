@@ -488,7 +488,25 @@ table.res td.num{text-align:right;font-family:var(--mono);font-variant-numeric:t
   color:var(--ink-2);font-size:.88rem;
 }
 .fform .fn{color:var(--ink-3);font-size:.85em;margin-left:.6rem;white-space:pre-wrap}
-.fitem .fobs{font-size:.8rem;color:var(--ink-3);margin-top:.25rem;max-width:74ch}
+.fitem .fobs{font-size:.79rem;color:var(--ink-3);margin-top:.25rem;max-width:74ch}
+
+/* legenda das variáveis de cada fórmula */
+.fvars{
+  list-style:none;margin:.4rem 0 0;padding:0;
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+  gap:.1rem .9rem;
+}
+.fvars li{
+  font-size:.78rem;color:var(--ink-2);line-height:1.45;
+  padding-left:.7rem;position:relative;
+}
+.fvars li::before{
+  content:"";position:absolute;left:0;top:.55em;
+  width:3px;height:3px;border-radius:50%;background:var(--line-strong);
+}
+
+/* cabeçalho que só aparece no papel */
+.print-cabecalho{display:none}
 
 .foot{
   max-width:1020px;margin:2.5rem auto 3rem;padding:1rem clamp(1.1rem,3vw,2.2rem);
@@ -497,3 +515,48 @@ table.res td.num{text-align:right;font-family:var(--mono);font-variant-numeric:t
 .foot p{max-width:78ch}
 
 .empty{text-align:center;padding:2.6rem 1rem;color:var(--ink-3)}
+
+
+/* ============================================================
+   IMPRESSÃO — sai apenas o formulário, em preto sobre branco
+   ============================================================ */
+@media print{
+  @page{ margin:14mm 12mm; }
+
+  .topbar,.foot,.naoimprimir,.subnav,.mainnav,.icon{display:none !important}
+  .view{display:none !important}
+  #view-formulario{display:block !important}
+  main{max-width:none;margin:0;padding:0}
+
+  body{background:#fff;color:#000;font-size:9.5pt;-webkit-print-color-adjust:exact}
+
+  .print-cabecalho{
+    display:block;border-bottom:1.5pt solid #000;
+    padding-bottom:3mm;margin-bottom:5mm;
+  }
+  .print-cabecalho strong{display:block;font-family:var(--display);font-size:13pt}
+  .print-cabecalho span{display:block;font-size:8pt;color:#444;margin-top:1mm}
+
+  .fsec{margin:0 0 3mm;break-inside:avoid}
+  .fsec summary{
+    background:none;border:0;border-bottom:1pt solid #000;border-radius:0;
+    padding:1.5mm 0;font-size:11.5pt;margin-top:4mm;break-after:avoid;
+  }
+  .fsec summary::before{content:""}
+  .fsec summary .muted{display:none}
+  .fsec .fbody{border:0;padding:2mm 0 0;background:none}
+
+  .fitem{
+    break-inside:avoid;padding:1.6mm 0;
+    border-bottom:0.3pt dotted #aaa;
+  }
+  .fitem .fname{font-size:8.5pt;color:#333;font-weight:600}
+  .fform{margin-top:1mm}
+  .fform .fl{font-size:9.5pt;color:#000}
+  .fform .fl + .fl{border-left:1pt solid #bbb;color:#222;font-size:9pt}
+  .fform .fn{color:#555}
+  .fvars{grid-template-columns:repeat(auto-fill,minmax(58mm,1fr));gap:0 4mm;margin-top:1mm}
+  .fvars li{font-size:7.5pt;color:#333}
+  .fvars li::before{background:#999}
+  .fitem .fobs{font-size:7.5pt;color:#444}
+}

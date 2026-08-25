@@ -20,7 +20,7 @@ Há também o `transpetro-enfase-25.bundle.html`: a mesma página com tudo embut
 - **Modo estudo** — filtra por assunto, dificuldade, questões nunca respondidas, questões erradas ou marcadas. Gabarito na hora.
 - **Simulado** — monta a prova real (50 específicas + 10 português + 10 inglês) em 4h30, com folha de navegação, marcação para revisão e relógio. No fim, aplica os três cortes eliminatórios do item 7.1.4.3 do edital e mostra o desempenho por bloco e por assunto.
 - **Revisão** — duas abas: **Resumo da matéria** (síntese dos 20 assuntos, pontos que precisam estar decorados e 40 exemplos resolvidos) e **fila de erros** automática, de onde a questão sai após dois acertos seguidos.
-- **Formulário** — 268 fórmulas organizadas pelos 18 itens do edital.
+- **Formulário** — 268 fórmulas organizadas pelos 18 itens do edital, cada uma com o **significado e a unidade de todas as variáveis**. O botão *Imprimir / Salvar em PDF* gera uma versão limpa em preto sobre branco, com todas as seções abertas (no destino da impressão, escolha "Salvar como PDF").
 - **Edital** — conteúdo programático transcrito do Anexo IV, com contagem de questões e foco de prova por item.
 
 Atalho: as teclas **A a E** respondem a questão em foco no modo estudo e no simulado.

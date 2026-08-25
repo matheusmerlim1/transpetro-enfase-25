@@ -677,11 +677,31 @@
     $("#formularioBox").innerHTML = FORMULARIO.map(function (sec, k) {
       return '<details class="fsec"' + (k === 0 ? " open" : "") + "><summary>" + esc(sec.titulo) + "</summary>" +
         '<div class="fbody">' + sec.itens.map(function (it) {
+          var v = (it.vars && it.vars.length)
+            ? '<ul class="fvars">' + it.vars.map(function (x) {
+                return "<li>" + fmt(x) + "</li>"; }).join("") + "</ul>"
+            : "";
           return '<div class="fitem"><div class="fname">' + fmt(it.nome) + "</div>" +
-            renderFormula(it.formula) +
+            renderFormula(it.formula) + v +
             (it.obs ? '<div class="fobs">' + fmt(it.obs) + "</div>" : "") + "</div>";
         }).join("") + "</div></details>";
     }).join("");
+  }
+
+  // abrir/fechar seções e impressão do formulário
+  function detalhesFormulario(abrir) {
+    $$("#formularioBox details").forEach(function (d) { d.open = abrir; });
+  }
+  var btAbrir = $("#abrirTudo"), btFechar = $("#fecharTudo"), btImprimir = $("#imprimirForm");
+  if (btAbrir) btAbrir.onclick = function () { detalhesFormulario(true); };
+  if (btFechar) btFechar.onclick = function () { detalhesFormulario(false); };
+  if (btImprimir) btImprimir.onclick = function () {
+    detalhesFormulario(true);           // nada pode ficar escondido no papel
+    setTimeout(function () { window.print(); }, 60);
+  };
+  // Ctrl+P direto também precisa sair completo
+  if (window.addEventListener) {
+    window.addEventListener("beforeprint", function () { detalhesFormulario(true); });
   }
 
   /* ============================================================
