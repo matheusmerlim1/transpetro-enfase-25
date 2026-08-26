@@ -1,0 +1,75 @@
+window.BANCO.push(
+
+{ id:"MCI-37", tema:"mci", subtema:"Comparação Otto e Diesel", nivel:"dificil",
+  texto:"Comparando motores de ciclo Otto e de ciclo Diesel, considere as afirmações abaixo.\n\nI - Na prática, o Diesel alcança rendimento térmico superior por operar com taxas de compressão bem maiores.\nII - O motor Otto comprime mistura ar-combustível, enquanto o Diesel comprime apenas ar.\nIII - Ambos são máquinas de combustão interna, com o calor liberado dentro do próprio cilindro.",
+  enunciado:"Está correto o que se afirma em",
+  alternativas:["I, apenas.","II, apenas.","I e II, apenas.","II e III, apenas.","I, II e III."],
+  correta:4,
+  explicacao:"As três estão corretas. O detalhe fino: para a **mesma** taxa de compressão o Otto seria mais eficiente; o Diesel vence na prática porque pode comprimir muito mais (15 a 22 contra 9 a 11), já que comprime só ar e não corre risco de detonação.",
+  pegadinha:"Uma pegadinha frequente é afirmar que o Diesel é de combustão externa. Ambos são internos — externa é a máquina a vapor." },
+
+{ id:"MCI-38", tema:"mci", subtema:"Parâmetros geométricos", nivel:"medio",
+  texto:"Um motor de seis cilindros tem diâmetro de 90 mm e curso de 100 mm.",
+  enunciado:"A cilindrada total, em litros, é de aproximadamente",
+  alternativas:["1,91","2,54","3,05","3,82","4,58"],
+  correta:3,
+  calculo:"Vu = (π × 90²/4) × 100 = 6.362 × 100 = 636.173 mm³ ≈ 636 cm³\nV_total = 6 × 636 = 3.817 cm³ ≈ 3,82 L",
+  explicacao:"Como S > D, o motor é **subquadrado** (curso longo): favorece torque em baixa rotação, configuração típica de motores Diesel e industriais." },
+
+{ id:"MCI-39", tema:"mci", subtema:"Ciclo Otto", nivel:"dificil",
+  texto:"Dois motores Otto padrão a ar operam com taxas de compressão 8:1 e 12:1.",
+  dados:"k = 1,4;  8^0,4 = 2,297;  12^0,4 = 2,702",
+  enunciado:"O ganho de rendimento térmico do segundo em relação ao primeiro, em pontos percentuais, é de aproximadamente",
+  alternativas:["2,5","5,5","8,5","11,5","16,5"],
+  correta:1,
+  calculo:"η₁ = 1 − 1/2,297 = 0,565 = 56,5%\nη₂ = 1 − 1/2,702 = 0,630 = 63,0%\nGanho = 63,0 − 56,5 = 6,5 → ≈ 5,5 a 6,5 pontos",
+  explicacao:"O ganho de rendimento tem **retorno decrescente**: subir de 8 para 12 rende cerca de 6 pontos; subir de 12 para 16 renderia menos de 4. Isso, somado ao limite da detonação, é o que estabiliza as taxas de compressão dos motores a gasolina na faixa de 9 a 11." },
+
+{ id:"MCI-40", tema:"mci", subtema:"Desempenho", nivel:"dificil",
+  texto:"Sobre os parâmetros de desempenho de motores de combustão interna, considere as afirmações abaixo.\n\nI - A potência indicada é maior que a efetiva, sendo a diferença consumida por atrito e acessórios.\nII - O consumo específico de combustível é tanto melhor quanto menor for o seu valor numérico.\nIII - A pressão média efetiva permite comparar motores de cilindradas diferentes.",
+  enunciado:"Está correto o que se afirma em",
+  alternativas:["I, apenas.","III, apenas.","I e II, apenas.","II e III, apenas.","I, II e III."],
+  correta:4,
+  explicacao:"As três procedem. A pme é o melhor indicador para comparar projetos, por ser independente do tamanho: valores de 8 a 11 bar são típicos de motores Otto aspirados, enquanto Diesel turboalimentados ultrapassam 20 bar." },
+
+{ id:"MCI-41", tema:"mci", subtema:"Consumo", nivel:"medio",
+  texto:"Um motor desenvolve 150 kW com consumo específico de 210 g/kWh, queimando diesel de PCI 42.000 kJ/kg.",
+  enunciado:"O rendimento térmico efetivo desse motor é de aproximadamente",
+  alternativas:["32%","37%","41%","45%","52%"],
+  correta:2,
+  calculo:"Energia por kWh = 0,210 kg × 42.000 kJ/kg = 8.820 kJ\n1 kWh = 3.600 kJ\nη = 3.600/8.820 ≈ 0,408 = 41%",
+  explicacao:"A relação prática é η = 3.600/(Ce·PCI), com Ce em kg/kWh. Note que a potência de 150 kW não entra na conta — o rendimento depende só do consumo específico e do combustível." },
+
+{ id:"MCI-42", tema:"mci", subtema:"Combustíveis", nivel:"dificil",
+  texto:"Sobre combustíveis de motores, considere as afirmações abaixo.\n\nI - A octanagem mede a resistência à detonação e interessa aos motores de ignição por centelha.\nII - A cetanagem mede a facilidade de autoignição e interessa aos motores Diesel.\nIII - Um combustível de alta octanagem tem necessariamente alta cetanagem.",
+  enunciado:"Está correto APENAS o que se afirma em",
+  alternativas:["I.","III.","I e II.","I e III.","II e III."],
+  correta:2,
+  explicacao:"As duas propriedades são **antagônicas**: um bom combustível de motor Otto resiste à autoignição, e um bom combustível Diesel autoignifica com facilidade. Por isso um não implica o outro — implica justamente o contrário.",
+  pegadinha:"O etanol tem octanagem alta (cerca de 110 RON) e cetanagem baixíssima, o que o torna péssimo combustível para motores de ignição por compressão." },
+
+{ id:"MCI-43", tema:"mci", subtema:"Sistemas auxiliares", nivel:"medio",
+  enunciado:"A função do **intercooler** em um motor turboalimentado é",
+  alternativas:[
+    "resfriar o ar após a compressão, elevando sua densidade.",
+    "resfriar o óleo lubrificante que retorna ao cárter.",
+    "reduzir a temperatura dos gases antes do turbocompressor.",
+    "pré-aquecer o ar na partida a frio do motor.",
+    "condensar o vapor de combustível no coletor de admissão."],
+  correta:0,
+  explicacao:"A compressão no turbo aquece o ar e reduz sua densidade, o que corrói parte do ganho. Resfriando o ar antes da admissão, recupera-se massa e ainda se afasta o risco de detonação, o que permite pressões de sobrealimentação maiores." },
+
+{ id:"MCI-44", tema:"mci", subtema:"Manutenção", nivel:"dificil",
+  texto:"A análise periódica do óleo de um motor Diesel revela queda acentuada da viscosidade e presença de combustível.",
+  enunciado:"A causa mais provável desse resultado é",
+  alternativas:[
+    "falha de injetor ou desgaste de anéis, com diluição do óleo.",
+    "intervalo de troca excedido, com oxidação e fuligem.",
+    "entrada de água pela junta do cabeçote do motor.",
+    "excesso de aditivo melhorador do índice de viscosidade.",
+    "contaminação por poeira devido a filtro de ar saturado."],
+  correta:0,
+  explicacao:"Viscosidade **abaixo** do especificado com presença de combustível aponta diluição — injetor gotejando ou blow-by por anéis desgastados. Viscosidade **acima** apontaria oxidação e fuligem. Água indica junta de cabeçote ou trocador; silício aponta entrada de poeira.",
+  pegadinha:"Cada metal de desgaste rastreia um componente: ferro (camisas e anéis), cobre (bronzinas e trocadores), alumínio (pistões), cromo (anéis)." }
+
+);

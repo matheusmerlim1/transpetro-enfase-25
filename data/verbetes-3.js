@@ -1,0 +1,376 @@
+window.VERBETES = window.VERBETES || [];
+
+window.VERBETES.push(
+
+/* ===================== 7. VIBRAÇÕES MECÂNICAS ===================== */
+{ id:"vib-livre", tema:"vibracoes", titulo:"Vibração livre e amortecimento", padrao:true,
+  subtemas:["Conceitos","Vibração livre","Amortecimento","Decremento logarítmico","Frequência natural","Rigidez equivalente","Viga em balanço","Vibração transiente","Vibração torcional"],
+  resumo:"Todo o assunto gira em torno de um único grupo: ωn = √(k/m). Rigidez alta e massa baixa elevam a frequência natural. O amortecimento quase não muda essa frequência — o que ele muda drasticamente é a amplitude na ressonância e a rapidez com que a oscilação livre morre.",
+  pontos:[
+    "ωn = √(k/m) em rad/s; fn = ωn/2π em Hz. Não confunda as duas na resposta.",
+    "Pela deflexão estática: ωn = √(g/δ). Isolador que afunda 1 mm sob o peso próprio tem fn ≈ 15,8 Hz; 4 mm dá ≈ 7,9 Hz.",
+    "Molas em **paralelo** somam rigidezes; em **série** somam flexibilidades (1/k). Isoladores sob a mesma base estão em paralelo.",
+    "Amortecimento crítico: cc = 2√(km) = 2mωn. O fator ζ = c/cc classifica o sistema.",
+    "ζ < 1 subamortecido (oscila e decai); ζ = 1 crítico (retorna sem oscilar, no menor tempo); ζ > 1 superamortecido (retorna sem oscilar, mais devagar).",
+    "ωd = ωn√(1 − ζ²). Com ζ = 0,10 a queda é de apenas 0,5% — na prática, ωd ≈ ωn.",
+    "Decremento logarítmico δ = ln(x₁/x₂) = 2πζ/√(1−ζ²) ≈ 2πζ para ζ pequeno. É como se mede ζ experimentalmente.",
+    "Sistema torcional: ωn = √(kt/J), com kt = G·J_polar/L. Mesma estrutura, trocando massa por momento de inércia.",
+    "Viga em balanço com massa na ponta: k = 3EI/L³. A rigidez cai com o **cubo** do comprimento."],
+  formulas:[
+    "ωn = √(k/m)        fn = ωn/(2π)        ωn = √(g/δ_estático)",
+    "cc = 2·√(k·m) = 2·m·ωn        ζ = c/cc",
+    "ωd = ωn·√(1 − ζ²)",
+    "δ = ln(x₁/x₂) = 2πζ/√(1 − ζ²)",
+    "δ = (1/n)·ln(x₀/xn)",
+    "k_balanço = 3EI/L³        kt = G·Jp/L"],
+  armadilhas:[
+    "Entregar rad/s onde a alternativa está em Hz (fator 2π).",
+    "Somar rigidezes de molas em série. Em série, somam-se as flexibilidades.",
+    "Achar que amortecer reduz a frequência natural de forma relevante — não reduz."] },
+
+{ id:"vib-forcada", tema:"vibracoes", titulo:"Vibração forçada, ressonância e isolamento",
+  subtemas:["Vibração forçada","Isolamento","Excitação pela base","Dois graus de liberdade","Múltiplos graus de liberdade","Absorvedor dinâmico"],
+  resumo:"O que decide tudo é a razão de frequências r = ω/ωn. Abaixo de 1, a resposta acompanha a força; perto de 1, explode na ressonância; acima de √2, começa o isolamento. Esses três regimes explicam por que se projeta isolador mole e por que se atravessa depressa a rotação crítica.",
+  pontos:[
+    "Fator de amplificação M = 1/√[(1−r²)² + (2ζr)²]. Na ressonância exata, M = 1/(2ζ).",
+    "Com ζ = 5%, a amplitude na ressonância é **dez vezes** a deflexão estática.",
+    "Transmissibilidade cruza 1 exatamente em r = √2. Só há isolamento acima disso.",
+    "Na faixa de isolamento, **mais amortecimento piora** a transmissibilidade. O amortecimento só ajuda na passagem pela ressonância — daí o valor moderado de compromisso.",
+    "Isolar melhor significa ωn menor, ou seja, isolador mais mole e maior deflexão estática — limitada pela estabilidade da máquina.",
+    "Desbalanceamento gera força m·e·ω², que cresce com o **quadrado** da rotação; por isso a amplitude tende a um patamar em alta rotação em vez de cair.",
+    "Excitação pela base (máquina sobre piso que vibra) usa a mesma curva de transmissibilidade, lida ao contrário.",
+    "Absorvedor dinâmico não amortecido: sintonizado em ωa = √(ka/ma) = ω da excitação, anula a amplitude da massa principal **naquela** frequência.",
+    "O preço do absorvedor é criar 2 GDL: surgem duas novas naturais, uma abaixo e outra acima. Só serve para rotação constante."],
+  formulas:[
+    "r = ω/ωn        M = 1/√[(1−r²)² + (2ζr)²]",
+    "M_ressonância = 1/(2ζ)",
+    "TR = √[1 + (2ζr)²] / √[(1−r²)² + (2ζr)²]",
+    "TR (sem amortecimento) = 1/|r² − 1|",
+    "Absorvedor:  ka/ma = ω²"],
+  armadilhas:[
+    "Aumentar o amortecimento para 'melhorar o isolamento' de uma máquina já bem acima de √2 — piora.",
+    "Confundir r = √2 (transmissibilidade unitária) com r = 1 (ressonância).",
+    "Supor que o absorvedor dissipa energia. Ele não dissipa: transfere e cancela."] },
+
+{ id:"vib-balanceamento", tema:"vibracoes", titulo:"Desbalanceamento, balanceamento e velocidade crítica",
+  subtemas:["Desbalanceamento","Balanceamento","Velocidade crítica"],
+  resumo:"Desbalanceamento é a causa isolada mais comum de vibração em máquinas rotativas, e sua assinatura é inconfundível: pico em 1× a rotação, radial, com fase estável. Corrigir exige distinguir se o desequilíbrio é de força (um plano) ou de binário (dois planos).",
+  pontos:[
+    "Força centrífuga F = m·e·ω². Dobrar a rotação **quadruplica** a força.",
+    "Balanceamento **estático**: corrige força resultante, num único plano; basta para rotores em disco (L/D pequeno).",
+    "Balanceamento **dinâmico**: corrige força e binário, em dois planos; obrigatório em rotores longos.",
+    "Um rotor longo pode estar perfeitamente equilibrado em estática e ainda sacudir os mancais em oposição de fase — é o binário desbalanceado.",
+    "ISO 1940 define graus de qualidade G (G6.3 para bombas e ventiladores; G2.5 para turbinas e turbocompressores; G1 para acionamentos de precisão).",
+    "Velocidade crítica é a rotação em que a excitação encontra uma natural de flexão do rotor; deve ser **atravessada rapidamente**, nunca mantida.",
+    "Como a rigidez transversal varia com 1/L³, encurtar o vão entre mancais é a forma mais eficaz de elevar a crítica.",
+    "Rotor rígido opera abaixo da primeira crítica; rotor flexível opera acima e exige balanceamento em rotação de serviço."],
+  formulas:[
+    "F = m·e·ω²        U = m·e  [g·mm]",
+    "e_permissível = G·1000/ω   [ω em rad/s]",
+    "ωc = √(k/m),  k transversal ∝ 1/L³"],
+  armadilhas:[
+    "Tentar corrigir com um único plano um desequilíbrio de binário — a vibração não cai.",
+    "Confundir a assinatura de desbalanceamento (1× radial) com a de desalinhamento (2× e axial alta).",
+    "Deixar a máquina operar 'só um pouco' na crítica para observá-la."] },
+
+{ id:"vib-preditiva", tema:"vibracoes", titulo:"Medição, espectro e manutenção preditiva",
+  subtemas:["Análise de falhas","Transdutores","Normas","Análise espectral","Medição","Manutenção preditiva"],
+  resumo:"O espectro converte o sinal do tempo em frequências, e cada defeito tem sua assinatura. A escolha do transdutor depende do tipo de mancal: proximitor em mancal de deslizamento, acelerômetro em rolamento. A ISO 10816/20816 dá os limites de severidade em velocidade eficaz.",
+  pontos:[
+    "Assinaturas: **1× radial, fase estável** → desbalanceamento; **2× com axial alta** → desalinhamento; **muitos harmônicos com pico truncado** → folga mecânica; **frequências não múltiplas da rotação** → rolamento; **ruído aleatório de banda larga** → cavitação.",
+    "**Proximitor** (sem contato) mede deslocamento relativo eixo-mancal: exigido pela API 670 em turbinas e compressores com mancais hidrodinâmicos.",
+    "**Acelerômetro** de carcaça é a escolha em máquinas com rolamentos, onde a vibração se transmite bem à estrutura.",
+    "Deslocamento serve à baixa frequência; velocidade à faixa média (10–1.000 Hz, usada nas normas); aceleração à alta frequência, onde vivem os defeitos de rolamento e engrenamento.",
+    "ISO 10816/20816: zona **A** máquina nova; **B** aceitável para operação contínua; **C** insatisfatório para uso prolongado, tolerado por período limitado; **D** severidade capaz de causar dano.",
+    "A **tendência** vale tanto quanto o valor absoluto: um nível que dobra em semanas exige investigação mesmo dentro da zona B.",
+    "Preditiva é a base do RCM junto com análise de óleo, termografia e ultrassom; substitui troca por tempo pela troca por condição.",
+    "Resolução do espectro Δf = 1/T: janelas de aquisição curtas não separam frequências próximas, como 1× da rede e 1× da rotação de motores de indução."],
+  formulas:[
+    "v_rms  [mm/s]  — grandeza das normas ISO 10816/20816",
+    "Δf = 1/T  (resolução espectral)",
+    "BPFO, BPFI, BSF, FTF — frequências de defeito de rolamento",
+    "F_engrenamento = z · n"],
+  armadilhas:[
+    "Usar acelerômetro de carcaça em máquina com mancal de deslizamento: o filme de óleo pode isolar o movimento do eixo.",
+    "Comparar valores de pico com limites de norma expressos em rms.",
+    "Julgar a máquina só pela zona, ignorando a taxa de crescimento."] },
+
+/* ===================== 8. MÁQUINAS DE FLUXO ===================== */
+{ id:"mfx-bombas", tema:"maqfluxo", titulo:"Bombas centrífugas: curvas e ponto de operação", padrao:true,
+  subtemas:["Bombas centrífugas","Componentes","Ponto de operação","Curva do sistema","Altura de Euler","Escorvamento","Rendimento","Potência","Desempenho","Seleção","Manutenção","Válvulas","Controle de vazão"],
+  resumo:"A bomba entrega a vazão em que sua curva cruza a curva do sistema — não a vazão que se deseja. A curva do sistema é a soma da altura estática (fixa) com a perda de carga (que cresce com o quadrado da vazão). Entender esse cruzamento resolve a maioria das questões do tema.",
+  pontos:[
+    "Ponto de operação = interseção da curva H×Q da bomba com a curva do sistema. Estrangular a válvula sobe a curva do sistema e **reduz** a vazão.",
+    "Curva do sistema: H = H_estático + K·Q². A parcela estática independe da vazão.",
+    "Potência hidráulica P = ρ·g·Q·H; potência no eixo = hidráulica/η. Cuidado com kW × CV (1 CV = 0,7355 kW).",
+    "BEP é o ponto de melhor rendimento; operar longe dele gera recirculação, empuxo e vibração. A faixa preferencial usual é 70% a 120% do BEP.",
+    "Equação de Euler: H = (u₂·cu₂ − u₁·cu₁)/g. Com entrada radial, cu₁ = 0 e sobra H = u₂·cu₂/g.",
+    "Pás **para trás** (o caso normal) dão curva estável e potência que não dispara; pás para frente dão curva instável e motor sujeito a sobrecarga.",
+    "A bomba centrífuga precisa estar **escorvada**: com ar na carcaça, a massa específica despenca e ela não gera pressão.",
+    "Controle por estrangulamento é simples mas dissipa energia; controle por **variador de frequência** é o eficiente, porque a potência cai com o cubo da rotação.",
+    "Vazão de recirculação mínima protege a bomba do sobreaquecimento na operação com válvula quase fechada."],
+  formulas:[
+    "H_sistema = H_estático + K·Q²",
+    "P_hidráulica = ρ·g·Q·H        P_eixo = P_hidráulica/η",
+    "η_total = η_hidráulico · η_volumétrico · η_mecânico",
+    "H_Euler = (u₂·cu₂ − u₁·cu₁)/g",
+    "u = π·D·n/60"],
+  armadilhas:[
+    "Esquecer o rendimento e responder a potência hidráulica onde se pede a do eixo.",
+    "Somar alturas de bombas em paralelo (soma-se vazão) ou vazões em série (soma-se altura).",
+    "Supor que a bomba entrega a vazão nominal de placa independentemente do sistema."] },
+
+{ id:"mfx-npsh", tema:"maqfluxo", titulo:"NPSH e cavitação",
+  subtemas:["NPSH e cavitação","Cavitação","Vazão mínima","Empuxo axial"],
+  resumo:"Cavitação é a formação e o colapso de bolhas de vapor dentro da bomba, e o critério é sempre o mesmo: NPSH disponível maior que o requerido, com margem. Tudo o que se faz para evitá-la é aumentar o disponível — que depende da instalação, nunca da bomba.",
+  pontos:[
+    "NPSH_d = (P_atm − P_vapor)/(ρg) ± z_sucção − h_perdas. NPSH_r vem da curva do fabricante e cresce com a vazão.",
+    "Critério: NPSH_d > NPSH_r, com margem usual de 0,5 m a 1,0 m (ou 10%).",
+    "NPSH disponível é da **instalação**; requerido é da **bomba**. Trocar de bomba não aumenta o disponível.",
+    "Para elevar o NPSH_d: baixar a bomba (afogá-la), encurtar e engrossar a sucção, reduzir acessórios, resfriar o líquido.",
+    "Líquido quente tem pressão de vapor alta e é o caso mais crítico — água a 100 °C tem P_vapor igual à atmosférica e exige sucção afogada.",
+    "Sintomas: ruído de cascalho, queda de altura e vazão, vibração errática, erosão em forma de crateras no lado de baixa pressão da pá.",
+    "Estrangular a **descarga** não corrige cavitação; estrangular a **sucção** piora.",
+    "Empuxo axial em bombas de múltiplos estágios é equilibrado por tambor de balanceamento, furos de alívio ou rotores opostos."],
+  formulas:[
+    "NPSH_d = (P_atm − P_v)/(ρ·g) ± z − h_f",
+    "Critério:  NPSH_d ≥ NPSH_r + margem",
+    "σ_Thoma = NPSH_r/H"],
+  armadilhas:[
+    "Errar o sinal de z: sucção **afogada** soma; sucção **negativa** subtrai.",
+    "Achar que trocar a bomba resolve NPSH insuficiente — só reduz o requerido, e pouco.",
+    "Confundir cavitação com golpe de aríete: este é transiente de fechamento rápido de válvula."] },
+
+{ id:"mfx-semelhanca", tema:"maqfluxo", titulo:"Leis de semelhança, rotação específica e associação",
+  subtemas:["Leis de semelhança","Usinagem do rotor","Velocidade específica","Bombas em paralelo","Associação de bombas"],
+  resumo:"As leis de semelhança dizem como vazão, altura e potência mudam quando se muda a rotação ou o diâmetro: expoentes 1, 2 e 3. É a base do controle por inversor e do recorte de rotor. A rotação específica classifica o tipo de máquina, de radial a axial.",
+  pontos:[
+    "Q ∝ n; H ∝ n²; P ∝ n³. Reduzir a rotação em 20% derruba a potência para 0,8³ = 51%.",
+    "As mesmas relações valem para variação de diâmetro em recorte moderado (até cerca de 10% a 20%).",
+    "Por isso o variador de frequência é muito mais econômico que a válvula: a válvula mantém a potência e queima o excedente em perda de carga.",
+    "Rotação específica ns classifica: baixa → rotor **radial** (alta altura, baixa vazão); média → **Francis/mista**; alta → **axial** (baixa altura, alta vazão).",
+    "Bombas em **paralelo**: somam-se as vazões na mesma altura — usa-se quando falta vazão. O ganho é menor que o dobro, porque o sistema sobe.",
+    "Bombas em **série**: somam-se as alturas na mesma vazão — usa-se quando falta pressão.",
+    "Em paralelo com curvas diferentes, a bomba mais fraca pode ser bloqueada pela mais forte e operar em shut-off.",
+    "Turbinas hidráulicas seguem a mesma lógica: Pelton para grande queda e pouca vazão; Francis para queda média; Kaplan para pouca queda e muita vazão."],
+  formulas:[
+    "Q₂/Q₁ = n₂/n₁        H₂/H₁ = (n₂/n₁)²        P₂/P₁ = (n₂/n₁)³",
+    "Q ∝ D³ (mesma máquina, escala);  em recorte de rotor  Q ∝ D, H ∝ D², P ∝ D³",
+    "ns = n·√Q/H^0,75",
+    "Paralelo: soma Q      Série: soma H"],
+  armadilhas:[
+    "Aplicar expoente 2 à vazão. É 1 na vazão, 2 na altura e 3 na potência.",
+    "Somar as alturas de bombas em paralelo.",
+    "Esperar vazão dobrada ao ligar a segunda bomba em paralelo num sistema com muita perda de carga."] },
+
+{ id:"mfx-desloc", tema:"maqfluxo", titulo:"Bombas de deslocamento positivo",
+  subtemas:["Bombas de deslocamento positivo","Bombas alternativas"],
+  resumo:"A bomba volumétrica entrega vazão praticamente constante seja qual for a pressão — o oposto da centrífuga. Isso muda tudo na operação: fechar a descarga não reduz a vazão, apenas eleva a pressão até romper algo. Daí a válvula de alívio ser obrigatória.",
+  pontos:[
+    "Vazão depende do deslocamento e da rotação, quase não da pressão. A curva Q×P é praticamente vertical.",
+    "**Válvula de alívio na descarga é obrigatória** — nunca se instala bloqueio sem alívio.",
+    "Indicadas para líquidos viscosos, altas pressões e vazões pequenas e precisas (dosagem). A centrífuga perde rendimento com viscosidade; a volumétrica melhora a vedação.",
+    "Tipos: alternativas (pistão, diafragma) e rotativas (engrenagens, lóbulos, palhetas, parafuso, peristáltica).",
+    "Alternativas produzem pulsação; amortecedores de pulsação e arranjos tríplex/quíntuplex reduzem a variação.",
+    "Rendimento volumétrico cai com o desgaste e com a folga; escorregamento (slip) aumenta com a pressão diferencial.",
+    "Bomba de diafragma isola completamente o produto do acionamento — usada com fluidos tóxicos e abrasivos."],
+  formulas:[
+    "Q_teórica = deslocamento × rotação",
+    "Q_real = Q_teórica · η_volumétrico",
+    "P_eixo = Q·Δp/η_total"],
+  armadilhas:[
+    "Estrangular a descarga de uma volumétrica esperando reduzir a vazão. A pressão dispara.",
+    "Selecionar centrífuga para óleo muito viscoso — o rendimento despenca.",
+    "Esquecer que a partida deve ser com a descarga **aberta**, o inverso da centrífuga."] },
+
+{ id:"mfx-compressores", tema:"maqfluxo", titulo:"Compressores, ventiladores e surge",
+  subtemas:["Compressores","Compressores alternativos","Compressores centrífugos","Ventiladores","Ventiladores e sopradores","Controle anti-surge","Eficiência politrópica"],
+  resumo:"A grande divisão é a mesma das bombas: dinâmicos (centrífugos e axiais) contra volumétricos (alternativos, parafuso, palhetas). Os dinâmicos têm um limite operacional próprio e perigoso — o surge — que exige sistema de reciclo automático.",
+  pontos:[
+    "**Surge** é a inversão cíclica do escoamento quando a vazão cai abaixo do limite da curva; provoca esforços axiais violentos e pode destruir a máquina em segundos.",
+    "A proteção é a linha de **reciclo anti-surge**, que devolve gás à sucção para manter a vazão acima do limite. Nunca se opera à esquerda da linha de surge.",
+    "**Stonewall** (choke) é o limite oposto, de vazão máxima, quando se atinge Mach 1 na garganta.",
+    "Compressão em **múltiplos estágios com resfriamento intermediário** reduz o trabalho, porque aproxima o processo da isotérmica.",
+    "O trabalho mínimo teórico seria isotérmico; o real está entre isotérmico e adiabático, e é descrito por politrópica com 1 < n < k.",
+    "Alternativos: alta relação de compressão por estágio, vazão modesta, pulsação; centrífugos: grande vazão, relação moderada, escoamento contínuo.",
+    "**Espaço nocivo** no alternativo reduz o rendimento volumétrico e cresce com a relação de compressão; sua variação é usada como controle de capacidade.",
+    "Ventiladores movem grandes volumes com pequeno aumento de pressão; a compressibilidade é desprezível abaixo de cerca de 10 kPa.",
+    "Leis dos ventiladores são as mesmas de semelhança: Q ∝ n, p ∝ n², P ∝ n³."],
+  formulas:[
+    "W_isentrópico = (k/(k−1))·R·T₁·[(p₂/p₁)^((k−1)/k) − 1]",
+    "T₂/T₁ = (p₂/p₁)^((k−1)/k)",
+    "Politrópico: n substitui k, com 1 < n < k",
+    "η_volumétrico = 1 − c·[(p₂/p₁)^(1/n) − 1]",
+    "Estágios iguais:  relação por estágio = (p_final/p_inicial)^(1/N)"],
+  armadilhas:[
+    "Confundir surge (vazão baixa demais) com stonewall (vazão alta demais).",
+    "Achar que o intercooler existe só para proteger o material — ele reduz o **trabalho** de compressão.",
+    "Usar temperaturas em Celsius nas relações de compressão."] },
+
+{ id:"mfx-turbinas", tema:"maqfluxo", titulo:"Turbinas a vapor, a gás e hidráulicas",
+  subtemas:["Turbinas a vapor","Turbinas a gás","Turbinas hidráulicas"],
+  resumo:"Turbina é máquina de fluxo que extrai trabalho. A distinção fundamental é entre estágio de **ação** (expansão só no bocal) e de **reação** (expansão também nas palhetas móveis). Nas hidráulicas, a escolha entre Pelton, Francis e Kaplan segue queda e vazão.",
+  pontos:[
+    "**Ação** (Curtis, Rateau): toda a queda de pressão ocorre no bocal fixo; a pressão é igual na entrada e na saída da palheta móvel; não há empuxo axial de pressão.",
+    "**Reação** (Parsons): a expansão continua na palheta móvel; gera empuxo axial, exigindo tambor de balanceamento.",
+    "Grau de reação = fração da queda entálpica que ocorre no rotor. Ação puro tem grau 0; Parsons clássico, 0,5.",
+    "Turbina a vapor de **contrapressão** descarrega em rede de processo (típica de cogeração em refinaria); de **condensação** descarrega em vácuo, com maior rendimento térmico.",
+    "Extração/sangria retira vapor em estágio intermediário para aquecimento regenerativo da água de alimentação.",
+    "Rendimento isentrópico da turbina = trabalho real/trabalho isentrópico. Real é **menor** — na turbina, o denominador é o ideal.",
+    "Turbina a gás: compressor, câmara de combustão e turbina no mesmo eixo; grande parte do trabalho da turbina alimenta o compressor (back-work ratio alto).",
+    "Hidráulicas: **Pelton** (ação, grande queda, pouca vazão); **Francis** (reação, queda média); **Kaplan** (reação, pouca queda, muita vazão)."],
+  formulas:[
+    "W = ṁ·(h₁ − h₂)",
+    "η_isentrópico = (h₁ − h₂_real)/(h₁ − h₂s)",
+    "Pelton:  F = ρ·Q·(V − u)·(1 + k),  potência máxima em u = V/2",
+    "Grau de reação = Δh_rotor/Δh_estágio"],
+  armadilhas:[
+    "Inverter o rendimento isentrópico da turbina com o do compressor (neste, o ideal está no numerador).",
+    "Atribuir empuxo axial a estágio de ação puro.",
+    "Escolher Pelton para grande vazão e pequena queda — é exatamente o caso da Kaplan."] },
+
+/* ===================== 9. MOTORES DE COMBUSTÃO INTERNA ===================== */
+{ id:"mci-ciclos", tema:"mci", titulo:"Ciclos Otto e Diesel e o funcionamento do motor", padrao:true,
+  subtemas:["Ciclo Otto","Ciclo Diesel","Ciclo de trabalho","Dois e quatro tempos","Comparação Otto e Diesel","Taxa de compressão","Diagramas","ICE e ICO","Componentes","Rendimento térmico"],
+  resumo:"Otto e Diesel diferem em como o calor entra: a **volume constante** no Otto e a **pressão constante** no Diesel ideal. Para a mesma taxa de compressão, o Otto rende mais; na prática o Diesel vence porque trabalha com taxas muito maiores, limitadas no Otto pela detonação.",
+  pontos:[
+    "Quatro tempos: admissão, compressão, expansão (o único que produz trabalho) e escape. Um ciclo a cada **duas** voltas do virabrequim.",
+    "Dois tempos: um ciclo por volta, mais potência específica, porém maior consumo de óleo e pior controle de emissões.",
+    "η_Otto = 1 − 1/r^(k−1). Depende **só** da taxa de compressão e de k — não do combustível nem da carga.",
+    "η_Diesel tem o fator de corte rc, sempre > 1, que faz o rendimento ser **menor** que o do Otto de mesma taxa.",
+    "Taxas típicas: Otto de 8:1 a 12:1 (limitado pela detonação); Diesel de 14:1 a 22:1 (precisa autoinflamar).",
+    "ICE (ignição por centelha) admite mistura ar-combustível e controla carga pela borboleta; ICO (ignição por compressão) admite **só ar** e controla pela quantidade injetada.",
+    "Por não estrangular a admissão, o Diesel não tem perda de bombeamento em carga parcial — parte de sua vantagem em consumo.",
+    "O diagrama p-V real difere do ideal pelo laço de bombeamento, pelo avanço de ignição e pela abertura antecipada do escape.",
+    "r = (Vd + Vc)/Vc. Aumentar r sem mudar o combustível leva à detonação no Otto."],
+  formulas:[
+    "r = (V_deslocado + V_morto)/V_morto",
+    "η_Otto = 1 − 1/r^(k−1)",
+    "η_Diesel = 1 − (1/r^(k−1))·[(rc^k − 1)/(k(rc − 1))]",
+    "Vd = (π·D²/4)·S·nº de cilindros"],
+  armadilhas:[
+    "Usar a fórmula do Otto em motor Diesel, esquecendo o fator de corte.",
+    "Achar que combustível melhor eleva o rendimento térmico ideal — ele só permite taxa maior.",
+    "Contar um ciclo por volta em motor de quatro tempos."] },
+
+{ id:"mci-desempenho", tema:"mci", titulo:"Desempenho: torque, potência, pme e consumo",
+  subtemas:["Parâmetros geométricos","Torque e pme","Torque","Potência","Consumo","Consumo específico","Rendimento volumétrico","Rendimento mecânico","Velocidade do pistão","Balanço energético","Desempenho"],
+  resumo:"Torque mede a capacidade de esforço; potência é torque vezes rotação. A pressão média efetiva normaliza o torque pela cilindrada e permite comparar motores de tamanhos diferentes. O consumo específico é a medida real de eficiência.",
+  pontos:[
+    "P[kW] = T[N·m]·n[rpm]/9.550. É a relação mais cobrada do tema.",
+    "O torque máximo ocorre em rotação **bem abaixo** da potência máxima, onde o rendimento volumétrico é melhor.",
+    "pme = trabalho por ciclo/cilindrada. Para 4 tempos: P = pme·Vd·n/(2·60).",
+    "pme típica: 8 a 12 bar em aspirado; acima de 20 bar em Diesel turbinado. Serve para comparar motores independentemente do tamanho.",
+    "Consumo específico ce = ṁ_comb/P, em g/kWh. Quanto **menor**, melhor. Diesel gira em 200 g/kWh; Otto em 250 a 300 g/kWh.",
+    "η_térmico = 3.600/(ce · PCI), com ce em kg/kWh e PCI em kJ/kg.",
+    "η_mecânico = potência efetiva/potência indicada; cai muito em marcha lenta e em carga parcial.",
+    "Rendimento volumétrico mede quanto ar entra em relação ao volume deslocado; sobrealimentação e comandos variáveis o elevam.",
+    "Velocidade média do pistão v = 2·S·n/60 é limitada por inércia e lubrificação — daí motores de curso longo girarem menos.",
+    "Balanço energético típico: cerca de 1/3 em trabalho útil, 1/3 nos gases de escape e 1/3 no arrefecimento."],
+  formulas:[
+    "P[kW] = T[N·m]·n[rpm]/9.550",
+    "P = pme·Vd·n/(2·60)   (4 tempos, n em rpm)",
+    "ce = ṁ_comb/P  [g/kWh]",
+    "η_térmico = 3.600/(ce[kg/kWh] · PCI[kJ/kg])",
+    "η_mecânico = P_efetiva/P_indicada",
+    "v_pistão = 2·S·n/60"],
+  armadilhas:[
+    "Esquecer o divisor 2 da fórmula de potência em motor de quatro tempos.",
+    "Interpretar consumo específico alto como bom desempenho — é o contrário.",
+    "Misturar unidades de ce (g/kWh) com kg/kWh no cálculo do rendimento."] },
+
+{ id:"mci-combustiveis", tema:"mci", titulo:"Combustíveis, detonação e emissões",
+  subtemas:["Combustíveis","Combustíveis alternativos","Detonação","Mistura ar-combustível","Injeção Diesel","Emissões"],
+  resumo:"Octanagem e cetanagem medem propriedades **opostas**: a primeira, a resistência a autoinflamar; a segunda, a facilidade. Um bom combustível de Otto é péssimo para Diesel. As emissões seguem essa mesma lógica de opostos: Otto emite CO e HC; Diesel, NOx e material particulado.",
+  pontos:[
+    "**Octanagem** alta = resiste à autoignição = permite taxa de compressão maior no Otto. Etanol tem octanagem maior que a gasolina.",
+    "**Cetanagem** alta = autoinflama facilmente = menor atraso de ignição no Diesel, partida mais suave e menos ruído.",
+    "**Detonação** (knock) é a autoignição da mistura ainda não queimada à frente da chama; produz o ruído metálico e pode furar o pistão.",
+    "Fatores que favorecem a detonação: taxa alta, avanço excessivo, mistura pobre, carga alta em baixa rotação, ar de admissão quente.",
+    "Estequiometria: cerca de 14,7:1 para gasolina e 9:1 para etanol — o etanol exige mais combustível por massa de ar, com menor autonomia.",
+    "λ = 1 é estequiométrico; λ > 1 pobre; λ < 1 rico. O catalisador de três vias só funciona bem em λ ≈ 1, daí a sonda lambda.",
+    "Motor Diesel opera sempre com **excesso de ar** e λ > 1, o que explica a fumaça preta quando falta ar.",
+    "NOx exige alta temperatura: reduz-se com EGR (recircula gás inerte e baixa o pico) e trata-se com SCR/ARLA 32.",
+    "Material particulado é tratado com filtro DPF, regenerado por queima periódica da fuligem.",
+    "PCI exclui a entalpia de condensação da água dos produtos; é o valor usado em cálculo de desempenho de motores."],
+  formulas:[
+    "λ = (A/C)_real/(A/C)_estequiométrico",
+    "Gasolina ≈ 14,7:1        Etanol ≈ 9:1",
+    "η = 3.600/(ce·PCI)"],
+  armadilhas:[
+    "Trocar octanagem por cetanagem — são grandezas contrárias.",
+    "Achar que combustível de alta octanagem aumenta a potência de qualquer motor: só ajuda se o motor tiver taxa ou avanço para aproveitá-lo.",
+    "Confundir pré-ignição (fonte quente antes da centelha) com detonação (autoignição após a centelha)."] },
+
+{ id:"mci-sistemas", tema:"mci", titulo:"Sobrealimentação, lubrificação e arrefecimento",
+  subtemas:["Sobrealimentação","Lubrificação","Arrefecimento","Sistemas auxiliares","Manutenção","Motores marítimos"],
+  resumo:"Os sistemas auxiliares definem a confiabilidade do motor. A sobrealimentação aumenta a massa de ar e, com ela, a potência; a lubrificação separa as superfícies; o arrefecimento mantém a temperatura na faixa em que o óleo trabalha e o material resiste.",
+  pontos:[
+    "**Turbocompressor** aproveita a energia dos gases de escape; **compressor mecânico** (supercharger) é acionado pelo eixo e consome potência, mas responde na hora.",
+    "O **intercooler** resfria o ar comprimido, aumentando sua massa específica e reduzindo o risco de detonação.",
+    "Turbo lag é o atraso de resposta; mitigado por turbinas de geometria variável, twin-scroll e turbos menores em série.",
+    "Óleo lubrifica, **refrigera**, veda o anel, limpa por detergência e protege contra corrosão — são cinco funções, não uma.",
+    "Grau SAE indica viscosidade, não qualidade. Em 15W-40, o número antes do W refere-se ao comportamento a frio.",
+    "Classificações API: **S**erviço para motores a gasolina, **C**omercial para Diesel (CJ-4, CK-4).",
+    "Óleo multiviscoso usa melhoradores de índice de viscosidade, que sofrem cisalhamento e degradam com o uso.",
+    "Arrefecimento com termostato mantém a temperatura em torno de 85–95 °C; motor frio aumenta desgaste, consumo e diluição do óleo.",
+    "Aditivo do fluido de arrefecimento evita corrosão, cavitação de camisa úmida e eleva o ponto de ebulição.",
+    "Motores marítimos de grande porte são Diesel de dois tempos, baixa rotação, cruzeta e óleo cilíndrico separado do cárter."],
+  formulas:[
+    "ρ_ar = p/(R·T)  — base do ganho do intercooler",
+    "P ∝ massa de ar admitida",
+    "η_volumétrico = ṁ_real/(ρ·Vd·n/2)"],
+  armadilhas:[
+    "Confundir turbocompressor (gases de escape) com compressor mecânico (eixo do motor).",
+    "Achar que óleo mais viscoso é sempre melhor — dificulta a partida a frio e aumenta a perda por bombeamento.",
+    "Ler o 'W' de 15W-40 como 'weight'; é winter, comportamento a frio."] },
+
+/* ===================== 10. CICLOS DE POTÊNCIA ===================== */
+{ id:"cip-rankine", tema:"ciclospot", titulo:"Ciclo Rankine e melhorias de rendimento", padrao:true,
+  subtemas:["Ciclo Rankine","Bomba","Título","Consumo de vapor","Irreversibilidades","Rendimento isentrópico","Equipamentos auxiliares","Ciclos","Cogeração"],
+  resumo:"Quatro equipamentos, quatro processos: bomba, caldeira, turbina, condensador. O trabalho da bomba é desprezível perto do da turbina, porque comprimir líquido custa pouco. As melhorias — superaquecimento, reaquecimento e regeneração — atacam pontos diferentes do ciclo.",
+  pontos:[
+    "η = (W_turbina − W_bomba)/Q_caldeira. O trabalho da bomba costuma ficar em 1% a 2% do da turbina.",
+    "W_bomba = v·Δp, com v ≈ 0,001 m³/kg. É por bombear **líquido** que o Rankine vence o ciclo a gás em eficiência de compressão.",
+    "**Superaquecer** eleva a temperatura média de fornecimento de calor e, de quebra, aumenta o título na saída da turbina.",
+    "**Reaquecer** existe sobretudo para manter o título acima de ~0,88 e proteger as palhetas da erosão por gotas.",
+    "**Regeneração** (aquecedores de água de alimentação com vapor de extração) reduz o calor fornecido a baixa temperatura e é a melhoria de maior efeito no rendimento.",
+    "Baixar a pressão do condensador aumenta o trabalho, mas piora o título e é limitado pela temperatura da água de resfriamento.",
+    "Título x = (h − hl)/(hlv). Vapor úmido na turbina erode palhetas e derruba o rendimento.",
+    "Rendimento isentrópico da turbina = real/ideal; o da bomba = ideal/real. A ordem inverte.",
+    "Consumo específico de vapor (kg/kWh) = 3.600/W_líquido, com W em kJ/kg.",
+    "Cogeração produz eletricidade e vapor de processo, elevando o aproveitamento total da energia do combustível bem acima do de uma central puramente elétrica."],
+  formulas:[
+    "η = (W_t − W_b)/q_ent",
+    "W_b = v·(p₂ − p₁)        v_água ≈ 0,001 m³/kg",
+    "x = (h − h_l)/h_lv",
+    "η_isen,turbina = (h₁ − h₂)/(h₁ − h₂s)",
+    "η_isen,bomba = (h₂s − h₁)/(h₂ − h₁)",
+    "CEV = 3.600/W_líquido  [kg/kWh]"],
+  armadilhas:[
+    "Inverter o rendimento isentrópico entre turbina e bomba.",
+    "Desprezar o trabalho da bomba quando o enunciado dá a pressão e pede o valor exato.",
+    "Atribuir ao reaquecimento um grande ganho de rendimento — o objetivo principal é o título."] },
+
+{ id:"cip-brayton", tema:"ciclospot", titulo:"Ciclo Brayton e ciclo combinado",
+  subtemas:["Ciclo Brayton","Ciclo combinado"],
+  resumo:"No Brayton, boa parte do trabalho da turbina é consumida pelo compressor — a relação de trabalho reversa é alta, e por isso o rendimento é muito sensível às irreversibilidades. O gás de escape sai quente, e aproveitá-lo em uma caldeira de recuperação é o que cria o ciclo combinado.",
+  pontos:[
+    "η_Brayton ideal = 1 − 1/rp^((k−1)/k). Depende só da **relação de pressão** e de k.",
+    "A relação de trabalho reversa (back-work ratio) fica entre 40% e 60%: o compressor devora boa parte do trabalho da turbina.",
+    "Existe uma relação de pressão que maximiza o **trabalho líquido**, diferente da que maximiza o rendimento.",
+    "**Regeneração** só é possível quando a saída da turbina está mais quente que a saída do compressor, ou seja, com rp baixa.",
+    "Resfriamento intermediário na compressão e reaquecimento na expansão elevam o trabalho líquido, mas sem regeneração podem **piorar** o rendimento.",
+    "**Ciclo combinado**: Brayton no topo (gases a 500–600 °C no escape) alimenta a caldeira de recuperação (HRSG) de um Rankine embaixo; o conjunto ultrapassa 60% de rendimento.",
+    "É exatamente por o Brayton descartar calor a alta temperatura que existe espaço para o ciclo de baixo."],
+  formulas:[
+    "η = 1 − 1/rp^((k−1)/k)        rp = p₂/p₁",
+    "T₂/T₁ = rp^((k−1)/k)",
+    "bwr = W_compressor/W_turbina",
+    "η_combinado = η_topo + η_base·(1 − η_topo)"],
+  armadilhas:[
+    "Usar a relação de compressão volumétrica (r) do Otto no lugar da relação de pressões (rp) do Brayton.",
+    "Aplicar regeneração em ciclo de alta relação de pressão, onde ela não tem como funcionar.",
+    "Somar diretamente os rendimentos dos dois ciclos no combinado."] }
+
+);

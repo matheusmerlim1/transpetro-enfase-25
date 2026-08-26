@@ -9,6 +9,7 @@
   var EDITAL = window.EDITAL || {};
   var FORMULARIO = window.FORMULARIO || [];
   var RESUMO = window.RESUMO || [];
+  var VERBETES = window.VERBETES || [];
 
   var DATA_PROVA = new Date(2026, 10, 29, 9, 0, 0); // 29/11/2026
 
@@ -169,6 +170,63 @@
   $$("[data-goto]").forEach(function (b) { b.onclick = function () { go(b.dataset.goto); }; });
 
   /* ============================================================
+     RESUMO DETALHADO DO ASSUNTO (verbete)
+     ============================================================ */
+  // cada questão cai em um verbete pelo par tema+subtema;
+  // o verbete padrão do tema recolhe os subtemas não mapeados
+  function verbeteDe(q) {
+    var doTema = VERBETES.filter(function (v) { return v.tema === q.tema; });
+    var achado = null;
+    doTema.forEach(function (v) {
+      if (!achado && v.subtemas && v.subtemas.indexOf(q.subtema) >= 0) achado = v;
+    });
+    if (achado) return achado;
+    var padrao = null;
+    doTema.forEach(function (v) { if (!padrao && v.padrao) padrao = v; });
+    return padrao;
+  }
+
+  function abrirVerbete(v, q) {
+    if (!v) return;
+    $("#vpTema").textContent = temaNome(v.tema);
+    $("#vpTitulo").textContent = v.titulo;
+
+    var h = '<p class="vp-resumo">' + fmt(v.resumo) + "</p>";
+    if (v.pontos && v.pontos.length) {
+      h += '<div class="vp-rotulo">O que precisa estar sabido</div><ul class="vp-lista">' +
+        v.pontos.map(function (p) { return "<li>" + fmt(p) + "</li>"; }).join("") + "</ul>";
+    }
+    if (v.formulas && v.formulas.length) {
+      h += '<div class="vp-rotulo">Fórmulas do assunto</div><div class="vp-formulas">' +
+        v.formulas.map(function (f) { return '<div class="vp-f">' + esc(f) + "</div>"; }).join("") + "</div>";
+    }
+    if (v.armadilhas && v.armadilhas.length) {
+      h += '<div class="vp-rotulo">Onde a banca costuma pegar</div><ul class="vp-lista vp-arm">' +
+        v.armadilhas.map(function (p) { return "<li>" + fmt(p) + "</li>"; }).join("") + "</ul>";
+    }
+    $("#vpCorpo").innerHTML = h;
+
+    var n = BANCO.filter(function (x) { return verbeteDe(x) === v; }).length;
+    $("#vpCobertura").textContent = n + " questões do banco caem neste assunto" +
+      (q && q.subtema ? " · esta é de " + q.subtema : "");
+
+    $("#verbetePainel").classList.remove("hidden");
+    $("#vpCorpo").scrollTop = 0;
+    document.body.style.overflow = "hidden";
+  }
+
+  function fecharVerbete() {
+    $("#verbetePainel").classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
+  $$("#verbetePainel [data-fechar]").forEach(function (el) { el.onclick = fecharVerbete; });
+  $("#vpFechar").onclick = fecharVerbete;
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !$("#verbetePainel").classList.contains("hidden")) fecharVerbete();
+  });
+
+  /* ============================================================
      RENDERIZAÇÃO DE QUESTÃO
      ============================================================ */
   // opts: { modo:"estudo"|"simulado"|"revisao", numero, total, respondida, escolha, onPick }
@@ -180,8 +238,10 @@
     if (q.subtema) h += '<span class="tag">' + esc(q.subtema) + "</span>";
     h += '<span class="tag ' + q.nivel + '">' + ({ facil: "Fácil", medio: "Média", dificil: "Difícil" }[q.nivel] || q.nivel) + "</span>";
     h += "</div>";
+    h += '<div class="qacoes">';
+    if (verbeteDe(q)) h += '<button class="btn tiny verbbtn" title="Abrir o resumo detalhado deste assunto">Resumo do assunto</button>';
     h += '<button class="starbtn' + (S.star[q.id] ? " on" : "") + '" title="Marcar para revisão">★</button>';
-    h += "</div>";
+    h += "</div></div>";
 
     if (q.texto) h += '<p class="qtexto">' + fmtQ(q.texto) + "</p>";
     if (q.dados) h += renderDados(q.dados);
@@ -233,6 +293,8 @@
   }
 
   function ligarEstrela(root, q) {
+    var vb = $(".verbbtn", root);
+    if (vb) vb.onclick = function () { abrirVerbete(verbeteDe(q), q); };
     var b = $(".starbtn", root);
     if (!b) return;
     b.onclick = function () {
@@ -479,6 +541,8 @@
     var q = SIM.lista[SIM.i];
     $("#simQ").innerHTML = qHTML(q, { numero: SIM.i + 1, total: SIM.lista.length });
     var root = $("#simQ .q");
+    var vbs = $(".verbbtn", root);
+    if (vbs) vbs.onclick = function () { abrirVerbete(verbeteDe(q), q); };
     // no simulado a estrela serve como "marcar para voltar depois"
     var sb = $(".starbtn", root);
     sb.classList.toggle("on", !!SIM.flag[q.id]);
