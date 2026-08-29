@@ -240,6 +240,8 @@
     h += "</div>";
     h += '<div class="qacoes">';
     if (verbeteDe(q)) h += '<button class="btn tiny verbbtn" title="Abrir o resumo detalhado deste assunto">Resumo do assunto</button>';
+    // questão de conta: calculadora ao lado, encaixada na própria questão
+    if (q.calculo) h += '<button class="btn tiny calcbtn" title="Abrir a calculadora nesta questão">Calculadora</button>';
     h += '<button class="starbtn' + (S.star[q.id] ? " on" : "") + '" title="Marcar para revisão">★</button>';
     h += "</div></div>";
 
@@ -292,7 +294,23 @@
     slot.innerHTML = h;
   }
 
+  // antes de trocar a questão, a calculadora precisa sair de dentro dela,
+  // senão o innerHTML a leva junto
+  function soltarCalculadora() {
+    if (window.CALC) window.CALC.soltar();
+  }
+
+  // a calculadora vive em assets/calc.js e se anuncia em window.CALC
+  function ligarCalculadora(root) {
+    var b = $(".calcbtn", root);
+    if (!b) return;
+    b.onclick = function () {
+      if (window.CALC) window.CALC.alternarNaQuestao(root);
+    };
+  }
+
   function ligarEstrela(root, q) {
+    ligarCalculadora(root);
     var vb = $(".verbbtn", root);
     if (vb) vb.onclick = function () { abrirVerbete(verbeteDe(q), q); };
     var b = $(".starbtn", root);
@@ -418,6 +436,7 @@
   function estudoShow() {
     if (EST.i >= EST.lista.length) return estudoFim();
     var q = EST.lista[EST.i];
+    soltarCalculadora();
     $("#estudoQ").innerHTML = qHTML(q, { numero: EST.i + 1, total: EST.lista.length });
     var root = $("#estudoQ .q");
     ligarEstrela(root, q);
@@ -448,6 +467,7 @@
   }
   function estudoFim() {
     var t = EST.ac + EST.er, p = pct(EST.ac, t);
+    soltarCalculadora();
     $("#estudoQ").innerHTML =
       '<div class="card resulthead"><div class="resultscore">' + p + "%</div>" +
       "<p>Você acertou <b>" + EST.ac + "</b> de <b>" + t + "</b> questões.</p>" +
@@ -539,8 +559,10 @@
 
   function simShow() {
     var q = SIM.lista[SIM.i];
+    soltarCalculadora();
     $("#simQ").innerHTML = qHTML(q, { numero: SIM.i + 1, total: SIM.lista.length });
     var root = $("#simQ .q");
+    ligarCalculadora(root);
     var vbs = $(".verbbtn", root);
     if (vbs) vbs.onclick = function () { abrirVerbete(verbeteDe(q), q); };
     // no simulado a estrela serve como "marcar para voltar depois"

@@ -254,7 +254,7 @@
 
     painel = document.createElement("div");
     painel.id = "calcPainel";
-    painel.className = "calc hidden";
+    painel.className = "calcp hidden";   // .calc já é a memória de cálculo do gabarito
     painel.setAttribute("role", "dialog");
     painel.setAttribute("aria-label", "Calculadora");
 
@@ -409,6 +409,7 @@
     var ox = 0, oy = 0, arrastando = false;
 
     function inicio(cx, cy) {
+      if (painel.classList.contains("inline")) return;   // encaixado não se arrasta
       arrastando = true;
       ox = cx - painel.offsetLeft;
       oy = cy - painel.offsetTop;
@@ -451,8 +452,24 @@
     document.addEventListener("touchend", fim);
   }
 
-  /* ---------- abrir e fechar ---------- */
+  /* ---------- abrir e fechar ----------
+     Dois modos, o mesmo painel: flutuante sobre a página (botão do canto)
+     ou encaixado na própria questão (botão ao lado do resumo do assunto).
+     O encaixe existe porque o modo flutuante depende de position:fixed,
+     que não se comporta igual quando a página é servida dentro de um
+     quadro embutido — na questão, o painel está no fluxo e sempre aparece.
+  */
+  var cartao = null, obsCartao = null;
+
+  function desancorar() {
+    if (obsCartao) { obsCartao.disconnect(); obsCartao = null; }
+    cartao = null;
+    painel.classList.remove("inline");
+    if (painel.parentNode !== document.body) document.body.appendChild(painel);
+  }
+
   function abrir() {
+    desancorar();
     posicionar();
     painel.classList.remove("hidden");
     fab.classList.add("ativo");
@@ -461,16 +478,62 @@
     campo.focus();
     campo.select();
   }
+
+  function abrirNaQuestao(q) {
+    if (!q) return;
+    desancorar();
+    cartao = q;
+    painel.classList.add("inline");
+    painel.style.left = "";
+    painel.style.top = "";
+    var alts = q.querySelector(".alts");
+    if (alts && alts.nextSibling) q.insertBefore(painel, alts.nextSibling);
+    else q.appendChild(painel);
+    painel.classList.remove("hidden");
+    fab.classList.add("ativo");
+    C.aberta = false;   // o encaixe é da questão atual, não reabre sozinho
+    salvar();
+    vigiar(q);
+    campo.focus();
+    campo.select();
+  }
+
+  // se a questão for trocada, o painel some junto com ela: traz de volta
+  function vigiar(q) {
+    if (!window.MutationObserver || !q.parentNode) return;
+    obsCartao = new MutationObserver(function () {
+      if (!document.body.contains(painel)) fechar();
+    });
+    obsCartao.observe(q.parentNode, { childList: true, subtree: true });
+  }
+
   function fechar() {
     // devolve o foco à página: sem isso os atalhos A–E continuariam
     // sendo engolidos pelo campo da conta
     campo.blur();
     painel.classList.add("hidden");
+    desancorar();
     fab.classList.remove("ativo");
     C.aberta = false;
     salvar();
   }
+
   function alternar() { painel.classList.contains("hidden") ? abrir() : fechar(); }
+
+  function alternarNaQuestao(q) {
+    var aberto = !painel.classList.contains("hidden");
+    if (aberto && cartao === q) fechar();
+    else abrirNaQuestao(q);
+  }
+
+  // o app avisa antes de trocar a questão: sair na hora evita depender
+  // do observador, que só corre no ciclo seguinte
+  function soltar() { if (cartao) fechar(); }
+
+  window.CALC = {
+    abrir: abrir, fechar: fechar,
+    alternarNaQuestao: alternarNaQuestao, soltar: soltar
+  };
 
   /* ---------- integração com a página ---------- */
   // a calculadora só faz sentido onde há conta a fazer
