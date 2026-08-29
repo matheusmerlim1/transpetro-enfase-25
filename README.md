@@ -22,9 +22,10 @@ Há também o `transpetro-enfase-25.bundle.html`: a mesma página com tudo embut
 - **Simulado** — monta a prova real (50 específicas + 10 português + 10 inglês) em 4h30, com folha de navegação, marcação para revisão e relógio. No fim, aplica os três cortes eliminatórios do item 7.1.4.3 do edital e mostra o desempenho por bloco e por assunto.
 - **Revisão** — duas abas: **Resumo da matéria** (síntese dos 20 assuntos, pontos que precisam estar decorados e 40 exemplos resolvidos) e **fila de erros** automática, de onde a questão sai após dois acertos seguidos.
 - **Formulário** — 268 fórmulas organizadas pelos 18 itens do edital, cada uma com o **significado e a unidade de todas as variáveis**. O botão *Imprimir / Salvar em PDF* gera uma versão limpa em preto sobre branco, com todas as seções abertas (no destino da impressão, escolha "Salvar como PDF").
+- **Calculadora** — painel flutuante nas abas de questão e no formulário, aberto pelo botão do canto ou pela tecla **K**. Não é modal: fica por cima da tela e pode ser arrastado, então dá para ler o enunciado enquanto se faz a conta. Aceita vírgula decimal e notação científica (`5,67e-8`), tem raiz, potência, trigonometria em graus ou radianos, π, a gravidade em `g`, porcentagem, `Ans` para reaproveitar o resultado anterior e histórico das últimas contas.
 - **Edital** — conteúdo programático transcrito do Anexo IV, com contagem de questões e foco de prova por item.
 
-Atalho: as teclas **A a E** respondem a questão em foco no modo estudo e no simulado.
+Atalhos: **A a E** respondem a questão em foco no modo estudo e no simulado; **K** abre e fecha a calculadora.
 
 ## Estrutura dos arquivos
 
@@ -32,6 +33,7 @@ Atalho: as teclas **A a E** respondem a questão em foco no modo estudo e no sim
 index.html                       página
 assets/style.css                 identidade visual
 assets/app.js                    lógica (estudo, simulado, revisão, estatísticas)
+assets/calc.js                   calculadora (parser próprio de expressões, sem eval)
 data/edital.js                   temas + transcrição do Anexo IV
 data/formulario.js               formulário
 data/q-*.js                      questões, um arquivo por assunto (os `-2` são a segunda leva)
