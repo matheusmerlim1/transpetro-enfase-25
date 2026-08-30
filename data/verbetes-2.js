@@ -69,7 +69,7 @@ window.VERBETES.push(
     "Esquecer a temperatura da vizinhança: o que importa é a diferença de T⁴, não T⁴ da superfície sozinha.",
     "Achar que a radiação precisa de meio material — é exatamente o contrário."] },
 
-{ id:"trc-trocadores", tema:"transcal", titulo:"Trocadores de calor: MLDT e ε-NUT",
+{ id:"trc-trocadores", figuras:["trocador-perfis"], tema:"transcal", titulo:"Trocadores de calor: MLDT e ε-NUT",
   subtemas:["Trocadores","Método ε-NUT"],
   resumo:"Há dois problemas distintos. No de **projeto**, conhecem-se as quatro temperaturas e busca-se a área: usa-se MLDT. No de **avaliação de desempenho**, conhecem-se só as entradas e o trocador já existe: usa-se ε-NUT, que evita iteração. Saber qual método aplicar é metade da questão.",
   pontos:[
@@ -94,7 +94,7 @@ window.VERBETES.push(
     "Aumentar NUT esperando ganho proporcional: de 1,5 para 3,0 a efetividade sobe só de 0,78 para 0,95."] },
 
 /* ===================== 4. RESISTÊNCIA DOS MATERIAIS ===================== */
-{ id:"res-axial", tema:"resmat", titulo:"Solicitação axial, propriedades e ensaios", padrao:true,
+{ id:"res-axial", figuras:["tensao-deformacao"], tema:"resmat", titulo:"Solicitação axial, propriedades e ensaios", padrao:true,
   subtemas:["Solicitação axial","Propriedades","Propriedades elásticas","Lei de Hooke","Deformação","Ensaios","Barras compostas","Energia de deformação","Efeitos térmicos","Coeficiente de segurança","Estruturas hiperestáticas"],
   resumo:"A base de tudo: σ = N/A e a Lei de Hooke σ = E·ε. A partir daí saem alongamento, energia de deformação, tensões térmicas e a repartição de carga em barras compostas. Em problemas hiperestáticos, o equilíbrio não basta — é preciso a compatibilidade de deformações.",
   pontos:[
@@ -117,7 +117,7 @@ window.VERBETES.push(
     "Confundir resiliência com tenacidade, ou rigidez com resistência.",
     "Esquecer que em dilatação **livre** não há tensão alguma — só deslocamento."] },
 
-{ id:"res-flexao", tema:"resmat", titulo:"Flexão, vigas e diagramas",
+{ id:"res-flexao", figuras:["viga-biapoiada-q","viga-biapoiada-p","viga-balanco-p"], tema:"resmat", titulo:"Flexão, vigas e diagramas",
   subtemas:["Flexão","Diagramas","Momento de inércia","Cisalhamento em vigas","Cisalhamento","Flechas","Superposição","Viga hiperestática","Flexão composta"],
   resumo:"Toda questão de viga começa pelas reações e pelos diagramas de cortante e momento. Com o momento máximo, σ = M/W dá a tensão; com as fórmulas clássicas de flecha, verifica-se o serviço. Vale memorizar os casos usuais — eles cobrem a esmagadora maioria das questões.",
   pontos:[
@@ -141,7 +141,7 @@ window.VERBETES.push(
     "Trocar 1,5V/A (retângulo) por 4V/3A (círculo).",
     "Em problema hiperestático, tentar resolver só com as três equações de equilíbrio."] },
 
-{ id:"res-torcao", tema:"resmat", titulo:"Torção de eixos",
+{ id:"res-torcao", figuras:["eixo-flexao-torcao"], tema:"resmat", titulo:"Torção de eixos",
   subtemas:["Torção","Solicitações combinadas"],
   resumo:"Em seção circular, a tensão de cisalhamento cresce linearmente do centro para a superfície e o ângulo de torção acumula ao longo do comprimento. Quando há flexão junto com torção, o dimensionamento usa um momento equivalente, cuja expressão depende do critério de falha adotado.",
   pontos:[
@@ -163,7 +163,7 @@ window.VERBETES.push(
     "Usar o fator 32 (flexão) onde cabe 16 (torção).",
     "Aplicar a expressão de Tresca quando o enunciado pede von Mises — as duas aparecem como alternativas."] },
 
-{ id:"res-tensoes", tema:"resmat", titulo:"Estado de tensões, Mohr e critérios de falha",
+{ id:"res-tensoes", figuras:["elemento-tensao","mohr"], tema:"resmat", titulo:"Estado de tensões, Mohr e critérios de falha",
   subtemas:["Estado plano","Estado plano de tensões","Transformação de tensões","Critérios de falha","Concentração de tensões","Extensometria"],
   resumo:"O círculo de Mohr organiza tudo: o centro é a média das tensões normais, o raio é o cisalhamento máximo no plano, e os cruzamentos com o eixo horizontal são as tensões principais. Com as principais em mãos, von Mises ou Tresca dizem se o material escoa.",
   pontos:[
@@ -187,7 +187,7 @@ window.VERBETES.push(
     "Esquecer σ3 = 0 no critério de Tresca quando as duas do plano têm o mesmo sinal.",
     "Achar que o extensômetro a 45° mede γxy diretamente — ele mede deformação **linear** naquela direção."] },
 
-{ id:"res-flambagem", tema:"resmat", titulo:"Flambagem de colunas",
+{ id:"res-flambagem", figuras:["coluna-flambagem"], tema:"resmat", titulo:"Flambagem de colunas",
   subtemas:["Flambagem"],
   resumo:"Flambagem é instabilidade, não escoamento: a coluna perde a forma antes de esgotar a resistência do material. A carga crítica de Euler depende de E e da geometria — nunca da tensão de escoamento — e é inversamente proporcional ao **quadrado** do comprimento efetivo.",
   pontos:[
@@ -407,7 +407,7 @@ window.VERBETES.push(
     "Supor conservação de energia cinética em colisão inelástica.",
     "Tratar velocidades como escalares na reversão de jato — o sinal negativo é o que dobra a força."] },
 
-{ id:"din-corpo-rigido", tema:"dinamica", titulo:"Corpo rígido: inércia, rotação e rolamento",
+{ id:"din-corpo-rigido", figuras:["pendulo-composto"], tema:"dinamica", titulo:"Corpo rígido: inércia, rotação e rolamento",
   subtemas:["Corpo rígido","Momento de inércia","Rolamento","Pêndulo composto"],
   resumo:"Em corpo rígido, o momento de inércia é o dado que decide o resultado. Vale memorizar os casos clássicos e o teorema dos eixos paralelos. No rolamento sem escorregamento, o ponto de contato é o centro instantâneo de rotação e tem velocidade nula.",
   pontos:[

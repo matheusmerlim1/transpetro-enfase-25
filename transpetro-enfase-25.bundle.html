@@ -752,6 +752,60 @@ table.res td.num{text-align:right;font-family:var(--mono);font-variant-numeric:t
   content:" · nesta questão";letter-spacing:.06em;color:var(--ink-3);opacity:.7;
 }
 
+/* ============================================================
+   FIGURAS DAS QUESTÕES E DOS RESUMOS
+   Desenhos vetoriais embutidos. Herdam a cor do texto, então
+   acompanham o tema; na impressão saem em preto sobre branco.
+   ============================================================ */
+.qfig{
+  margin:.9rem 0;padding:.8rem .6rem .5rem;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r);
+}
+.qfig svg{display:block;width:100%;max-width:400px;height:auto;margin:0 auto;color:var(--ink)}
+.qfig-leg{
+  margin:.5rem 0 0;font-family:var(--mono);font-size:.66rem;
+  color:var(--ink-3);text-align:center;letter-spacing:.02em;
+}
+/* traços da figura */
+.qfig .f-g{fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round}
+.qfig .f-l{fill:none;stroke:currentColor;stroke-width:1.1}
+.qfig .f-l2{fill:none;stroke:var(--ink-3);stroke-width:1.4}
+.qfig .f-c{fill:none;stroke:var(--accent);stroke-width:1.8}
+.qfig .f-d{fill:none;stroke:var(--ink-3);stroke-width:.8;stroke-dasharray:4 3}
+.qfig .f-p{fill:currentColor;stroke:none}
+.qfig .f-pl{fill:currentColor;stroke:none}
+.qfig .f-pc{fill:var(--accent);stroke:none}
+.qfig .f-p2{fill:var(--ink-3);stroke:none}
+.qfig .f-hatch{fill:var(--accent);opacity:.14;stroke:none}
+/* rótulos */
+.qfig text{font-family:var(--mono);paint-order:stroke}
+.qfig .f-t{fill:currentColor;font-size:12px}
+.qfig .f-t2{fill:var(--ink-2);font-size:10px}
+.qfig .f-t3{fill:var(--ink-3);font-size:9px}
+.qfig .f-ta{fill:var(--accent);font-size:11px}
+/* dentro do painel de resumo do assunto */
+.vp-corpo .qfig{margin:.6rem 0 0}
+@media print{
+  .qfig{background:none;border-color:#999;break-inside:avoid}
+  .qfig svg{color:#000}
+}
+
+/* legenda das variáveis nas fórmulas do resumo do assunto */
+.vp-vars{
+  display:grid;grid-template-columns:auto 1fr;gap:.18rem .7rem;
+  margin:.55rem 0 0;padding:.55rem .7rem;
+  background:var(--surface-2);border-left:2px solid var(--line-strong);border-radius:0 3px 3px 0;
+}
+.vp-vars dt{
+  font-family:var(--mono);font-size:.8rem;font-weight:600;color:var(--accent);
+  white-space:nowrap;text-align:right;
+}
+.vp-vars dd{margin:0;font-size:.8rem;color:var(--ink-2);line-height:1.45}
+@media(max-width:520px){
+  .vp-vars{grid-template-columns:1fr;gap:0}
+  .vp-vars dt{text-align:left;margin-top:.4rem}
+}
+
 </style>
 
 <header class="topbar">
@@ -2028,7 +2082,7 @@ window.VERBETES.push(
     "Esquecer a coluna do fluido da linha no manômetro diferencial e usar só γ_Hg·h.",
     "Usar pressão manométrica onde a equação exige absoluta (estado, tabelas, escoamento compressível)."] },
 
-{ id:"flu-escoamento", tema:"mecflu", titulo:"Escoamento em tubulações e perda de carga",
+{ id:"flu-escoamento", figuras:["moody"], tema:"mecflu", titulo:"Escoamento em tubulações e perda de carga",
   subtemas:["Regimes de escoamento","Escoamento laminar","Perda de carga","Perda localizada","Escoamento em tubulações","Associação de tubulações","Diagrama de Moody","Bernoulli","Potência","Camada limite","Sifão"],
   resumo:"O número de Reynolds decide tudo: abaixo de 2.000 o escoamento é laminar e f depende só de Re; acima de 4.000 é turbulento e f depende de Re e da rugosidade relativa. Com f na mão, Darcy-Weisbach fecha a perda distribuída, e o coeficiente K ou o comprimento equivalente fecham as localizadas. Bernoulli com perdas e máquina é a equação que amarra o sistema inteiro.",
   pontos:[
@@ -2172,7 +2226,7 @@ window.VERBETES.push(
     "Esquecer a temperatura da vizinhança: o que importa é a diferença de T⁴, não T⁴ da superfície sozinha.",
     "Achar que a radiação precisa de meio material — é exatamente o contrário."] },
 
-{ id:"trc-trocadores", tema:"transcal", titulo:"Trocadores de calor: MLDT e ε-NUT",
+{ id:"trc-trocadores", figuras:["trocador-perfis"], tema:"transcal", titulo:"Trocadores de calor: MLDT e ε-NUT",
   subtemas:["Trocadores","Método ε-NUT"],
   resumo:"Há dois problemas distintos. No de **projeto**, conhecem-se as quatro temperaturas e busca-se a área: usa-se MLDT. No de **avaliação de desempenho**, conhecem-se só as entradas e o trocador já existe: usa-se ε-NUT, que evita iteração. Saber qual método aplicar é metade da questão.",
   pontos:[
@@ -2197,7 +2251,7 @@ window.VERBETES.push(
     "Aumentar NUT esperando ganho proporcional: de 1,5 para 3,0 a efetividade sobe só de 0,78 para 0,95."] },
 
 /* ===================== 4. RESISTÊNCIA DOS MATERIAIS ===================== */
-{ id:"res-axial", tema:"resmat", titulo:"Solicitação axial, propriedades e ensaios", padrao:true,
+{ id:"res-axial", figuras:["tensao-deformacao"], tema:"resmat", titulo:"Solicitação axial, propriedades e ensaios", padrao:true,
   subtemas:["Solicitação axial","Propriedades","Propriedades elásticas","Lei de Hooke","Deformação","Ensaios","Barras compostas","Energia de deformação","Efeitos térmicos","Coeficiente de segurança","Estruturas hiperestáticas"],
   resumo:"A base de tudo: σ = N/A e a Lei de Hooke σ = E·ε. A partir daí saem alongamento, energia de deformação, tensões térmicas e a repartição de carga em barras compostas. Em problemas hiperestáticos, o equilíbrio não basta — é preciso a compatibilidade de deformações.",
   pontos:[
@@ -2220,7 +2274,7 @@ window.VERBETES.push(
     "Confundir resiliência com tenacidade, ou rigidez com resistência.",
     "Esquecer que em dilatação **livre** não há tensão alguma — só deslocamento."] },
 
-{ id:"res-flexao", tema:"resmat", titulo:"Flexão, vigas e diagramas",
+{ id:"res-flexao", figuras:["viga-biapoiada-q","viga-biapoiada-p","viga-balanco-p"], tema:"resmat", titulo:"Flexão, vigas e diagramas",
   subtemas:["Flexão","Diagramas","Momento de inércia","Cisalhamento em vigas","Cisalhamento","Flechas","Superposição","Viga hiperestática","Flexão composta"],
   resumo:"Toda questão de viga começa pelas reações e pelos diagramas de cortante e momento. Com o momento máximo, σ = M/W dá a tensão; com as fórmulas clássicas de flecha, verifica-se o serviço. Vale memorizar os casos usuais — eles cobrem a esmagadora maioria das questões.",
   pontos:[
@@ -2244,7 +2298,7 @@ window.VERBETES.push(
     "Trocar 1,5V/A (retângulo) por 4V/3A (círculo).",
     "Em problema hiperestático, tentar resolver só com as três equações de equilíbrio."] },
 
-{ id:"res-torcao", tema:"resmat", titulo:"Torção de eixos",
+{ id:"res-torcao", figuras:["eixo-flexao-torcao"], tema:"resmat", titulo:"Torção de eixos",
   subtemas:["Torção","Solicitações combinadas"],
   resumo:"Em seção circular, a tensão de cisalhamento cresce linearmente do centro para a superfície e o ângulo de torção acumula ao longo do comprimento. Quando há flexão junto com torção, o dimensionamento usa um momento equivalente, cuja expressão depende do critério de falha adotado.",
   pontos:[
@@ -2266,7 +2320,7 @@ window.VERBETES.push(
     "Usar o fator 32 (flexão) onde cabe 16 (torção).",
     "Aplicar a expressão de Tresca quando o enunciado pede von Mises — as duas aparecem como alternativas."] },
 
-{ id:"res-tensoes", tema:"resmat", titulo:"Estado de tensões, Mohr e critérios de falha",
+{ id:"res-tensoes", figuras:["elemento-tensao","mohr"], tema:"resmat", titulo:"Estado de tensões, Mohr e critérios de falha",
   subtemas:["Estado plano","Estado plano de tensões","Transformação de tensões","Critérios de falha","Concentração de tensões","Extensometria"],
   resumo:"O círculo de Mohr organiza tudo: o centro é a média das tensões normais, o raio é o cisalhamento máximo no plano, e os cruzamentos com o eixo horizontal são as tensões principais. Com as principais em mãos, von Mises ou Tresca dizem se o material escoa.",
   pontos:[
@@ -2290,7 +2344,7 @@ window.VERBETES.push(
     "Esquecer σ3 = 0 no critério de Tresca quando as duas do plano têm o mesmo sinal.",
     "Achar que o extensômetro a 45° mede γxy diretamente — ele mede deformação **linear** naquela direção."] },
 
-{ id:"res-flambagem", tema:"resmat", titulo:"Flambagem de colunas",
+{ id:"res-flambagem", figuras:["coluna-flambagem"], tema:"resmat", titulo:"Flambagem de colunas",
   subtemas:["Flambagem"],
   resumo:"Flambagem é instabilidade, não escoamento: a coluna perde a forma antes de esgotar a resistência do material. A carga crítica de Euler depende de E e da geometria — nunca da tensão de escoamento — e é inversamente proporcional ao **quadrado** do comprimento efetivo.",
   pontos:[
@@ -2510,7 +2564,7 @@ window.VERBETES.push(
     "Supor conservação de energia cinética em colisão inelástica.",
     "Tratar velocidades como escalares na reversão de jato — o sinal negativo é o que dobra a força."] },
 
-{ id:"din-corpo-rigido", tema:"dinamica", titulo:"Corpo rígido: inércia, rotação e rolamento",
+{ id:"din-corpo-rigido", figuras:["pendulo-composto"], tema:"dinamica", titulo:"Corpo rígido: inércia, rotação e rolamento",
   subtemas:["Corpo rígido","Momento de inércia","Rolamento","Pêndulo composto"],
   resumo:"Em corpo rígido, o momento de inércia é o dado que decide o resultado. Vale memorizar os casos clássicos e o teorema dos eixos paralelos. No rolamento sem escorregamento, o ponto de contato é o centro instantâneo de rotação e tem velocidade nula.",
   pontos:[
@@ -2542,7 +2596,7 @@ window.VERBETES = window.VERBETES || [];
 window.VERBETES.push(
 
 /* ===================== 7. VIBRAÇÕES MECÂNICAS ===================== */
-{ id:"vib-livre", tema:"vibracoes", titulo:"Vibração livre e amortecimento", padrao:true,
+{ id:"vib-livre", figuras:["massa-mola"], tema:"vibracoes", titulo:"Vibração livre e amortecimento", padrao:true,
   subtemas:["Conceitos","Vibração livre","Amortecimento","Decremento logarítmico","Frequência natural","Rigidez equivalente","Viga em balanço","Vibração transiente","Vibração torcional"],
   resumo:"Todo o assunto gira em torno de um único grupo: ωn = √(k/m). Rigidez alta e massa baixa elevam a frequência natural. O amortecimento quase não muda essa frequência — o que ele muda drasticamente é a amplitude na ressonância e a rapidez com que a oscilação livre morre.",
   pontos:[
@@ -2567,7 +2621,7 @@ window.VERBETES.push(
     "Somar rigidezes de molas em série. Em série, somam-se as flexibilidades.",
     "Achar que amortecer reduz a frequência natural de forma relevante — não reduz."] },
 
-{ id:"vib-forcada", tema:"vibracoes", titulo:"Vibração forçada, ressonância e isolamento",
+{ id:"vib-forcada", figuras:["transmissibilidade"], tema:"vibracoes", titulo:"Vibração forçada, ressonância e isolamento",
   subtemas:["Vibração forçada","Isolamento","Excitação pela base","Dois graus de liberdade","Múltiplos graus de liberdade","Absorvedor dinâmico"],
   resumo:"O que decide tudo é a razão de frequências r = ω/ωn. Abaixo de 1, a resposta acompanha a força; perto de 1, explode na ressonância; acima de √2, começa o isolamento. Esses três regimes explicam por que se projeta isolador mole e por que se atravessa depressa a rotação crítica.",
   pontos:[
@@ -2635,7 +2689,7 @@ window.VERBETES.push(
     "Julgar a máquina só pela zona, ignorando a taxa de crescimento."] },
 
 /* ===================== 8. MÁQUINAS DE FLUXO ===================== */
-{ id:"mfx-bombas", tema:"maqfluxo", titulo:"Bombas centrífugas: curvas e ponto de operação", padrao:true,
+{ id:"mfx-bombas", figuras:["bomba-sistema"], tema:"maqfluxo", titulo:"Bombas centrífugas: curvas e ponto de operação", padrao:true,
   subtemas:["Bombas centrífugas","Componentes","Ponto de operação","Curva do sistema","Altura de Euler","Escorvamento","Rendimento","Potência","Desempenho","Seleção","Manutenção","Válvulas","Controle de vazão"],
   resumo:"A bomba entrega a vazão em que sua curva cruza a curva do sistema — não a vazão que se deseja. A curva do sistema é a soma da altura estática (fixa) com a perda de carga (que cresce com o quadrado da vazão). Entender esse cruzamento resolve a maioria das questões do tema.",
   pontos:[
@@ -2769,7 +2823,7 @@ window.VERBETES.push(
     "Escolher Pelton para grande vazão e pequena queda — é exatamente o caso da Kaplan."] },
 
 /* ===================== 9. MOTORES DE COMBUSTÃO INTERNA ===================== */
-{ id:"mci-ciclos", tema:"mci", titulo:"Ciclos Otto e Diesel e o funcionamento do motor", padrao:true,
+{ id:"mci-ciclos", figuras:["ciclo-otto-pv","ciclo-diesel-pv"], tema:"mci", titulo:"Ciclos Otto e Diesel e o funcionamento do motor", padrao:true,
   subtemas:["Ciclo Otto","Ciclo Diesel","Ciclo de trabalho","Dois e quatro tempos","Comparação Otto e Diesel","Taxa de compressão","Diagramas","ICE e ICO","Componentes","Rendimento térmico"],
   resumo:"Otto e Diesel diferem em como o calor entra: a **volume constante** no Otto e a **pressão constante** no Diesel ideal. Para a mesma taxa de compressão, o Otto rende mais; na prática o Diesel vence porque trabalha com taxas muito maiores, limitadas no Otto pela detonação.",
   pontos:[
@@ -2865,7 +2919,7 @@ window.VERBETES.push(
     "Ler o 'W' de 15W-40 como 'weight'; é winter, comportamento a frio."] },
 
 /* ===================== 10. CICLOS DE POTÊNCIA ===================== */
-{ id:"cip-rankine", tema:"ciclospot", titulo:"Ciclo Rankine e melhorias de rendimento", padrao:true,
+{ id:"cip-rankine", figuras:["rankine-ts"], tema:"ciclospot", titulo:"Ciclo Rankine e melhorias de rendimento", padrao:true,
   subtemas:["Ciclo Rankine","Bomba","Título","Consumo de vapor","Irreversibilidades","Rendimento isentrópico","Equipamentos auxiliares","Ciclos","Cogeração"],
   resumo:"Quatro equipamentos, quatro processos: bomba, caldeira, turbina, condensador. O trabalho da bomba é desprezível perto do da turbina, porque comprimir líquido custa pouco. As melhorias — superaquecimento, reaquecimento e regeneração — atacam pontos diferentes do ciclo.",
   pontos:[
@@ -3042,7 +3096,7 @@ window.VERBETES.push(
     "Confundir recuperação com recristalização: a primeira não muda os grãos.",
     "Supor que aço inox austenítico fica frágil a frio. A estrutura CFC não tem transição."] },
 
-{ id:"met-ferro-carbono", tema:"metalurgia", titulo:"Diagrama Fe-C, tratamentos térmicos e temperabilidade",
+{ id:"met-ferro-carbono", figuras:["fe-c"], tema:"metalurgia", titulo:"Diagrama Fe-C, tratamentos térmicos e temperabilidade",
   subtemas:["Diagrama Fe-C","Regra da alavanca","Tratamentos térmicos","Curvas TTT","Curvas TTT e CCT","Temperabilidade","Martensita","Tratamentos termoquímicos","Elementos de liga","Aços inoxidáveis"],
   resumo:"O diagrama Fe-C diz o que se forma no resfriamento lento; as curvas TTT e CCT dizem o que se forma nas demais velocidades. Têmpera é resfriar rápido o bastante para produzir martensita, e revenido é o tratamento que a torna utilizável.",
   pontos:[
@@ -3066,7 +3120,7 @@ window.VERBETES.push(
     "Confundir temperabilidade com dureza. Aço-carbono simples atinge alta dureza na superfície, mas com baixa temperabilidade.",
     "Esquecer o revenido após a têmpera: a peça pode trincar sozinha."] },
 
-{ id:"met-ensaios", tema:"metalurgia", titulo:"Ensaios mecânicos, fratura e fluência",
+{ id:"met-ensaios", figuras:["tensao-deformacao","charpy"], tema:"metalurgia", titulo:"Ensaios mecânicos, fratura e fluência",
   subtemas:["Ensaios mecânicos","Ensaio de tração","Ensaio de dureza","Ensaio Charpy","Fratura","Tenacidade","Fluência"],
   resumo:"Cada ensaio responde a uma pergunta diferente. Tração dá resistência e ductilidade; dureza é o ensaio rápido e quase não destrutivo; Charpy revela a transição dúctil-frágil; fluência governa componentes que trabalham quentes por anos.",
   pontos:[
@@ -3268,7 +3322,7 @@ window.VERBETES.push(
     "Confundir mutuamente exclusivo com independente.",
     "Somar confiabilidades em paralelo em vez de trabalhar com as probabilidades de falha."] },
 
-{ id:"est-controle", tema:"estatistica", titulo:"Controle estatístico e capacidade de processo",
+{ id:"est-controle", figuras:["carta-controle","banheira"], tema:"estatistica", titulo:"Controle estatístico e capacidade de processo",
   subtemas:["Controle estatístico","Capacidade de processo","Confiabilidade"],
   resumo:"Carta de controle separa a variação **comum** (inerente ao processo) da **especial** (causa identificável). Índice de capacidade compara a dispersão do processo com a largura da especificação — e Cp ignora a centralização, enquanto Cpk a leva em conta.",
   pontos:[
@@ -3292,7 +3346,7 @@ window.VERBETES.push(
     "Aplicar preventiva por tempo em item com taxa de falha constante: não reduz falha alguma."] },
 
 /* ===================== 17. ELETROTÉCNICA ===================== */
-{ id:"ele-motores", tema:"eletrotecnica", titulo:"Motores de indução, partida e acionamento", padrao:true,
+{ id:"ele-motores", figuras:["conjugado-motor"], tema:"eletrotecnica", titulo:"Motores de indução, partida e acionamento", padrao:true,
   subtemas:["Motores","Motor de indução","Escorregamento","Conjugado","Curva de conjugado","Partida","Inversor de frequência","Rendimento","Princípios","Geradores","Proteção","Potência trifásica","Fator de potência"],
   resumo:"O motor de indução trifásico é o acionador padrão da indústria. Sua rotação é ditada pela frequência e pelo número de polos, e o escorregamento é o que permite o funcionamento: sem ele não há tensão induzida no rotor e, portanto, não há conjugado.",
   pontos:[
@@ -3498,6 +3552,1217 @@ window.VERBETES.push(
     "Empregar *that* em oração relativa explicativa, entre vírgulas."] }
 
 );
+
+/* ===== data/figuras-1.js ===== */
+/* ============================================================
+   FIGURAS — mecânica dos sólidos
+   Desenhos vetoriais embutidos: sem arquivo externo, funcionam
+   offline e na impressão. Cores por currentColor e var(--accent),
+   para acompanhar o tema claro/escuro.
+
+   Convenção das classes (definidas em assets/style.css):
+     .f-g  peça / corpo          .f-l  linha fina
+     .f-c  carga (âmbar)         .f-d  linha de referência tracejada
+     .f-t  rótulo                .f-ta rótulo de carga
+     .f-p  preenchimento sólido
+   As setas são polígonos desenhados à mão, não marcadores, para que
+   dois desenhos na mesma página nunca disputem o mesmo id.
+   ============================================================ */
+window.FIGURAS = window.FIGURAS || {};
+
+window.FIGURAS["viga-biapoiada-q"] = {
+  titulo: "Viga biapoiada com carga uniformemente distribuída",
+  svg:
+  '<svg viewBox="0 0 340 120" role="img" aria-label="Viga biapoiada de vão L com carga distribuída q ao longo de todo o vão">' +
+    // carga distribuída
+    '<line class="f-c" x1="50" y1="30" x2="290" y2="30"/>' +
+    '<g class="f-c">' +
+      '<line x1="60" y1="30" x2="60" y2="52"/><line x1="98" y1="30" x2="98" y2="52"/>' +
+      '<line x1="136" y1="30" x2="136" y2="52"/><line x1="174" y1="30" x2="174" y2="52"/>' +
+      '<line x1="212" y1="30" x2="212" y2="52"/><line x1="250" y1="30" x2="250" y2="52"/>' +
+      '<line x1="280" y1="30" x2="280" y2="52"/>' +
+    '</g>' +
+    '<g class="f-pc">' +
+      '<path d="M57,46 L63,46 L60,54 Z"/><path d="M95,46 L101,46 L98,54 Z"/>' +
+      '<path d="M133,46 L139,46 L136,54 Z"/><path d="M171,46 L177,46 L174,54 Z"/>' +
+      '<path d="M209,46 L215,46 L212,54 Z"/><path d="M247,46 L253,46 L250,54 Z"/>' +
+      '<path d="M277,46 L283,46 L280,54 Z"/>' +
+    '</g>' +
+    '<text class="f-ta" x="296" y="34">q</text>' +
+    // viga
+    '<line class="f-g" x1="50" y1="60" x2="290" y2="60"/>' +
+    // apoios: triângulo fixo à esquerda, móvel à direita
+    '<path class="f-p" d="M50,60 L40,78 L60,78 Z"/>' +
+    '<path class="f-p" d="M290,60 L280,74 L300,74 Z"/>' +
+    '<circle class="f-p" cx="284" cy="77" r="2.6"/><circle class="f-p" cx="296" cy="77" r="2.6"/>' +
+    '<line class="f-l" x1="34" y1="80" x2="66" y2="80"/>' +
+    '<line class="f-l" x1="276" y1="82" x2="304" y2="82"/>' +
+    // cota do vão
+    '<line class="f-d" x1="50" y1="60" x2="50" y2="104"/>' +
+    '<line class="f-d" x1="290" y1="60" x2="290" y2="104"/>' +
+    '<line class="f-l" x1="50" y1="98" x2="290" y2="98"/>' +
+    '<path class="f-pl" d="M50,98 L58,95 L58,101 Z"/><path class="f-pl" d="M290,98 L282,95 L282,101 Z"/>' +
+    '<text class="f-t" x="164" y="114" text-anchor="middle">L</text>' +
+    '<text class="f-t" x="44" y="94" text-anchor="end">A</text>' +
+    '<text class="f-t" x="298" y="94">B</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["viga-biapoiada-p"] = {
+  titulo: "Viga biapoiada com carga concentrada no meio do vão",
+  svg:
+  '<svg viewBox="0 0 340 120" role="img" aria-label="Viga biapoiada de vão L com carga concentrada P aplicada no meio do vão">' +
+    '<line class="f-c" x1="170" y1="22" x2="170" y2="52"/>' +
+    '<path class="f-pc" d="M166,44 L174,44 L170,55 Z"/>' +
+    '<text class="f-ta" x="177" y="30">P</text>' +
+    '<line class="f-g" x1="50" y1="60" x2="290" y2="60"/>' +
+    '<path class="f-p" d="M50,60 L40,78 L60,78 Z"/>' +
+    '<path class="f-p" d="M290,60 L280,74 L300,74 Z"/>' +
+    '<circle class="f-p" cx="284" cy="77" r="2.6"/><circle class="f-p" cx="296" cy="77" r="2.6"/>' +
+    '<line class="f-l" x1="34" y1="80" x2="66" y2="80"/>' +
+    '<line class="f-l" x1="276" y1="82" x2="304" y2="82"/>' +
+    '<line class="f-d" x1="170" y1="60" x2="170" y2="104"/>' +
+    '<line class="f-d" x1="50" y1="60" x2="50" y2="104"/>' +
+    '<line class="f-d" x1="290" y1="60" x2="290" y2="104"/>' +
+    '<line class="f-l" x1="50" y1="98" x2="170" y2="98"/>' +
+    '<line class="f-l" x1="170" y1="98" x2="290" y2="98"/>' +
+    '<path class="f-pl" d="M50,98 L58,95 L58,101 Z"/><path class="f-pl" d="M170,98 L162,95 L162,101 Z"/>' +
+    '<path class="f-pl" d="M170,98 L178,95 L178,101 Z"/><path class="f-pl" d="M290,98 L282,95 L282,101 Z"/>' +
+    '<text class="f-t" x="110" y="114" text-anchor="middle">L/2</text>' +
+    '<text class="f-t" x="230" y="114" text-anchor="middle">L/2</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["viga-balanco-p"] = {
+  titulo: "Viga em balanço com carga concentrada na extremidade livre",
+  svg:
+  '<svg viewBox="0 0 340 120" role="img" aria-label="Viga engastada em uma extremidade, livre na outra, com carga concentrada P aplicada na ponta livre">' +
+    // engaste: parede hachurada
+    '<line class="f-g" x1="56" y1="26" x2="56" y2="94"/>' +
+    '<g class="f-l">' +
+      '<line x1="56" y1="30" x2="44" y2="42"/><line x1="56" y1="42" x2="44" y2="54"/>' +
+      '<line x1="56" y1="54" x2="44" y2="66"/><line x1="56" y1="66" x2="44" y2="78"/>' +
+      '<line x1="56" y1="78" x2="44" y2="90"/>' +
+    '</g>' +
+    '<line class="f-g" x1="56" y1="60" x2="290" y2="60"/>' +
+    '<line class="f-c" x1="290" y1="22" x2="290" y2="52"/>' +
+    '<path class="f-pc" d="M286,44 L294,44 L290,55 Z"/>' +
+    '<text class="f-ta" x="297" y="30">P</text>' +
+    '<line class="f-d" x1="56" y1="60" x2="56" y2="104"/>' +
+    '<line class="f-d" x1="290" y1="60" x2="290" y2="104"/>' +
+    '<line class="f-l" x1="56" y1="98" x2="290" y2="98"/>' +
+    '<path class="f-pl" d="M56,98 L64,95 L64,101 Z"/><path class="f-pl" d="M290,98 L282,95 L282,101 Z"/>' +
+    '<text class="f-t" x="173" y="114" text-anchor="middle">L</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["viga-engastada-apoiada"] = {
+  titulo: "Viga engastada em uma extremidade e apoiada na outra, com carga distribuída",
+  svg:
+  '<svg viewBox="0 0 340 120" role="img" aria-label="Viga hiperestática: engastada à esquerda, sobre apoio simples à direita, com carga uniformemente distribuída q">' +
+    '<line class="f-c" x1="56" y1="30" x2="290" y2="30"/>' +
+    '<g class="f-c">' +
+      '<line x1="66" y1="30" x2="66" y2="52"/><line x1="103" y1="30" x2="103" y2="52"/>' +
+      '<line x1="140" y1="30" x2="140" y2="52"/><line x1="177" y1="30" x2="177" y2="52"/>' +
+      '<line x1="214" y1="30" x2="214" y2="52"/><line x1="251" y1="30" x2="251" y2="52"/>' +
+      '<line x1="284" y1="30" x2="284" y2="52"/>' +
+    '</g>' +
+    '<g class="f-pc">' +
+      '<path d="M63,46 L69,46 L66,54 Z"/><path d="M100,46 L106,46 L103,54 Z"/>' +
+      '<path d="M137,46 L143,46 L140,54 Z"/><path d="M174,46 L180,46 L177,54 Z"/>' +
+      '<path d="M211,46 L217,46 L214,54 Z"/><path d="M248,46 L254,46 L251,54 Z"/>' +
+      '<path d="M281,46 L287,46 L284,54 Z"/>' +
+    '</g>' +
+    '<text class="f-ta" x="296" y="34">q</text>' +
+    '<line class="f-g" x1="56" y1="26" x2="56" y2="94"/>' +
+    '<g class="f-l">' +
+      '<line x1="56" y1="30" x2="44" y2="42"/><line x1="56" y1="42" x2="44" y2="54"/>' +
+      '<line x1="56" y1="54" x2="44" y2="66"/><line x1="56" y1="66" x2="44" y2="78"/>' +
+      '<line x1="56" y1="78" x2="44" y2="90"/>' +
+    '</g>' +
+    '<line class="f-g" x1="56" y1="60" x2="290" y2="60"/>' +
+    '<path class="f-p" d="M290,60 L280,74 L300,74 Z"/>' +
+    '<circle class="f-p" cx="284" cy="77" r="2.6"/><circle class="f-p" cx="296" cy="77" r="2.6"/>' +
+    '<line class="f-l" x1="276" y1="82" x2="304" y2="82"/>' +
+    '<line class="f-d" x1="56" y1="60" x2="56" y2="104"/>' +
+    '<line class="f-d" x1="290" y1="60" x2="290" y2="104"/>' +
+    '<line class="f-l" x1="56" y1="98" x2="290" y2="98"/>' +
+    '<path class="f-pl" d="M56,98 L64,95 L64,101 Z"/><path class="f-pl" d="M290,98 L282,95 L282,101 Z"/>' +
+    '<text class="f-t" x="173" y="114" text-anchor="middle">L</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["elemento-tensao"] = {
+  titulo: "Elemento sob estado plano de tensões",
+  svg:
+  '<svg viewBox="0 0 300 190" role="img" aria-label="Elemento quadrado com tensões normais sigma x e sigma y e tensão de cisalhamento tau xy nas quatro faces">' +
+    '<rect class="f-g" x="100" y="55" width="100" height="80"/>' +
+    // sigma x nas faces verticais
+    '<line class="f-c" x1="60" y1="95" x2="96" y2="95"/>' +
+    '<path class="f-pc" d="M100,95 L90,91 L90,99 Z"/>' +
+    '<line class="f-c" x1="204" y1="95" x2="240" y2="95"/>' +
+    '<path class="f-pc" d="M244,95 L234,91 L234,99 Z"/>' +
+    '<text class="f-ta" x="52" y="88" text-anchor="end">σx</text>' +
+    '<text class="f-ta" x="248" y="88">σx</text>' +
+    // sigma y nas faces horizontais
+    '<line class="f-c" x1="150" y1="18" x2="150" y2="51"/>' +
+    '<path class="f-pc" d="M150,55 L146,45 L154,45 Z"/>' +
+    '<line class="f-c" x1="150" y1="139" x2="150" y2="172"/>' +
+    '<path class="f-pc" d="M150,176 L146,166 L154,166 Z"/>' +
+    '<text class="f-ta" x="157" y="18">σy</text>' +
+    '<text class="f-ta" x="157" y="180">σy</text>' +
+    // cisalhamento nas quatro faces
+    '<g class="f-l2">' +
+      '<line x1="108" y1="48" x2="192" y2="48"/>' +
+      '<line x1="192" y1="142" x2="108" y2="142"/>' +
+      '<line x1="93" y1="65" x2="93" y2="125"/>' +
+      '<line x1="207" y1="125" x2="207" y2="65"/>' +
+    '</g>' +
+    '<g class="f-p2">' +
+      '<path d="M196,48 L188,45 L188,51 Z"/><path d="M104,142 L112,139 L112,145 Z"/>' +
+      '<path d="M93,129 L90,121 L96,121 Z"/><path d="M207,61 L204,69 L210,69 Z"/>' +
+    '</g>' +
+    '<text class="f-t2" x="150" y="42" text-anchor="middle">τxy</text>' +
+    '<text class="f-t2" x="150" y="156" text-anchor="middle">τxy</text>' +
+    // eixos
+    '<line class="f-d" x1="30" y1="170" x2="30" y2="140"/>' +
+    '<line class="f-d" x1="30" y1="170" x2="60" y2="170"/>' +
+    '<text class="f-t" x="64" y="174">x</text>' +
+    '<text class="f-t" x="26" y="138" text-anchor="end">y</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["secao-retangular"] = {
+  titulo: "Seção retangular na flexão",
+  svg:
+  '<svg viewBox="0 0 300 170" role="img" aria-label="Seção retangular de base b e altura h, com a linha neutra na meia altura e a distribuição linear de tensões de flexão">' +
+    '<rect class="f-g" x="60" y="30" width="70" height="110"/>' +
+    // linha neutra
+    '<line class="f-d" x1="44" y1="85" x2="230" y2="85"/>' +
+    '<text class="f-t" x="236" y="89">LN</text>' +
+    // distribuição de tensões
+    '<path class="f-c" d="M150,30 L200,30 L150,85 L200,140 L150,140"/>' +
+    '<line class="f-c" x1="150" y1="30" x2="150" y2="140"/>' +
+    '<g class="f-pc">' +
+      '<path d="M204,30 L194,26 L194,34 Z"/><path d="M204,140 L194,136 L194,144 Z"/>' +
+    '</g>' +
+    '<text class="f-ta" x="208" y="26">σmax</text>' +
+    '<text class="f-ta" x="208" y="150">compressão</text>' +
+    // cotas
+    '<line class="f-l" x1="60" y1="152" x2="130" y2="152"/>' +
+    '<path class="f-pl" d="M60,152 L68,149 L68,155 Z"/><path class="f-pl" d="M130,152 L122,149 L122,155 Z"/>' +
+    '<text class="f-t" x="95" y="164" text-anchor="middle">b</text>' +
+    '<line class="f-l" x1="44" y1="30" x2="44" y2="140"/>' +
+    '<path class="f-pl" d="M44,30 L41,38 L47,38 Z"/><path class="f-pl" d="M44,140 L41,132 L47,132 Z"/>' +
+    '<text class="f-t" x="38" y="88" text-anchor="end">h</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["eixo-flexao-torcao"] = {
+  titulo: "Eixo circular sob flexão e torção combinadas",
+  svg:
+  '<svg viewBox="0 0 340 150" role="img" aria-label="Eixo de seção circular engastado, submetido simultaneamente a momento fletor e momento torçor">' +
+    // engaste
+    '<line class="f-g" x1="56" y1="34" x2="56" y2="116"/>' +
+    '<g class="f-l">' +
+      '<line x1="56" y1="38" x2="44" y2="50"/><line x1="56" y1="50" x2="44" y2="62"/>' +
+      '<line x1="56" y1="62" x2="44" y2="74"/><line x1="56" y1="74" x2="44" y2="86"/>' +
+      '<line x1="56" y1="86" x2="44" y2="98"/><line x1="56" y1="98" x2="44" y2="110"/>' +
+    '</g>' +
+    // eixo em perspectiva simples
+    '<line class="f-g" x1="56" y1="60" x2="250" y2="60"/>' +
+    '<line class="f-g" x1="56" y1="92" x2="250" y2="92"/>' +
+    '<ellipse class="f-g" cx="250" cy="76" rx="9" ry="16"/>' +
+    '<ellipse class="f-l" cx="56" cy="76" rx="9" ry="16"/>' +
+    '<line class="f-d" x1="40" y1="76" x2="270" y2="76"/>' +
+    // momento fletor: seta curva
+    '<path class="f-c" d="M272,50 A26,26 0 0 1 272,102"/>' +
+    '<path class="f-pc" d="M272,102 L266,94 L278,95 Z"/>' +
+    '<text class="f-ta" x="286" y="80">M</text>' +
+    // torque: seta em torno do eixo
+    '<path class="f-l2" d="M120,40 A34,14 0 0 1 200,40"/>' +
+    '<path class="f-p2" d="M200,40 L191,36 L194,45 Z"/>' +
+    '<text class="f-t2" x="160" y="32" text-anchor="middle">T</text>' +
+    '<line class="f-l" x1="245" y1="112" x2="255" y2="112"/>' +
+    '<text class="f-t" x="250" y="126" text-anchor="middle">d</text>' +
+    '<line class="f-l" x1="250" y1="98" x2="250" y2="110"/>' +
+  '</svg>'
+};
+
+window.FIGURAS["coluna-flambagem"] = {
+  titulo: "Modos de flambagem conforme a vinculação",
+  svg:
+  '<svg viewBox="0 0 340 180" role="img" aria-label="Quatro colunas com vinculações diferentes e as respectivas formas de flambagem: birrotulada, engastada e livre, biengastada, engastada e rotulada">' +
+    '<g class="f-l">' +
+      '<line x1="30" y1="150" x2="60" y2="150"/><line x1="110" y1="150" x2="140" y2="150"/>' +
+      '<line x1="190" y1="150" x2="220" y2="150"/><line x1="270" y1="150" x2="300" y2="150"/>' +
+    '</g>' +
+    // birrotulada
+    '<path class="f-g" d="M45,150 C70,120 70,70 45,40"/>' +
+    '<circle class="f-p" cx="45" cy="150" r="3"/><circle class="f-p" cx="45" cy="40" r="3"/>' +
+    '<text class="f-t" x="45" y="168" text-anchor="middle">rotulada</text>' +
+    // engastada-livre
+    '<path class="f-g" d="M125,150 C125,110 140,80 152,45"/>' +
+    '<line class="f-g" x1="112" y1="150" x2="138" y2="150"/>' +
+    '<text class="f-t" x="125" y="168" text-anchor="middle">eng.-livre</text>' +
+    // biengastada
+    '<path class="f-g" d="M205,150 C230,120 180,70 205,40"/>' +
+    '<line class="f-g" x1="192" y1="150" x2="218" y2="150"/>' +
+    '<line class="f-g" x1="192" y1="40" x2="218" y2="40"/>' +
+    '<text class="f-t" x="205" y="168" text-anchor="middle">biengastada</text>' +
+    // engastada-rotulada
+    '<path class="f-g" d="M285,150 C310,115 265,70 285,40"/>' +
+    '<line class="f-g" x1="272" y1="150" x2="298" y2="150"/>' +
+    '<circle class="f-p" cx="285" cy="40" r="3"/>' +
+    '<text class="f-t" x="285" y="168" text-anchor="middle">eng.-rotulada</text>' +
+    '<text class="f-t2" x="170" y="22" text-anchor="middle">o comprimento efetivo K·L muda com a vinculação</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["mohr"] = {
+  titulo: "Círculo de Mohr",
+  svg:
+  '<svg viewBox="0 0 340 200" role="img" aria-label="Círculo de Mohr: eixo horizontal de tensão normal, eixo vertical de cisalhamento, centro na média das tensões normais e raio igual ao cisalhamento máximo no plano">' +
+    '<line class="f-l" x1="30" y1="120" x2="320" y2="120"/>' +
+    '<line class="f-l" x1="60" y1="20" x2="60" y2="190"/>' +
+    '<text class="f-t" x="316" y="136">σ</text>' +
+    '<text class="f-t" x="48" y="26">τ</text>' +
+    '<circle class="f-c" cx="190" cy="120" r="70"/>' +
+    '<circle class="f-pc" cx="190" cy="120" r="2.5"/>' +
+    '<line class="f-d" x1="190" y1="50" x2="190" y2="190"/>' +
+    '<line class="f-d" x1="120" y1="120" x2="120" y2="140"/>' +
+    '<line class="f-d" x1="260" y1="120" x2="260" y2="140"/>' +
+    '<line class="f-l2" x1="190" y1="120" x2="260" y2="120"/>' +
+    '<text class="f-t2" x="225" y="114" text-anchor="middle">R</text>' +
+    '<text class="f-t" x="120" y="154" text-anchor="middle">σ₂</text>' +
+    '<text class="f-t" x="260" y="154" text-anchor="middle">σ₁</text>' +
+    '<text class="f-t" x="190" y="154" text-anchor="middle">centro</text>' +
+    '<line class="f-d" x1="190" y1="50" x2="196" y2="50"/>' +
+    '<text class="f-t2" x="200" y="54">τmax = R</text>' +
+    '<text class="f-t2" x="190" y="186" text-anchor="middle">centro = (σx+σy)/2      R = √[((σx−σy)/2)² + τxy²]</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["tensao-deformacao"] = {
+  titulo: "Curva tensão-deformação de um aço dúctil",
+  svg:
+  '<svg viewBox="0 0 340 200" role="img" aria-label="Curva tensão-deformação: trecho elástico linear, patamar de escoamento, encruamento até o limite de resistência e queda até a ruptura">' +
+    '<line class="f-l" x1="45" y1="165" x2="320" y2="165"/>' +
+    '<line class="f-l" x1="45" y1="20" x2="45" y2="165"/>' +
+    '<text class="f-t" x="316" y="182" text-anchor="end">deformação ε</text>' +
+    '<text class="f-t" x="40" y="26" text-anchor="end">σ</text>' +
+    '<path class="f-c" d="M45,165 L95,80 L130,74 C170,72 200,45 235,42 C265,42 285,70 300,95"/>' +
+    // marcações
+    '<line class="f-d" x1="45" y1="80" x2="95" y2="80"/>' +
+    '<circle class="f-pc" cx="95" cy="80" r="3"/>' +
+    '<text class="f-t2" x="100" y="94">escoamento</text>' +
+    '<line class="f-d" x1="45" y1="42" x2="235" y2="42"/>' +
+    '<circle class="f-pc" cx="235" cy="42" r="3"/>' +
+    '<text class="f-t2" x="240" y="36">limite de resistência</text>' +
+    '<circle class="f-pc" cx="300" cy="95" r="3"/>' +
+    '<text class="f-t2" x="296" y="110" text-anchor="end">ruptura</text>' +
+    // área de resiliência
+    '<path class="f-hatch" d="M45,165 L95,80 L95,165 Z"/>' +
+    '<text class="f-t2" x="60" y="160">resiliência</text>' +
+  '</svg>'
+};
+
+/* ===== data/figuras-2.js ===== */
+/* ============================================================
+   FIGURAS — térmica, fluidos, máquinas, vibrações e dinâmica
+   Mesmas convenções de figuras-1.js.
+   ============================================================ */
+window.FIGURAS = window.FIGURAS || {};
+
+window.FIGURAS["ciclo-otto-pv"] = {
+  titulo: "Ciclo Otto no diagrama p–V",
+  svg:
+  '<svg viewBox="0 0 340 200" role="img" aria-label="Ciclo Otto no diagrama pressão volume: compressão isentrópica, fornecimento de calor a volume constante, expansão isentrópica e rejeição de calor a volume constante">' +
+    '<line class="f-l" x1="50" y1="170" x2="320" y2="170"/>' +
+    '<line class="f-l" x1="50" y1="20" x2="50" y2="170"/>' +
+    '<text class="f-t" x="316" y="187" text-anchor="end">V</text>' +
+    '<text class="f-t" x="44" y="26" text-anchor="end">p</text>' +
+    '<path class="f-c" d="M110,140 C150,132 220,120 270,116"/>' +
+    '<path class="f-c" d="M110,40 C150,60 220,92 270,116"/>' +
+    '<line class="f-c" x1="110" y1="140" x2="110" y2="40"/>' +
+    '<line class="f-c" x1="270" y1="116" x2="270" y2="146"/>' +
+    '<path class="f-c" d="M110,140 L270,146"/>' +
+    '<g class="f-pc">' +
+      '<circle cx="270" cy="146" r="3"/><circle cx="110" cy="140" r="3"/>' +
+      '<circle cx="110" cy="40" r="3"/><circle cx="270" cy="116" r="3"/>' +
+    '</g>' +
+    '<text class="f-t" x="278" y="152">1</text>' +
+    '<text class="f-t" x="100" y="150" text-anchor="end">2</text>' +
+    '<text class="f-t" x="100" y="38" text-anchor="end">3</text>' +
+    '<text class="f-t" x="278" y="114">4</text>' +
+    '<text class="f-t2" x="118" y="90">q entra (V const.)</text>' +
+    '<text class="f-t2" x="262" y="134" text-anchor="end">q sai</text>' +
+    '<line class="f-d" x1="110" y1="170" x2="110" y2="146"/>' +
+    '<line class="f-d" x1="270" y1="170" x2="270" y2="150"/>' +
+    '<text class="f-t2" x="190" y="186" text-anchor="middle">r = V₁/V₂</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["ciclo-diesel-pv"] = {
+  titulo: "Ciclo Diesel no diagrama p–V",
+  svg:
+  '<svg viewBox="0 0 340 200" role="img" aria-label="Ciclo Diesel no diagrama pressão volume: o fornecimento de calor do ponto 2 ao ponto 3 ocorre a pressão constante">' +
+    '<line class="f-l" x1="50" y1="170" x2="320" y2="170"/>' +
+    '<line class="f-l" x1="50" y1="20" x2="50" y2="170"/>' +
+    '<text class="f-t" x="316" y="187" text-anchor="end">V</text>' +
+    '<text class="f-t" x="44" y="26" text-anchor="end">p</text>' +
+    '<path class="f-c" d="M110,140 C150,132 220,120 270,116"/>' +
+    '<line class="f-c" x1="110" y1="140" x2="110" y2="45"/>' +
+    '<line class="f-c" x1="110" y1="45" x2="155" y2="45"/>' +
+    '<path class="f-c" d="M155,45 C190,70 235,100 270,116"/>' +
+    '<line class="f-c" x1="270" y1="116" x2="270" y2="146"/>' +
+    '<path class="f-c" d="M110,140 L270,146"/>' +
+    '<g class="f-pc">' +
+      '<circle cx="270" cy="146" r="3"/><circle cx="110" cy="140" r="3"/>' +
+      '<circle cx="110" cy="45" r="3"/><circle cx="155" cy="45" r="3"/><circle cx="270" cy="116" r="3"/>' +
+    '</g>' +
+    '<text class="f-t" x="278" y="152">1</text>' +
+    '<text class="f-t" x="100" y="150" text-anchor="end">2</text>' +
+    '<text class="f-t" x="106" y="38" text-anchor="end">2</text>' +
+    '<text class="f-t" x="160" y="38">3</text>' +
+    '<text class="f-t" x="278" y="114">4</text>' +
+    '<text class="f-t2" x="132" y="34" text-anchor="middle">q entra a p constante</text>' +
+    '<text class="f-t2" x="262" y="134" text-anchor="end">q sai (V const.)</text>' +
+    '<line class="f-d" x1="155" y1="45" x2="155" y2="170"/>' +
+    '<text class="f-t2" x="190" y="186" text-anchor="middle">rc = V₃/V₂ (razão de corte)</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["rankine-ts"] = {
+  titulo: "Ciclo Rankine no diagrama T–s",
+  svg:
+  '<svg viewBox="0 0 340 200" role="img" aria-label="Ciclo Rankine no diagrama temperatura entropia, com o domo de saturação, bombeamento, caldeira, superaquecimento, turbina e condensador">' +
+    '<line class="f-l" x1="45" y1="170" x2="320" y2="170"/>' +
+    '<line class="f-l" x1="45" y1="20" x2="45" y2="170"/>' +
+    '<text class="f-t" x="316" y="187" text-anchor="end">s</text>' +
+    '<text class="f-t" x="40" y="26" text-anchor="end">T</text>' +
+    // domo de saturação
+    '<path class="f-d" d="M95,150 C105,80 140,52 175,52 C210,52 245,80 255,150"/>' +
+    '<text class="f-t2" x="175" y="46" text-anchor="middle">domo de saturação</text>' +
+    // ciclo
+    '<line class="f-c" x1="95" y1="150" x2="95" y2="144"/>' +
+    '<path class="f-c" d="M95,144 C120,100 145,72 175,70"/>' +
+    '<line class="f-c" x1="175" y1="70" x2="230" y2="70"/>' +
+    '<path class="f-c" d="M230,70 L268,150"/>' +
+    '<line class="f-c" x1="268" y1="150" x2="95" y2="150"/>' +
+    '<g class="f-pc">' +
+      '<circle cx="95" cy="150" r="3"/><circle cx="95" cy="144" r="3"/>' +
+      '<circle cx="230" cy="70" r="3"/><circle cx="268" cy="150" r="3"/>' +
+    '</g>' +
+    '<text class="f-t" x="88" y="162" text-anchor="end">1</text>' +
+    '<text class="f-t" x="86" y="142" text-anchor="end">2</text>' +
+    '<text class="f-t" x="236" y="66">3</text>' +
+    '<text class="f-t" x="276" y="154">4</text>' +
+    '<text class="f-t2" x="150" y="112">caldeira</text>' +
+    '<text class="f-t2" x="262" y="108" text-anchor="end">turbina</text>' +
+    '<text class="f-t2" x="180" y="164" text-anchor="middle">condensador</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["massa-mola"] = {
+  titulo: "Sistema massa-mola-amortecedor de um grau de liberdade",
+  svg:
+  '<svg viewBox="0 0 300 200" role="img" aria-label="Massa suspensa por uma mola de rigidez k e um amortecedor de constante c, com deslocamento x medido a partir da posição de equilíbrio">' +
+    '<line class="f-g" x1="60" y1="26" x2="240" y2="26"/>' +
+    '<g class="f-l">' +
+      '<line x1="70" y1="26" x2="60" y2="16"/><line x1="94" y1="26" x2="84" y2="16"/>' +
+      '<line x1="118" y1="26" x2="108" y2="16"/><line x1="142" y1="26" x2="132" y2="16"/>' +
+      '<line x1="166" y1="26" x2="156" y2="16"/><line x1="190" y1="26" x2="180" y2="16"/>' +
+      '<line x1="214" y1="26" x2="204" y2="16"/><line x1="238" y1="26" x2="228" y2="16"/>' +
+    '</g>' +
+    // mola
+    '<path class="f-l" d="M110,26 L110,44 L96,52 L124,64 L96,76 L124,88 L96,100 L110,108 L110,124"/>' +
+    '<text class="f-t" x="88" y="80" text-anchor="end">k</text>' +
+    // amortecedor
+    '<line class="f-l" x1="190" y1="26" x2="190" y2="60"/>' +
+    '<rect class="f-l" x="176" y="60" width="28" height="34"/>' +
+    '<line class="f-l" x1="190" y1="70" x2="190" y2="124"/>' +
+    '<line class="f-g" x1="178" y1="70" x2="202" y2="70"/>' +
+    '<text class="f-t" x="212" y="80">c</text>' +
+    // massa
+    '<rect class="f-g" x="95" y="124" width="110" height="42"/>' +
+    '<text class="f-t" x="150" y="150" text-anchor="middle">m</text>' +
+    // deslocamento
+    '<line class="f-c" x1="250" y1="130" x2="250" y2="168"/>' +
+    '<path class="f-pc" d="M250,172 L246,162 L254,162 Z"/>' +
+    '<text class="f-ta" x="256" y="152">x(t)</text>' +
+    '<text class="f-t2" x="150" y="188" text-anchor="middle">ωn = √(k/m)</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["transmissibilidade"] = {
+  titulo: "Transmissibilidade em função da razão de frequências",
+  svg:
+  '<svg viewBox="0 0 340 200" role="img" aria-label="Curvas de transmissibilidade contra a razão de frequências, cruzando o valor unitário em raiz de dois, com o isolamento ocorrendo apenas acima desse ponto">' +
+    '<line class="f-l" x1="50" y1="165" x2="320" y2="165"/>' +
+    '<line class="f-l" x1="50" y1="20" x2="50" y2="165"/>' +
+    '<text class="f-t" x="316" y="182" text-anchor="end">r = ω/ωn</text>' +
+    '<text class="f-t" x="44" y="26" text-anchor="end">TR</text>' +
+    '<line class="f-d" x1="50" y1="120" x2="320" y2="120"/>' +
+    '<text class="f-t2" x="46" y="124" text-anchor="end">1</text>' +
+    // ζ baixo
+    '<path class="f-c" d="M50,120 C80,116 100,100 118,60 C124,30 132,30 138,60 C150,104 170,132 200,144 C240,154 280,158 315,160"/>' +
+    // ζ alto
+    '<path class="f-l2" d="M50,120 C80,118 100,110 120,96 C136,88 150,96 170,116 C200,138 260,150 315,154"/>' +
+    '<line class="f-d" x1="128" y1="20" x2="128" y2="165"/>' +
+    '<text class="f-t2" x="128" y="180" text-anchor="middle">1</text>' +
+    '<line class="f-d" x1="168" y1="60" x2="168" y2="165"/>' +
+    '<text class="f-t2" x="168" y="180" text-anchor="middle">√2</text>' +
+    '<circle class="f-pc" cx="168" cy="120" r="3"/>' +
+    '<text class="f-t2" x="176" y="40">isolamento só depois de √2</text>' +
+    '<text class="f-t2" x="132" y="30">ζ baixo</text>' +
+    '<text class="f-t3" x="196" y="106">ζ alto</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["bomba-sistema"] = {
+  titulo: "Curva da bomba e curva do sistema",
+  svg:
+  '<svg viewBox="0 0 340 200" role="img" aria-label="Curva altura contra vazão da bomba cruzando a curva do sistema no ponto de operação; a curva do sistema parte da altura estática e cresce com o quadrado da vazão">' +
+    '<line class="f-l" x1="50" y1="165" x2="320" y2="165"/>' +
+    '<line class="f-l" x1="50" y1="20" x2="50" y2="165"/>' +
+    '<text class="f-t" x="316" y="182" text-anchor="end">Q</text>' +
+    '<text class="f-t" x="44" y="26" text-anchor="end">H</text>' +
+    // curva da bomba
+    '<path class="f-c" d="M55,50 C120,54 190,74 280,140"/>' +
+    '<text class="f-ta" x="70" y="44">curva da bomba</text>' +
+    // curva do sistema
+    '<path class="f-l2" d="M50,140 C110,138 170,120 250,60"/>' +
+    '<line class="f-d" x1="50" y1="140" x2="300" y2="140"/>' +
+    '<text class="f-t2" x="46" y="144" text-anchor="end">H est.</text>' +
+    '<text class="f-t2" x="256" y="56">curva do sistema</text>' +
+    // ponto de operação
+    '<circle class="f-pc" cx="203" cy="96" r="4"/>' +
+    '<line class="f-d" x1="203" y1="96" x2="203" y2="165"/>' +
+    '<line class="f-d" x1="50" y1="96" x2="203" y2="96"/>' +
+    '<text class="f-t2" x="210" y="92">ponto de operação</text>' +
+    '<text class="f-t2" x="203" y="180" text-anchor="middle">Q de trabalho</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["trocador-perfis"] = {
+  titulo: "Perfis de temperatura: paralelo e contracorrente",
+  svg:
+  '<svg viewBox="0 0 340 210" role="img" aria-label="Comparação dos perfis de temperatura em trocador de calor em correntes paralelas e em contracorrente ao longo do comprimento">' +
+    // paralelo
+    '<text class="f-t" x="90" y="18" text-anchor="middle">correntes paralelas</text>' +
+    '<line class="f-l" x1="30" y1="95" x2="150" y2="95"/>' +
+    '<line class="f-l" x1="30" y1="26" x2="30" y2="95"/>' +
+    '<path class="f-c" d="M32,32 C60,48 90,58 148,62"/>' +
+    '<path class="f-l2" d="M32,90 C60,80 90,72 148,68"/>' +
+    '<text class="f-t2" x="90" y="108" text-anchor="middle">as curvas se aproximam</text>' +
+    '<text class="f-t3" x="152" y="66">→</text>' +
+    // contracorrente
+    '<text class="f-t" x="250" y="18" text-anchor="middle">contracorrente</text>' +
+    '<line class="f-l" x1="190" y1="95" x2="310" y2="95"/>' +
+    '<line class="f-l" x1="190" y1="26" x2="190" y2="95"/>' +
+    '<path class="f-c" d="M192,32 C230,44 270,52 308,58"/>' +
+    '<path class="f-l2" d="M192,74 C230,80 270,86 308,90"/>' +
+    '<text class="f-t2" x="250" y="108" text-anchor="middle">ΔT mais uniforme</text>' +
+    // legenda
+    '<line class="f-c" x1="40" y1="136" x2="70" y2="136"/>' +
+    '<text class="f-t2" x="76" y="140">fluido quente</text>' +
+    '<line class="f-l2" x1="40" y1="156" x2="70" y2="156"/>' +
+    '<text class="f-t2" x="76" y="160">fluido frio</text>' +
+    '<text class="f-t2" x="20" y="186">Q = U·A·F·ΔTml    ΔTml = (ΔT₁ − ΔT₂)/ln(ΔT₁/ΔT₂)</text>' +
+    '<text class="f-t3" x="20" y="202">o contracorrente dá MLDT maior e, para a mesma carga, menos área</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["banheira"] = {
+  titulo: "Curva da banheira",
+  svg:
+  '<svg viewBox="0 0 340 190" role="img" aria-label="Taxa de falha ao longo do tempo: mortalidade infantil decrescente, vida útil com taxa constante e desgaste crescente">' +
+    '<line class="f-l" x1="50" y1="150" x2="320" y2="150"/>' +
+    '<line class="f-l" x1="50" y1="20" x2="50" y2="150"/>' +
+    '<text class="f-t" x="316" y="167" text-anchor="end">tempo</text>' +
+    '<text class="f-t" x="44" y="26" text-anchor="end">λ</text>' +
+    '<path class="f-c" d="M55,40 C80,100 100,112 130,114 L230,114 C265,116 285,80 310,32"/>' +
+    '<line class="f-d" x1="130" y1="30" x2="130" y2="150"/>' +
+    '<line class="f-d" x1="230" y1="30" x2="230" y2="150"/>' +
+    '<text class="f-t2" x="90" y="166" text-anchor="middle">mortalidade</text>' +
+    '<text class="f-t2" x="90" y="178" text-anchor="middle">infantil</text>' +
+    '<text class="f-t2" x="180" y="166" text-anchor="middle">vida útil</text>' +
+    '<text class="f-t2" x="180" y="178" text-anchor="middle">λ constante</text>' +
+    '<text class="f-t2" x="272" y="166" text-anchor="middle">desgaste</text>' +
+    '<text class="f-t3" x="180" y="104" text-anchor="middle">só aqui a preventiva por tempo faz sentido →</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["charpy"] = {
+  titulo: "Transição dúctil-frágil no ensaio Charpy",
+  svg:
+  '<svg viewBox="0 0 340 190" role="img" aria-label="Energia absorvida no ensaio Charpy em função da temperatura: aço ferrítico apresenta patamar inferior, transição e patamar superior; aço austenítico não apresenta transição">' +
+    '<line class="f-l" x1="50" y1="150" x2="320" y2="150"/>' +
+    '<line class="f-l" x1="50" y1="20" x2="50" y2="150"/>' +
+    '<text class="f-t" x="316" y="167" text-anchor="end">temperatura</text>' +
+    '<text class="f-t" x="44" y="26" text-anchor="end">energia</text>' +
+    '<path class="f-c" d="M55,138 C100,136 130,130 160,90 C185,58 215,46 310,42"/>' +
+    '<path class="f-l2" d="M55,52 C140,48 230,42 310,36"/>' +
+    '<line class="f-d" x1="160" y1="30" x2="160" y2="150"/>' +
+    '<text class="f-t2" x="160" y="166" text-anchor="middle">temperatura de transição</text>' +
+    '<text class="f-ta" x="200" y="72">CCC (ferrítico): tem transição</text>' +
+    '<text class="f-t3" x="70" y="46">CFC (austenítico, alumínio): não tem</text>' +
+    '<text class="f-t2" x="60" y="132">frágil</text>' +
+    '<text class="f-t2" x="300" y="58" text-anchor="end">dúctil</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["fe-c"] = {
+  titulo: "Diagrama ferro-carbono (região dos aços)",
+  svg:
+  '<svg viewBox="0 0 340 210" role="img" aria-label="Diagrama de equilíbrio ferro-carbono na região dos aços, com o campo da austenita, as linhas A3 e Acm e a reação eutetoide a 727 graus Celsius">' +
+    '<line class="f-l" x1="55" y1="170" x2="320" y2="170"/>' +
+    '<line class="f-l" x1="55" y1="20" x2="55" y2="170"/>' +
+    '<text class="f-t" x="316" y="187" text-anchor="end">% C</text>' +
+    '<text class="f-t" x="50" y="26" text-anchor="end">T</text>' +
+    // linhas A3 e Acm encontrando-se no eutetoide
+    '<path class="f-c" d="M57,44 C100,70 140,98 175,112"/>' +
+    '<path class="f-c" d="M175,112 C215,104 260,88 300,72"/>' +
+    '<line class="f-c" x1="57" y1="112" x2="300" y2="112"/>' +
+    '<circle class="f-pc" cx="175" cy="112" r="3.5"/>' +
+    '<text class="f-ta" x="175" y="106" text-anchor="middle">eutetoide</text>' +
+    '<text class="f-t2" x="46" y="116" text-anchor="end">727 °C</text>' +
+    '<text class="f-t2" x="175" y="184" text-anchor="middle">0,77</text>' +
+    '<line class="f-d" x1="175" y1="112" x2="175" y2="176"/>' +
+    '<text class="f-t2" x="150" y="70">austenita (γ)</text>' +
+    '<text class="f-t2" x="70" y="146">ferrita + perlita</text>' +
+    '<text class="f-t2" x="300" y="146" text-anchor="end">perlita + cementita</text>' +
+    '<text class="f-t3" x="110" y="60" text-anchor="middle">A₃</text>' +
+    '<text class="f-t3" x="250" y="82" text-anchor="middle">Acm</text>' +
+    '<text class="f-t3" x="90" y="200">hipoeutetoide</text>' +
+    '<text class="f-t3" x="300" y="200" text-anchor="end">hipereutetoide</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["moody"] = {
+  titulo: "Diagrama de Moody (leitura esquemática)",
+  svg:
+  '<svg viewBox="0 0 340 200" role="img" aria-label="Fator de atrito contra número de Reynolds: trecho laminar decrescente, zona de transição e, no turbulento completamente rugoso, curvas horizontais dependentes apenas da rugosidade relativa">' +
+    '<line class="f-l" x1="55" y1="165" x2="320" y2="165"/>' +
+    '<line class="f-l" x1="55" y1="20" x2="55" y2="165"/>' +
+    '<text class="f-t" x="316" y="182" text-anchor="end">Re (log)</text>' +
+    '<text class="f-t" x="50" y="26" text-anchor="end">f</text>' +
+    // laminar
+    '<line class="f-c" x1="60" y1="36" x2="120" y2="96"/>' +
+    '<text class="f-t2" x="62" y="32">laminar: f = 64/Re</text>' +
+    // transição
+    '<line class="f-d" x1="120" y1="20" x2="120" y2="165"/>' +
+    '<line class="f-d" x1="152" y1="20" x2="152" y2="165"/>' +
+    '<text class="f-t3" x="136" y="180" text-anchor="middle">transição</text>' +
+    // turbulento: famílias de rugosidade relativa
+    '<path class="f-c" d="M152,80 C200,74 240,70 310,70"/>' +
+    '<path class="f-c" d="M152,104 C200,98 240,96 310,96"/>' +
+    '<path class="f-c" d="M152,128 C210,122 250,120 310,120"/>' +
+    '<path class="f-l2" d="M152,146 C210,138 250,134 310,132"/>' +
+    '<text class="f-t2" x="314" y="68" text-anchor="end">ε/D maior</text>' +
+    '<text class="f-t2" x="314" y="128" text-anchor="end">ε/D menor</text>' +
+    '<text class="f-t3" x="314" y="146" text-anchor="end">liso</text>' +
+    '<text class="f-t2" x="230" y="42" text-anchor="middle">completamente rugoso: f depende só de ε/D</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["carta-controle"] = {
+  titulo: "Carta de controle",
+  svg:
+  '<svg viewBox="0 0 340 180" role="img" aria-label="Carta de controle com linha média, limites superior e inferior a três sigma e um ponto fora dos limites indicando causa especial">' +
+    '<line class="f-l" x1="45" y1="150" x2="320" y2="150"/>' +
+    '<line class="f-l" x1="45" y1="18" x2="45" y2="150"/>' +
+    '<text class="f-t" x="316" y="167" text-anchor="end">amostra</text>' +
+    '<line class="f-c" x1="45" y1="40" x2="320" y2="40"/>' +
+    '<line class="f-c" x1="45" y1="130" x2="320" y2="130"/>' +
+    '<line class="f-d" x1="45" y1="85" x2="320" y2="85"/>' +
+    '<text class="f-ta" x="324" y="44" text-anchor="end">LSC = x̄ + 3σ</text>' +
+    '<text class="f-ta" x="324" y="134" text-anchor="end">LIC = x̄ − 3σ</text>' +
+    '<text class="f-t2" x="324" y="81" text-anchor="end">x̄</text>' +
+    '<path class="f-l2" d="M60,96 L86,74 L112,100 L138,80 L164,92 L190,70 L216,98 L242,30 L268,88 L294,78"/>' +
+    '<g class="f-p2">' +
+      '<circle cx="60" cy="96" r="2.6"/><circle cx="86" cy="74" r="2.6"/><circle cx="112" cy="100" r="2.6"/>' +
+      '<circle cx="138" cy="80" r="2.6"/><circle cx="164" cy="92" r="2.6"/><circle cx="190" cy="70" r="2.6"/>' +
+      '<circle cx="216" cy="98" r="2.6"/><circle cx="268" cy="88" r="2.6"/><circle cx="294" cy="78" r="2.6"/>' +
+    '</g>' +
+    '<circle class="f-pc" cx="242" cy="30" r="4.5"/>' +
+    '<text class="f-ta" x="238" y="22" text-anchor="end">causa especial</text>' +
+    '<text class="f-t3" x="45" y="176">limite de controle vem do processo; limite de especificação vem do projeto</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["pendulo-composto"] = {
+  titulo: "Pêndulo composto",
+  svg:
+  '<svg viewBox="0 0 280 200" role="img" aria-label="Corpo rígido suspenso por um pino, oscilando em torno dele, com a distância d entre o pino e o centro de massa">' +
+    '<line class="f-g" x1="70" y1="26" x2="200" y2="26"/>' +
+    '<g class="f-l">' +
+      '<line x1="80" y1="26" x2="70" y2="16"/><line x1="104" y1="26" x2="94" y2="16"/>' +
+      '<line x1="128" y1="26" x2="118" y2="16"/><line x1="152" y1="26" x2="142" y2="16"/>' +
+      '<line x1="176" y1="26" x2="166" y2="16"/><line x1="200" y1="26" x2="190" y2="16"/>' +
+    '</g>' +
+    '<circle class="f-g" cx="135" cy="34" r="6"/>' +
+    '<text class="f-t" x="120" y="32" text-anchor="end">O</text>' +
+    // corpo
+    '<path class="f-g" d="M135,40 C118,70 116,110 128,140 C134,154 150,154 156,140 C168,110 160,70 141,40 Z"/>' +
+    '<circle class="f-pc" cx="142" cy="110" r="3.5"/>' +
+    '<text class="f-ta" x="150" y="114">G</text>' +
+    '<line class="f-d" x1="135" y1="34" x2="142" y2="110"/>' +
+    '<line class="f-d" x1="135" y1="34" x2="135" y2="180"/>' +
+    '<text class="f-t2" x="112" y="76" text-anchor="end">d</text>' +
+    '<line class="f-l" x1="122" y1="34" x2="122" y2="110"/>' +
+    '<path class="f-pl" d="M122,34 L119,42 L125,42 Z"/><path class="f-pl" d="M122,110 L119,102 L125,102 Z"/>' +
+    '<path class="f-c" d="M135,160 A25,25 0 0 1 158,150"/>' +
+    '<text class="f-ta" x="164" y="152">θ</text>' +
+    '<text class="f-t2" x="140" y="192" text-anchor="middle">T = 2π·√(I/(m·g·d))</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["conjugado-motor"] = {
+  titulo: "Curva de conjugado do motor de indução",
+  svg:
+  '<svg viewBox="0 0 340 190" role="img" aria-label="Conjugado do motor de indução em função da rotação, com conjugado de partida, conjugado máximo e o ponto de operação próximo da rotação síncrona">' +
+    '<line class="f-l" x1="50" y1="150" x2="320" y2="150"/>' +
+    '<line class="f-l" x1="50" y1="20" x2="50" y2="150"/>' +
+    '<text class="f-t" x="316" y="167" text-anchor="end">rotação</text>' +
+    '<text class="f-t" x="44" y="26" text-anchor="end">C</text>' +
+    '<path class="f-c" d="M52,104 C90,96 140,74 200,44 C230,34 250,44 268,86 C276,112 282,140 288,150"/>' +
+    '<circle class="f-pc" cx="200" cy="44" r="3.5"/>' +
+    '<text class="f-ta" x="206" y="40">conjugado máximo</text>' +
+    '<circle class="f-pc" cx="52" cy="104" r="3.5"/>' +
+    '<text class="f-t2" x="60" y="118">partida</text>' +
+    '<line class="f-d" x1="288" y1="20" x2="288" y2="150"/>' +
+    '<text class="f-t2" x="288" y="166" text-anchor="middle">ns</text>' +
+    '<line class="f-l2" x1="50" y1="122" x2="300" y2="122"/>' +
+    '<text class="f-t3" x="300" y="118" text-anchor="end">conjugado resistente da carga</text>' +
+    '<circle class="f-p2" cx="272" cy="122" r="4"/>' +
+    '<text class="f-t2" x="266" y="140" text-anchor="end">ponto de operação</text>' +
+    '<text class="f-t3" x="292" y="36">o conjugado se anula em ns:</text>' +
+    '<text class="f-t3" x="292" y="48">sem escorregamento, sem conjugado</text>' +
+  '</svg>'
+};
+
+/* ===== data/figuras-3.js ===== */
+/* ============================================================
+   FIGURAS — casos específicos de enunciado
+   Desenhos feitos para questões cujo enunciado não é atendido
+   por nenhuma figura genérica. Figura que não corresponde ao
+   enunciado atrapalha mais que ajuda.
+   ============================================================ */
+window.FIGURAS = window.FIGURAS || {};
+
+window.FIGURAS["viga-biapoiada-qp"] = {
+  titulo: "Viga biapoiada com carga distribuída e carga concentrada no meio do vão",
+  svg:
+  '<svg viewBox="0 0 340 130" role="img" aria-label="Viga biapoiada de vão L submetida ao mesmo tempo a uma carga uniformemente distribuída q e a uma carga concentrada P no meio do vão">' +
+    '<line class="f-c" x1="50" y1="46" x2="290" y2="46"/>' +
+    '<g class="f-c">' +
+      '<line x1="60" y1="46" x2="60" y2="62"/><line x1="98" y1="46" x2="98" y2="62"/>' +
+      '<line x1="136" y1="46" x2="136" y2="62"/><line x1="204" y1="46" x2="204" y2="62"/>' +
+      '<line x1="242" y1="46" x2="242" y2="62"/><line x1="280" y1="46" x2="280" y2="62"/>' +
+    '</g>' +
+    '<g class="f-pc">' +
+      '<path d="M57,56 L63,56 L60,64 Z"/><path d="M95,56 L101,56 L98,64 Z"/>' +
+      '<path d="M133,56 L139,56 L136,64 Z"/><path d="M201,56 L207,56 L204,64 Z"/>' +
+      '<path d="M239,56 L245,56 L242,64 Z"/><path d="M277,56 L283,56 L280,64 Z"/>' +
+    '</g>' +
+    '<text class="f-ta" x="296" y="50">q</text>' +
+    '<line class="f-c" x1="170" y1="14" x2="170" y2="62"/>' +
+    '<path class="f-pc" d="M166,54 L174,54 L170,65 Z"/>' +
+    '<text class="f-ta" x="177" y="22">P</text>' +
+    '<line class="f-g" x1="50" y1="70" x2="290" y2="70"/>' +
+    '<path class="f-p" d="M50,70 L40,88 L60,88 Z"/>' +
+    '<path class="f-p" d="M290,70 L280,84 L300,84 Z"/>' +
+    '<circle class="f-p" cx="284" cy="87" r="2.6"/><circle class="f-p" cx="296" cy="87" r="2.6"/>' +
+    '<line class="f-l" x1="34" y1="90" x2="66" y2="90"/>' +
+    '<line class="f-l" x1="276" y1="92" x2="304" y2="92"/>' +
+    '<line class="f-d" x1="50" y1="70" x2="50" y2="114"/>' +
+    '<line class="f-d" x1="170" y1="70" x2="170" y2="114"/>' +
+    '<line class="f-d" x1="290" y1="70" x2="290" y2="114"/>' +
+    '<line class="f-l" x1="50" y1="108" x2="170" y2="108"/>' +
+    '<line class="f-l" x1="170" y1="108" x2="290" y2="108"/>' +
+    '<path class="f-pl" d="M50,108 L58,105 L58,111 Z"/><path class="f-pl" d="M170,108 L162,105 L162,111 Z"/>' +
+    '<path class="f-pl" d="M170,108 L178,105 L178,111 Z"/><path class="f-pl" d="M290,108 L282,105 L282,111 Z"/>' +
+    '<text class="f-t" x="110" y="124" text-anchor="middle">L/2</text>' +
+    '<text class="f-t" x="230" y="124" text-anchor="middle">L/2</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["cisalhamento-puro"] = {
+  titulo: "Elemento em cisalhamento puro",
+  svg:
+  '<svg viewBox="0 0 300 180" role="img" aria-label="Elemento quadrado submetido apenas a tensões de cisalhamento nas quatro faces, com tensões normais nulas, e indicação do plano a quarenta e cinco graus">' +
+    '<rect class="f-g" x="90" y="45" width="100" height="90"/>' +
+    '<g class="f-c">' +
+      '<line x1="100" y1="36" x2="180" y2="36"/>' +
+      '<line x1="180" y1="144" x2="100" y2="144"/>' +
+      '<line x1="81" y1="55" x2="81" y2="125"/>' +
+      '<line x1="199" y1="125" x2="199" y2="55"/>' +
+    '</g>' +
+    '<g class="f-pc">' +
+      '<path d="M184,36 L176,33 L176,39 Z"/><path d="M96,144 L104,141 L104,147 Z"/>' +
+      '<path d="M81,129 L78,121 L84,121 Z"/><path d="M199,51 L196,59 L202,59 Z"/>' +
+    '</g>' +
+    '<text class="f-ta" x="140" y="30" text-anchor="middle">τ</text>' +
+    '<text class="f-ta" x="140" y="158" text-anchor="middle">τ</text>' +
+    '<text class="f-ta" x="72" y="94" text-anchor="end">τ</text>' +
+    '<text class="f-ta" x="208" y="94">τ</text>' +
+    '<line class="f-d" x1="90" y1="135" x2="190" y2="45"/>' +
+    '<text class="f-t2" x="228" y="46">plano a 45°</text>' +
+    '<text class="f-t3" x="140" y="174" text-anchor="middle">σx = σy = 0</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["equip-isoladores"] = {
+  titulo: "Equipamento sobre isoladores em paralelo",
+  svg:
+  '<svg viewBox="0 0 300 180" role="img" aria-label="Bloco de massa m apoiado sobre quatro isoladores iguais de rigidez k, trabalhando em paralelo sobre a base">' +
+    '<rect class="f-g" x="60" y="30" width="180" height="46"/>' +
+    '<text class="f-t" x="150" y="59" text-anchor="middle">m</text>' +
+    '<g class="f-l">' +
+      '<path d="M85,76 L85,86 L76,91 L94,99 L76,107 L94,115 L85,120 L85,130"/>' +
+      '<path d="M128,76 L128,86 L119,91 L137,99 L119,107 L137,115 L128,120 L128,130"/>' +
+      '<path d="M171,76 L171,86 L162,91 L180,99 L162,107 L180,115 L171,120 L171,130"/>' +
+      '<path d="M214,76 L214,86 L205,91 L223,99 L205,107 L223,115 L214,120 L214,130"/>' +
+    '</g>' +
+    '<text class="f-t" x="66" y="103" text-anchor="end">k</text>' +
+    '<line class="f-d" x1="70" y1="99" x2="76" y2="99"/>' +
+    '<line class="f-g" x1="55" y1="130" x2="245" y2="130"/>' +
+    '<g class="f-l">' +
+      '<line x1="65" y1="130" x2="55" y2="140"/><line x1="89" y1="130" x2="79" y2="140"/>' +
+      '<line x1="113" y1="130" x2="103" y2="140"/><line x1="137" y1="130" x2="127" y2="140"/>' +
+      '<line x1="161" y1="130" x2="151" y2="140"/><line x1="185" y1="130" x2="175" y2="140"/>' +
+      '<line x1="209" y1="130" x2="199" y2="140"/><line x1="233" y1="130" x2="223" y2="140"/>' +
+    '</g>' +
+    '<line class="f-c" x1="266" y1="34" x2="266" y2="66"/>' +
+    '<path class="f-pc" d="M266,70 L262,60 L270,60 Z"/>' +
+    '<text class="f-ta" x="272" y="54">x</text>' +
+    '<text class="f-t3" x="150" y="164" text-anchor="middle">isoladores sob a mesma base trabalham em paralelo</text>' +
+  '</svg>'
+};
+
+window.FIGURAS["disco-anel"] = {
+  titulo: "Disco maciço e anel de parede fina, de mesma massa e mesmo raio",
+  svg:
+  '<svg viewBox="0 0 300 160" role="img" aria-label="Comparação entre um disco maciço e um anel de parede fina, ambos de mesma massa e mesmo raio, girando em torno do eixo central">' +
+    '<circle class="f-g" cx="85" cy="70" r="45"/>' +
+    '<circle class="f-hatch" cx="85" cy="70" r="45"/>' +
+    '<circle class="f-p" cx="85" cy="70" r="2.5"/>' +
+    '<line class="f-d" x1="85" y1="70" x2="130" y2="70"/>' +
+    '<text class="f-t2" x="107" y="64" text-anchor="middle">R</text>' +
+    '<text class="f-t" x="85" y="134" text-anchor="middle">disco maciço</text>' +
+    '<text class="f-t3" x="85" y="150" text-anchor="middle">massa até o centro</text>' +
+    '<circle class="f-g" cx="215" cy="70" r="45"/>' +
+    '<circle class="f-g" cx="215" cy="70" r="40"/>' +
+    '<circle class="f-p" cx="215" cy="70" r="2.5"/>' +
+    '<line class="f-d" x1="215" y1="70" x2="260" y2="70"/>' +
+    '<text class="f-t2" x="237" y="64" text-anchor="middle">R</text>' +
+    '<text class="f-t" x="215" y="134" text-anchor="middle">anel de parede fina</text>' +
+    '<text class="f-t3" x="215" y="150" text-anchor="middle">massa no raio externo</text>' +
+    '<line class="f-c" x1="85" y1="12" x2="85" y2="24"/>' +
+    '<line class="f-c" x1="215" y1="12" x2="215" y2="24"/>' +
+    '<text class="f-ta" x="150" y="20" text-anchor="middle">eixo central</text>' +
+  '</svg>'
+};
+
+/* ===== data/simbolos.js ===== */
+/* ============================================================
+   SIGNIFICADO E UNIDADE DAS VARIÁVEIS
+   Dicionário por assunto. O resumo de cada tema monta sua legenda
+   a partir daqui: varre os símbolos das próprias fórmulas e lista
+   só os que estiverem definidos abaixo — por isso palavra de texto
+   corrido nunca vira "variável".
+
+   O dicionário é por tema de propósito: o mesmo símbolo muda de
+   significado conforme o assunto (R é constante do gás na
+   termodinâmica, resistência térmica na transmissão de calor e
+   confiabilidade na estatística).
+   ============================================================ */
+window.SIMBOLOS = {
+
+  termodinamica: {
+    p: "pressão absoluta [kPa]", V: "volume [m³]", v: "volume específico [m³/kg]",
+    m: "massa [kg]", T: "temperatura absoluta [K]", R: "constante particular do gás [kJ/kg·K]",
+    M: "massa molar [kg/kmol]", Q: "calor trocado, positivo entrando [kJ]",
+    W: "trabalho, positivo quando o sistema realiza [kJ]", w: "trabalho específico [kJ/kg]",
+    ΔU: "variação da energia interna [kJ]", u: "energia interna específica [kJ/kg]",
+    h: "entalpia específica [kJ/kg]", s: "entropia específica [kJ/kg·K]",
+    Δs: "variação de entropia específica [kJ/kg·K]", ΔT: "variação de temperatura [K]",
+    cp: "calor específico a pressão constante [kJ/kg·K]",
+    cv: "calor específico a volume constante [kJ/kg·K]",
+    c: "calor específico do incompressível [kJ/kg·K]",
+    k: "razão de calores específicos cp/cv, adimensional",
+    n: "expoente politrópico, adimensional", x: "título, fração mássica de vapor (0 a 1)",
+    hf: "entalpia do líquido saturado [kJ/kg]", hfg: "entalpia de vaporização [kJ/kg]",
+    vf: "volume específico do líquido saturado [m³/kg]", vfg: "diferença vg − vf [m³/kg]",
+    η: "rendimento térmico, adimensional", COP: "coeficiente de desempenho, adimensional",
+    TL: "temperatura absoluta da fonte fria [K]", TH: "temperatura absoluta da fonte quente [K]",
+    qL: "calor retirado da fonte fria [kJ/kg]", qH: "calor rejeitado na fonte quente [kJ/kg]",
+    rv: "taxa de compressão, adimensional", g: "aceleração da gravidade [m/s²]",
+    z: "cota [m]", "T₀": "temperatura do ambiente de referência [K]",
+    S_gerada: "entropia gerada no processo [kJ/K]", X_destruída: "exergia destruída [kJ]"
+  },
+
+  mecflu: {
+    p: "pressão [Pa]", "p₀": "pressão na superfície livre [Pa]",
+    ρ: "massa específica [kg/m³]", γ: "peso específico [N/m³]",
+    g: "aceleração da gravidade [m/s²]", h: "altura ou profundidade [m]",
+    z: "cota [m]", V: "velocidade média [m/s]", Q: "vazão volumétrica [m³/s]",
+    A: "área da seção [m²]", D: "diâmetro interno [m]", L: "comprimento do trecho [m]",
+    μ: "viscosidade dinâmica [Pa·s]", ν: "viscosidade cinemática [m²/s]",
+    τ: "tensão de cisalhamento [Pa]", Re: "número de Reynolds, adimensional",
+    f: "fator de atrito de Darcy, adimensional", h_L: "perda de carga distribuída [m]",
+    h_loc: "perda de carga localizada [m]", K: "coeficiente de perda do acessório, adimensional",
+    L_eq: "comprimento equivalente [m]", F: "força [N]",
+    E: "empuxo [N]", GM: "altura metacêntrica [m]; estável se positiva",
+    I: "momento de inércia de área [m⁴]", I_cg: "momento de inércia em relação ao centroide [m⁴]",
+    y_cg: "posição do centroide [m]", y_cp: "posição do centro de pressão [m]",
+    h_cg: "profundidade do centroide [m]", δ: "espessura da camada limite [m]",
+    Ma: "número de Mach, adimensional", k: "razão de calores específicos, adimensional",
+    c: "velocidade do som [m/s]", R: "constante do gás [J/kg·K]",
+    T: "temperatura absoluta [K]", H: "altura de carga [m]",
+    H_bomba: "energia fornecida pela bomba [m]", P: "potência [W]",
+    Δp: "diferença de pressão [Pa]", Δh: "desnível no manômetro [m]",
+    η: "rendimento, adimensional", x: "distância ao longo da placa [m]",
+    ΔV: "variação de velocidade [m/s]", Π: "grupo adimensional (Buckingham)"
+  },
+
+  transcal: {
+    Q: "taxa de transferência de calor [W]", q: "fluxo de calor por área [W/m²]",
+    k: "condutividade térmica [W/m·K]", A: "área de troca [m²]",
+    L: "espessura ou comprimento [m]", ΔT: "diferença de temperatura [K]",
+    ΣR: "soma das resistências térmicas [K/W]",
+    R_cilíndrica: "resistência térmica da parede cilíndrica [K/W]",
+    "r₁": "raio interno [m]", "r₂": "raio externo [m]",
+    U: "coeficiente global de troca [W/m²·K]",
+    h: "coeficiente de convecção [W/m²·K]",
+    h_interno: "coeficiente de convecção interno [W/m²·K]",
+    h_externo: "coeficiente de convecção externo [W/m²·K]",
+    r_crítico: "raio crítico de isolamento [m]", Bi: "número de Biot, adimensional",
+    Lc: "comprimento característico, volume/área [m]", ρ: "massa específica [kg/m³]",
+    c: "calor específico [J/kg·K]", τ: "constante de tempo térmica [s]",
+    t: "tempo [s]", Ti: "temperatura inicial [K]", Ts: "temperatura da superfície [K]",
+    Nu: "número de Nusselt, adimensional", Pr: "número de Prandtl, adimensional",
+    Re: "número de Reynolds, adimensional", Gr: "número de Grashof, adimensional",
+    ν: "viscosidade cinemática [m²/s]", α: "difusividade térmica [m²/s]",
+    m: "parâmetro da aleta √(hP/kA) [1/m]", P: "perímetro da aleta [m]",
+    η_aleta: "eficiência da aleta, adimensional",
+    ε: "emissividade (radiação) ou efetividade (ε-NUT), adimensional",
+    σ: "constante de Stefan-Boltzmann, 5,67×10⁻⁸ W/m²·K⁴",
+    T_viz: "temperatura da vizinhança [K]", λ_max: "comprimento de onda do pico [μm]",
+    F: "fator de correção do arranjo, ≤ 1", ΔT_ml: "média logarítmica das diferenças [K]",
+    "ΔT₁": "diferença de temperatura em uma extremidade [K]",
+    "ΔT₂": "diferença de temperatura na outra extremidade [K]",
+    Rf: "resistência de incrustação [m²·K/W]", NUT: "número de unidades de transferência",
+    C_min: "menor capacidade térmica de corrente [W/K]",
+    Cr: "razão C_min/C_max, adimensional", Q_max: "troca máxima possível [W]",
+    hi: "coeficiente interno [W/m²·K]", he: "coeficiente externo [W/m²·K]",
+    Ai: "área interna [m²]", Ae: "área externa [m²]"
+  },
+
+  resmat: {
+    σ: "tensão normal [MPa]", τ: "tensão de cisalhamento [MPa]",
+    N: "força normal [N]", P: "carga aplicada [N]", A: "área da seção [mm²]",
+    E: "módulo de elasticidade [MPa]", G: "módulo de elasticidade transversal [MPa]",
+    ν: "coeficiente de Poisson, adimensional", ε: "deformação específica, adimensional",
+    δ: "alongamento ou deflexão [mm]", L: "comprimento [mm]",
+    U: "energia de deformação [N·mm]", α: "coeficiente de dilatação térmica [1/°C]",
+    ΔT: "variação de temperatura [°C]", M: "momento fletor [N·mm]",
+    W: "módulo de resistência à flexão, I/y_max [mm³]",
+    I: "momento de inércia da seção [mm⁴]", I_cg: "inércia em relação ao centroide [mm⁴]",
+    y: "distância à linha neutra [mm]", y_max: "distância à fibra mais afastada [mm]",
+    V: "esforço cortante [N]", Q: "momento estático da área [mm³]",
+    b: "largura da seção [mm]", h: "altura da seção [mm]",
+    d: "diâmetro do eixo, ou distância entre eixos paralelos [mm]",
+    e: "excentricidade da carga [mm]",
+    T: "momento torçor [N·mm]", J: "momento polar de inércia [mm⁴]",
+    φ: "ângulo de torção [rad]", n: "rotação [rpm]", p: "pressão interna [MPa]",
+    t: "espessura da parede [mm]", D: "diâmetro do vaso [mm]",
+    σ_adm: "tensão admissível [MPa]", σ_escoamento: "tensão de escoamento [MPa]",
+    "σ1": "primeira tensão principal [MPa]", "σ2": "segunda tensão principal [MPa]",
+    "σ3": "terceira tensão principal [MPa]", σx: "tensão normal na direção x [MPa]",
+    σy: "tensão normal na direção y [MPa]", τxy: "tensão de cisalhamento no plano xy [MPa]",
+    τ_max: "cisalhamento máximo [MPa]", θp: "ângulo dos planos principais [°]",
+    εa: "deformação medida no extensômetro a", εb: "deformação medida no extensômetro b",
+    εc: "deformação medida no extensômetro c", γxy: "distorção angular no plano xy",
+    GF: "fator do extensômetro (gage factor), adimensional",
+    R: "resistência elétrica do extensômetro [Ω]", ΔR: "variação de resistência [Ω]",
+    Pcr: "carga crítica de flambagem [N]", σcr: "tensão crítica [MPa]",
+    K: "coeficiente de comprimento efetivo, adimensional",
+    λ: "índice de esbeltez, adimensional", λ_limite: "esbeltez limite de Euler",
+    r: "raio de giração, √(I/A) [mm]", σ_circ: "tensão circunferencial [MPa]",
+    σ_long: "tensão longitudinal [MPa]", σ_térmica: "tensão de origem térmica [MPa]"
+  },
+
+  elemmaq: {
+    m: "módulo do dente [mm]", d: "diâmetro primitivo [mm]",
+    d_ext: "diâmetro externo [mm]", z: "número de dentes",
+    p: "passo circular [mm]", i: "relação de transmissão, adimensional",
+    Ft: "força tangencial [N]", Fr: "força radial [N]",
+    φ: "ângulo de pressão [°]", T: "torque [N·m]", P: "potência [kW]",
+    n: "rotação [rpm]", L10: "vida nominal em milhões de rotações",
+    L10h: "vida nominal em horas", C: "capacidade de carga dinâmica [N]",
+    a: "expoente de vida: 3 para esferas, 10/3 para rolos",
+    Fa: "carga axial [N]", X: "fator radial de catálogo", Y: "fator axial de catálogo",
+    Se: "limite de fadiga corrigido [MPa]", "Se'": "limite de fadiga do corpo de prova [MPa]",
+    Sut: "limite de resistência à tração [MPa]", Sy: "tensão de escoamento [MPa]",
+    σa: "tensão alternada [MPa]", σm: "tensão média [MPa]",
+    ka: "fator de acabamento superficial", kb: "fator de tamanho",
+    kc: "fator de tipo de carregamento", kd: "fator de temperatura",
+    ke: "fator de confiabilidade", Kt: "fator de concentração geométrico",
+    Kf: "fator de concentração em fadiga", q: "sensibilidade ao entalhe (0 a 1)",
+    τ: "tensão de cisalhamento na chaveta [MPa]",
+    σ: "pressão de esmagamento [MPa]", b: "largura da chaveta [mm]",
+    h: "altura da chaveta [mm]", L: "comprimento da chaveta ou da mola [mm]",
+    Fi: "pré-carga do parafuso [N]", K: "coeficiente de atrito do aperto ≈ 0,2",
+    km: "rigidez dos membros da junta [N/mm]", "k_mola": "constante da mola [N/mm]",
+    G: "módulo de elasticidade transversal [MPa]", D: "diâmetro médio da mola [mm]",
+    N: "número de espiras ativas", Kw: "fator de Wahl, adimensional",
+    F1: "tração no ramo tenso da correia [N]", F2: "tração no ramo frouxo [N]",
+    v: "velocidade da correia [m/s]", μ: "coeficiente de atrito",
+    θ: "ângulo de abraçamento [rad]", F: "força axial na embreagem [N]",
+    R_médio: "raio médio de atrito [mm]"
+  },
+
+  dinamica: {
+    m: "massa [kg]", a: "aceleração [m/s²]", v: "velocidade [m/s]",
+    s: "deslocamento [m]", t: "tempo [s]", F: "força [N]",
+    g: "aceleração da gravidade, 9,81 m/s²", P: "potência [W]",
+    a_n: "aceleração normal, v²/R [m/s²]", a_t: "aceleração tangencial [m/s²]",
+    R: "raio de curvatura [m]", μ: "coeficiente de atrito, adimensional",
+    θ: "ângulo do plano inclinado [°]", a_max: "aceleração máxima possível [m/s²]",
+    v_max: "velocidade máxima em curva [m/s]", ω: "velocidade angular [rad/s]",
+    α: "aceleração angular [rad/s²]", v_rel: "velocidade relativa [m/s]",
+    a_rel: "aceleração relativa [m/s²]", T: "energia cinética [J]",
+    U: "trabalho das forças [J]", V_g: "energia potencial gravitacional [J]",
+    V_e: "energia potencial elástica [J]", k: "constante da mola [N/m]",
+    x: "deformação da mola [m]", h: "altura [m]", Δt: "intervalo de tempo [s]",
+    e: "coeficiente de restituição (0 a 1)", I: "momento de inércia de massa [kg·m²]",
+    I_G: "momento de inércia em relação ao centro de massa [kg·m²]",
+    I_cg: "momento de inércia em relação ao centro de massa [kg·m²]",
+    d: "distância entre eixos paralelos [m]", L: "comprimento da barra [m]",
+    E: "energia cinética de rotação [J]", ΔV: "variação de velocidade do jato [m/s]",
+    π: "3,1416"
+  },
+
+  vibracoes: {
+    ωn: "frequência natural [rad/s]", fn: "frequência natural [Hz]",
+    ωd: "frequência natural amortecida [rad/s]", ω: "frequência de excitação [rad/s]",
+    ωc: "velocidade crítica [rad/s]", k: "rigidez [N/m]", m: "massa [kg]",
+    c: "constante de amortecimento [N·s/m]", cc: "amortecimento crítico, 2√(km) [N·s/m]",
+    ζ: "fator de amortecimento, c/cc, adimensional",
+    δ: "decremento logarítmico, adimensional",
+    δ_estático: "deflexão estática sob o peso próprio [m]",
+    g: "aceleração da gravidade [m/s²]", "x₁": "amplitude em um ciclo [mm]",
+    "x₂": "amplitude no ciclo seguinte [mm]", "x₀": "amplitude inicial [mm]",
+    xn: "amplitude após n ciclos [mm]", n: "número de ciclos",
+    r: "razão de frequências ω/ωn, adimensional",
+    M: "fator de amplificação dinâmica, adimensional",
+    TR: "transmissibilidade, adimensional", ka: "rigidez do absorvedor [N/m]",
+    ma: "massa do absorvedor [kg]", F: "força de desbalanceamento [N]",
+    e: "excentricidade do rotor [mm]", U: "desbalanceamento residual [g·mm]",
+    e_permissível: "excentricidade permissível pela ISO 1940 [mm]",
+    EI: "rigidez à flexão [N·mm²]", L: "comprimento [mm]",
+    kt: "rigidez torcional [N·m/rad]", Jp: "momento polar de inércia [mm⁴]",
+    G: "módulo de elasticidade transversal [MPa]",
+    v_rms: "velocidade eficaz de vibração [mm/s]", T: "janela de aquisição [s]",
+    Δf: "resolução do espectro, 1/T [Hz]", z: "número de dentes da engrenagem",
+    F_engrenamento: "frequência de engrenamento [Hz]"
+  },
+
+  maqfluxo: {
+    Q: "vazão [m³/s ou m³/h]", H: "altura manométrica [m]",
+    H_sistema: "altura exigida pelo sistema [m]",
+    H_estático: "parcela estática, independente da vazão [m]",
+    K: "coeficiente de perda do sistema", ρ: "massa específica [kg/m³]",
+    g: "aceleração da gravidade [m/s²]",
+    P_hidráulica: "potência entregue ao líquido [W]",
+    P_eixo: "potência no eixo da bomba [W]", P: "potência [kW]",
+    η: "rendimento total, adimensional",
+    η_hidráulico: "rendimento hidráulico", η_volumétrico: "rendimento volumétrico",
+    η_mecânico: "rendimento mecânico", η_isentrópico: "rendimento isentrópico",
+    H_Euler: "altura teórica de Euler [m]", "u₁": "velocidade periférica na entrada [m/s]",
+    "u₂": "velocidade periférica na saída [m/s]",
+    "cu₁": "componente tangencial da velocidade absoluta na entrada [m/s]",
+    "cu₂": "componente tangencial na saída [m/s]", D: "diâmetro do rotor [m]",
+    n: "rotação [rpm]", NPSH_d: "NPSH disponível na instalação [m]",
+    NPSH_r: "NPSH requerido pela bomba [m]", P_atm: "pressão atmosférica local [Pa]",
+    P_v: "pressão de vapor do líquido na temperatura [Pa]",
+    z: "altura de sucção; soma se afogada, subtrai se negativa [m]",
+    h_f: "perda de carga na sucção [m]", σ_Thoma: "coeficiente de cavitação, adimensional",
+    ns: "rotação específica", Q_teórica: "vazão teórica da volumétrica [m³/s]",
+    Q_real: "vazão efetivamente entregue [m³/s]", Δp: "pressão diferencial [Pa]",
+    W_isentrópico: "trabalho de compressão isentrópico [kJ/kg]",
+    k: "razão de calores específicos, adimensional", R: "constante do gás [kJ/kg·K]",
+    "T₁": "temperatura na sucção [K]", "T₂": "temperatura na descarga [K]",
+    "p₁": "pressão de sucção [kPa]", "p₂": "pressão de descarga [kPa]",
+    p_final: "pressão final da compressão [kPa]", p_inicial: "pressão inicial [kPa]",
+    N: "número de estágios", c: "fração de espaço nocivo, adimensional",
+    W: "trabalho específico [kJ/kg]", "h₁": "entalpia na entrada [kJ/kg]",
+    "h₂": "entalpia real na saída [kJ/kg]", "h₂s": "entalpia na saída isentrópica [kJ/kg]",
+    F: "força do jato na pá [N]", V: "velocidade do jato [m/s]", u: "velocidade da pá [m/s]"
+  },
+
+  mci: {
+    r: "taxa de compressão, adimensional", Vd: "volume deslocado (cilindrada) [cm³]",
+    V_morto: "volume da câmara de combustão [cm³]",
+    V_deslocado: "volume deslocado pelo pistão [cm³]",
+    rc: "razão de corte do ciclo Diesel, adimensional",
+    k: "razão de calores específicos, 1,4 para o ar",
+    η_Otto: "rendimento térmico do ciclo Otto", η_Diesel: "rendimento térmico do ciclo Diesel",
+    η_térmico: "rendimento térmico, adimensional",
+    η_mecânico: "rendimento mecânico, adimensional",
+    η_volumétrico: "rendimento volumétrico, adimensional",
+    D: "diâmetro do cilindro [mm]", S: "curso do pistão [mm]",
+    P: "potência efetiva [kW]", T: "torque [N·m]", n: "rotação [rpm]",
+    pme: "pressão média efetiva [kPa]", ce: "consumo específico [g/kWh]",
+    PCI: "poder calorífico inferior [kJ/kg]",
+    P_efetiva: "potência medida no eixo [kW]",
+    P_indicada: "potência desenvolvida no interior do cilindro [kW]",
+    v_pistão: "velocidade média do pistão [m/s]",
+    λ: "razão ar-combustível relativa: 1 estequiométrico, >1 pobre, <1 rico",
+    A: "massa de ar [kg]", C: "massa de combustível [kg]",
+    ρ_ar: "massa específica do ar admitido [kg/m³]",
+    p: "pressão do ar de admissão [kPa]", R: "constante do ar, 0,287 kJ/kg·K",
+    ρ: "massa específica [kg/m³]", m: "massa [kg]", g: "grama"
+  },
+
+  ciclospot: {
+    η: "rendimento térmico, adimensional", W_t: "trabalho da turbina [kJ/kg]",
+    W_b: "trabalho da bomba [kJ/kg]", W_líquido: "trabalho líquido do ciclo [kJ/kg]",
+    W_compressor: "trabalho consumido pelo compressor [kJ/kg]",
+    W_turbina: "trabalho produzido pela turbina [kJ/kg]",
+    q_ent: "calor fornecido na caldeira [kJ/kg]",
+    v: "volume específico do líquido, ≈ 0,001 m³/kg", v_água: "volume específico da água [m³/kg]",
+    "p₁": "pressão do condensador [kPa]", "p₂": "pressão da caldeira [kPa]",
+    x: "título do vapor, fração de vapor (0 a 1)", h: "entalpia específica [kJ/kg]",
+    "h₁": "entalpia na entrada da turbina [kJ/kg]",
+    "h₂": "entalpia real na saída [kJ/kg]", "h₂s": "entalpia na saída isentrópica [kJ/kg]",
+    h_l: "entalpia do líquido saturado [kJ/kg]", h_lv: "entalpia de vaporização [kJ/kg]",
+    η_isen: "rendimento isentrópico, adimensional",
+    CEV: "consumo específico de vapor [kg/kWh]",
+    rp: "relação de pressões do ciclo Brayton, p₂/p₁",
+    k: "razão de calores específicos, adimensional", bwr: "back-work ratio, adimensional",
+    η_topo: "rendimento do ciclo de topo (Brayton)",
+    η_base: "rendimento do ciclo de baixo (Rankine)",
+    η_combinado: "rendimento do ciclo combinado",
+    "T₁": "temperatura na entrada do compressor [K]",
+    "T₂": "temperatura na saída do compressor [K]", m: "massa [kg]"
+  },
+
+  corrosao: {
+    E: "potencial eletroquímico [V]", I: "corrente de proteção [A]",
+    t: "tempo [s]", m: "massa de metal corroído [g]",
+    M: "massa atômica do metal [g/mol]", n: "número de elétrons da reação",
+    F: "constante de Faraday, 96.500 C/mol",
+    PREN: "número equivalente de resistência ao pite, adimensional",
+    Cr: "teor de cromo [%]", Mo: "teor de molibdênio [%]", N: "teor de nitrogênio [%]",
+    A_exposta: "área metálica exposta ao eletrólito [m²]",
+    V: "tensão em relação ao eletrodo de referência [V]",
+    HRC: "dureza Rockwell C, limite de 22 em serviço ácido"
+  },
+
+  selmat: {
+    PREN: "número equivalente de resistência ao pite, adimensional",
+    Cr: "teor de cromo [%]", Mo: "teor de molibdênio [%]", N: "teor de nitrogênio [%]",
+    E: "módulo de elasticidade [GPa]", ρ: "massa específica [kg/m³]",
+    σe: "tensão de escoamento [MPa]",
+    HRC: "dureza Rockwell C, limite de 22 em serviço ácido"
+  },
+
+  metalurgia: {
+    σ: "tensão de escoamento [MPa]", "σ₀": "tensão de atrito da rede [MPa]",
+    k: "constante de Hall-Petch [MPa·mm^0,5]", d: "diâmetro médio de grão [mm]",
+    J: "fluxo de difusão [mol/m²·s]", D: "coeficiente de difusão [m²/s]",
+    "D₀": "fator pré-exponencial de difusão [m²/s]",
+    Q: "energia de ativação [J/mol]", R: "constante universal, 8,314 J/mol·K",
+    T: "temperatura absoluta [K]", t: "tempo [s]", x: "profundidade de difusão [m]",
+    T_fusão: "temperatura de fusão [K]", C: "teor de carbono [%]",
+    σe: "tensão de escoamento [MPa]", Sut: "limite de resistência à tração [MPa]",
+    F_max: "carga máxima no ensaio de tração [N]",
+    "A₀": "área inicial do corpo de prova [mm²]",
+    "L₀": "comprimento inicial de referência [mm]", Lf: "comprimento final [mm]",
+    HB: "dureza Brinell", LMP: "parâmetro de Larson-Miller",
+    K_IC: "tenacidade à fratura [MPa·√m]", Y: "fator geométrico da trinca",
+    a: "tamanho da trinca [m]", Ms: "temperatura de início da martensita [°C]",
+    Mf: "temperatura de fim da martensita [°C]"
+  },
+
+  fabricacao: {
+    vc: "velocidade de corte [m/min]", D: "diâmetro da peça ou da ferramenta [mm]",
+    n: "rotação [rpm]", f: "avanço [mm/volta]", ap: "profundidade de corte [mm]",
+    tc: "tempo de corte [min]", L: "comprimento percorrido pela ferramenta [mm]",
+    Q: "taxa de remoção de material [mm³/min]", T: "vida da ferramenta [min]",
+    C: "constante de Taylor", Ra: "rugosidade média [μm]",
+    r: "raio de ponta da ferramenta [mm]", T_fusão: "temperatura de fusão [K]",
+    "A₀": "área inicial [mm²]", Af: "área final [mm²]",
+    σ: "tensão de escoamento no encruamento [MPa]",
+    ε: "deformação verdadeira", K: "coeficiente de resistência [MPa]"
+  },
+
+  soldagem: {
+    H: "aporte térmico [kJ/mm]", U: "tensão do arco [V]", I: "corrente de soldagem [A]",
+    v: "velocidade de avanço [mm/min]", CE: "carbono equivalente [%]",
+    C: "teor de carbono [%]", Mn: "teor de manganês [%]", Cr: "teor de cromo [%]",
+    Mo: "teor de molibdênio [%]", V: "teor de vanádio [%]",
+    Ni: "teor de níquel [%]", Cu: "teor de cobre [%]", Si: "teor de silício [%]",
+    Nb: "teor de nióbio [%]", Creq: "cromo equivalente do diagrama de Schaeffler",
+    Nieq: "níquel equivalente do diagrama de Schaeffler",
+    A_metal: "área fundida do metal base [mm²]",
+    A_base: "área do metal base diluída [mm²]",
+    A_adição: "área depositada pelo consumível [mm²]"
+  },
+
+  estatistica: {
+    x: "valor observado ou média amostral", n: "tamanho da amostra",
+    s: "desvio-padrão amostral",
+    σ: "desvio-padrão populacional", μ: "média populacional",
+    CV: "coeficiente de variação, adimensional",
+    IC: "intervalo de confiança", z: "escore padronizado da normal",
+    r: "coeficiente de correlação linear, de −1 a +1",
+    y: "segunda variável na correlação", p: "probabilidade de sucesso",
+    k: "número de sucessos ou de ocorrências", X: "variável aleatória",
+    C: "combinação de n elementos tomados k a k",
+    λ: "número médio de ocorrências no intervalo (Poisson)",
+    A: "evento A", B: "evento B", P: "probabilidade",
+    R: "confiabilidade, de 0 a 1", "R₁": "confiabilidade do componente 1",
+    "R₂": "confiabilidade do componente 2", t: "tempo de operação [h]",
+    e: "base dos logaritmos naturais, 2,718",
+    MTBF: "tempo médio entre falhas [h]", MTTR: "tempo médio de reparo [h]",
+    LC: "limite de controle", LSE: "limite superior de especificação",
+    LIE: "limite inferior de especificação",
+    Cp: "índice de capacidade potencial, adimensional",
+    Cpk: "índice de capacidade real, considera o descentramento"
+  },
+
+  eletrotecnica: {
+    ns: "rotação síncrona [rpm]", n: "rotação de operação [rpm]",
+    f: "frequência da rede [Hz]", p: "número de polos",
+    s: "escorregamento, adimensional", V: "tensão de linha [V]",
+    I: "corrente de linha [A]",
+    φ: "ângulo de defasagem entre tensão e corrente [°]",
+    P: "potência ativa [W]", P_útil: "potência mecânica no eixo [W]",
+    P_elétrica: "potência elétrica absorvida [W]",
+    η: "rendimento do motor, adimensional", T: "conjugado [N·m]",
+    N: "rotação [rpm]", m: "massa [kg]"
+  },
+
+  seguranca: {
+    dB: "decibel, unidade de nível de ruído; a NR-15 usa dB(A)",
+    m: "metro; a NR-35 define trabalho em altura acima de 2 m",
+    HHT: "homens-hora trabalhadas no período",
+    n: "número de acidentes com afastamento",
+    LP: "Licença Prévia, viabilidade e localização",
+    LI: "Licença de Instalação, autoriza construir",
+    LO: "Licença de Operação, autoriza operar",
+    EPI: "equipamento de proteção individual",
+    EPC: "equipamento de proteção coletiva"
+  },
+
+  portugues: {},
+  ingles: {}
+};
 
 /* ===== data/q-termodinamica.js ===== */
 window.BANCO.push(
@@ -4239,7 +5504,7 @@ window.BANCO.push(
   calculo:"I = b·h³/12 = 100 × 200³/12 = 100 × 8×10⁶/12 = 66,7×10⁶ mm⁴\nW = I/y_max = 66,7×10⁶/100 = 6,67×10⁵ mm³\n(ou diretamente W = b·h²/6 = 100×40.000/6)",
   explicacao:"O momento de inércia cresce com o **cubo** da altura: por isso é muito mais eficiente aumentar h do que b. Duplicando a altura, I aumenta 8 vezes e W aumenta 4 vezes." },
 
-{ id:"RES-05", tema:"resmat", subtema:"Flexão", nivel:"medio",
+{ id:"RES-05", figura:"secao-retangular", tema:"resmat", subtema:"Flexão", nivel:"medio",
   texto:"Uma viga de seção retangular 100 mm × 200 mm (altura) está submetida a um momento fletor de 20 kN·m em torno do eixo de maior inércia.",
   enunciado:"A tensão normal máxima de flexão nessa seção, em MPa, é de",
   alternativas:["15","30","60","120","200"],
@@ -4247,7 +5512,7 @@ window.BANCO.push(
   calculo:"W = b·h²/6 = 100 × 200²/6 = 666.667 mm³\nM = 20 kN·m = 20×10⁶ N·mm\nσ = M/W = 20×10⁶/666.667 = 30 MPa",
   explicacao:"A tensão de flexão varia **linearmente** ao longo da altura, sendo nula na linha neutra (que passa pelo centroide, na flexão pura) e máxima nas fibras extremas, com tração de um lado e compressão do outro." },
 
-{ id:"RES-06", tema:"resmat", subtema:"Diagramas", nivel:"medio",
+{ id:"RES-06", figura:"viga-biapoiada-q", tema:"resmat", subtema:"Diagramas", nivel:"medio",
   texto:"Uma viga biapoiada de vão L = 6,0 m suporta uma carga uniformemente distribuída q = 10 kN/m em todo o vão.",
   enunciado:"O momento fletor máximo e o esforço cortante máximo nessa viga valem, respectivamente,",
   alternativas:[
@@ -4296,7 +5561,7 @@ window.BANCO.push(
   calculo:"J_vazado = π(D⁴ − d⁴)/32",
   explicacao:"O material próximo ao eixo contribui muito pouco para a resistência à torção, pois ali a tensão é quase nula. Retirando esse material e redistribuindo-o em raios maiores, obtém-se maior J com a mesma massa — é o princípio dos eixos e tubos ocos, largamente usados em eixos de transmissão e estruturas tubulares." },
 
-{ id:"RES-10", tema:"resmat", subtema:"Estado plano de tensões", nivel:"dificil",
+{ id:"RES-10", figura:"elemento-tensao", tema:"resmat", subtema:"Estado plano de tensões", nivel:"dificil",
   texto:"Um elemento estrutural está submetido ao seguinte estado plano de tensões:",
   dados:"σx = 80 MPa (tração)\nσy = 20 MPa (tração)\nτxy = 30 MPa",
   enunciado:"As tensões principais e a tensão de cisalhamento máxima no plano valem, aproximadamente, em MPa,",
@@ -7400,7 +8665,7 @@ window.BANCO.push(
   calculo:"W = m·g·h = 2.000 × 10 × 15 = 300.000 J\nP = W/t = 300.000/20 = 15.000 W = 15 kW",
   explicacao:"Com velocidade constante, toda a potência vai para vencer o peso. A potência do motor deve ser maior para cobrir o rendimento da transmissão e as fases de aceleração." },
 
-{ id:"DIN-30", tema:"dinamica", subtema:"Momento de inércia", nivel:"medio",
+{ id:"DIN-30", figura:"disco-anel", tema:"dinamica", subtema:"Momento de inércia", nivel:"medio",
   texto:"Compara-se um disco maciço a um anel de parede fina, ambos de mesma massa e mesmo raio.",
   enunciado:"A razão entre os momentos de inércia do anel e do disco, em relação ao eixo central, é de",
   alternativas:["0,5","1,0","1,5","2,0","4,0"],
@@ -7504,7 +8769,7 @@ window.BANCO.push(
   explicacao:"A força tangencial é a que transmite potência; a radial apenas separa as engrenagens e carrega os mancais, sem produzir trabalho. Um ângulo de pressão maior (25°) fortalece o dente na raiz, mas aumenta a força radial sobre os mancais.",
   pegadinha:"Usar o raio em vez do diâmetro dobra o resultado. A relação é Ft = T/r = 2T/d." },
 
-{ id:"ELM-25", tema:"elemmaq", subtema:"Eixos", nivel:"dificil",
+{ id:"ELM-25", figura:"eixo-flexao-torcao", tema:"elemmaq", subtema:"Eixos", nivel:"dificil",
   texto:"Um eixo maciço está submetido simultaneamente a momento fletor de 300 N·m e momento torçor de 400 N·m.",
   dados:"Tensão admissível (critério de Tresca): 80 MPa",
   enunciado:"O diâmetro mínimo do eixo, em mm, é de aproximadamente",
@@ -8387,7 +9652,7 @@ window.BANCO.push(
   explicacao:"Mesmo sob tração pura existe cisalhamento em planos inclinados. O máximo ocorre em **45°**, valendo σ/2 = 50 MPa — é por isso que corpos de prova dúcteis rompem em cone a 45° e que aparecem as linhas de Lüders nessa inclinação.",
   pegadinha:"Não existe estado de tensão sem cisalhamento em algum plano, exceto o estado hidrostático." },
 
-{ id:"RES-30", tema:"resmat", subtema:"Viga hiperestática", nivel:"dificil",
+{ id:"RES-30", figura:"viga-engastada-apoiada", tema:"resmat", subtema:"Viga hiperestática", nivel:"dificil",
   texto:"Uma viga de vão 4,0 m está engastada em uma extremidade e simplesmente apoiada na outra, suportando carga uniformemente distribuída de 12 kN/m.",
   enunciado:"A reação vertical no apoio simples e o momento fletor no engaste valem, respectivamente,",
   alternativas:[
@@ -8455,7 +9720,7 @@ window.BANCO.push(
   explicacao:"A energia armazenada é a área sob o diagrama força-deslocamento: U = ½·P·δ. Ela varia com o **quadrado** da carga, o que explica por que impactos são tão mais severos que carregamentos estáticos de mesma intensidade.",
   pegadinha:"Essa é a base do dimensionamento de parafusos de alta resistência sob carga de impacto: parafusos mais longos (maior L) armazenam mais energia elasticamente e resistem melhor ao choque." },
 
-{ id:"RES-36", tema:"resmat", subtema:"Superposição", nivel:"dificil",
+{ id:"RES-36", figura:"viga-biapoiada-qp", tema:"resmat", subtema:"Superposição", nivel:"dificil",
   texto:"Uma viga biapoiada de vão L suporta simultaneamente uma carga distribuída q em todo o vão e uma carga concentrada P no meio do vão.",
   enunciado:"A flecha máxima no meio do vão é dada por",
   alternativas:[
@@ -8512,7 +9777,7 @@ window.BANCO.push(
   explicacao:"Com a **mesma massa**, o tubo é quase dez vezes mais rígido à flexão, porque o material está afastado da linha neutra e o termo A·y² domina. É a razão de estruturas offshore, torres e lanças de guindaste serem tubulares.",
   pegadinha:"O limite dessa lógica é a **flambagem local** da parede: reduzir demais a espessura leva ao enrugamento do tubo antes de atingir a resistência do material." },
 
-{ id:"RES-41", tema:"resmat", subtema:"Flexão", nivel:"dificil",
+{ id:"RES-41", figura:"viga-biapoiada-q", tema:"resmat", subtema:"Flexão", nivel:"dificil",
   texto:"Uma viga biapoiada de 6,0 m de vão, com seção I de módulo de resistência W = 500 cm³, suporta carga uniformemente distribuída.",
   dados:"Tensão admissível: 160 MPa",
   enunciado:"A carga distribuída máxima admissível, em kN/m, é de aproximadamente",
@@ -8557,7 +9822,7 @@ window.BANCO.push(
   calculo:"δ = α·L·ΔT = 23×10⁻⁶ × 4.000 × 60\nδ = 23×10⁻⁶ × 240.000 = 5,52 mm",
   explicacao:"Com dilatação **livre** não surge tensão alguma, apenas deslocamento. É quando o movimento é impedido que aparece σ = E·α·ΔT. O alumínio dilata cerca de o dobro do aço (α ≈ 12×10⁻⁶), o que exige atenção em montagens de materiais diferentes." },
 
-{ id:"RES-46", tema:"resmat", subtema:"Diagramas", nivel:"medio",
+{ id:"RES-46", figura:"viga-balanco-p", tema:"resmat", subtema:"Diagramas", nivel:"medio",
   texto:"Uma viga em balanço de 3,0 m de comprimento suporta uma carga concentrada de 15 kN na extremidade livre.",
   enunciado:"O momento fletor máximo e sua posição são",
   alternativas:[
@@ -8570,7 +9835,7 @@ window.BANCO.push(
   calculo:"M_max = P·L = 15 × 3,0 = 45 kN·m, no engaste\nO cortante é constante e igual a 15 kN em todo o vão",
   explicacao:"No balanço, o momento cresce linearmente da extremidade livre (onde é nulo) até o engaste (onde é máximo). Por isso o engaste é sempre a seção crítica, e é onde se concentram as verificações e os reforços." },
 
-{ id:"RES-47", tema:"resmat", subtema:"Estado plano", nivel:"medio",
+{ id:"RES-47", figura:"cisalhamento-puro", tema:"resmat", subtema:"Estado plano", nivel:"medio",
   texto:"Um elemento está submetido a cisalhamento puro, com τ = 60 MPa e tensões normais nulas.",
   enunciado:"As tensões principais nesse elemento valem",
   alternativas:[
@@ -9955,7 +11220,7 @@ window.BANCO.push(
   explicacao:"Assinaturas típicas: **1× radial dominante e fase estável** → desbalanceamento; **2× com axial alta** → desalinhamento; **muitos harmônicos com pico truncado** → folga; **frequências não múltiplas da rotação** → rolamento; **ruído aleatório de banda larga em alta frequência** → cavitação.",
   pegadinha:"O desbalanceamento gera força m·e·ω², que cresce com o quadrado da rotação — por isso o problema se agrava em máquinas rápidas." },
 
-{ id:"VIB-40", tema:"vibracoes", subtema:"Frequência natural", nivel:"medio",
+{ id:"VIB-40", figura:"equip-isoladores", tema:"vibracoes", subtema:"Frequência natural", nivel:"medio",
   texto:"Um equipamento de 400 kg é montado sobre quatro isoladores iguais, cada um com rigidez de 250 kN/m.",
   enunciado:"A frequência natural vertical do conjunto, em Hz, é de aproximadamente",
   alternativas:["3,98","5,63","7,96","11,25","15,92"],
@@ -10647,6 +11912,43 @@ window.BANCO.push(
   var FORMULARIO = window.FORMULARIO || [];
   var RESUMO = window.RESUMO || [];
   var VERBETES = window.VERBETES || [];
+  var FIGURAS = window.FIGURAS || {};
+  var SIMBOLOS = window.SIMBOLOS || {};
+
+  /* ---------- legenda das variáveis de um resumo ----------
+     Varre os símbolos das próprias fórmulas do verbete e devolve os que
+     estiverem definidos no dicionário do tema. O dicionário funciona como
+     lista branca: palavra de texto corrido não está lá e não vira variável.
+     O dicionário é por tema porque o mesmo símbolo muda de significado
+     conforme o assunto (R é constante do gás, resistência ou confiabilidade). */
+  var RE_SIMBOLO = /[A-Za-zÀ-ÿΑ-Ωα-ω][A-Za-zÀ-ÿΑ-Ωα-ω0-9_₀-₉'′]*/g;
+
+  function legendaVars(v) {
+    var dic = SIMBOLOS[v.tema];
+    if (!dic || !v.formulas || !v.formulas.length) return [];
+    var achados = {}, ordem = [];
+    v.formulas.forEach(function (f) {
+      var toks = String(f).match(RE_SIMBOLO) || [];
+      toks.forEach(function (t) {
+        // tenta o símbolo inteiro e, se não houver, a raiz antes do subscrito
+        var chave = dic[t] !== undefined ? t
+          : (t.indexOf("_") > 0 && dic[t.split("_")[0]] !== undefined ? t.split("_")[0] : null);
+        if (chave === null || achados[chave]) return;
+        achados[chave] = true;
+        ordem.push(chave);
+      });
+    });
+    return ordem.map(function (k) { return { s: k, d: dic[k] }; });
+  }
+
+  // desenho da questão ou do resumo: o SVG vem pronto do banco de figuras
+  function renderFigura(id) {
+    var f = FIGURAS[id];
+    if (!f) return "";
+    return '<figure class="qfig">' + f.svg +
+      (f.titulo ? '<figcaption class="qfig-leg">' + esc(f.titulo) + "</figcaption>" : "") +
+      "</figure>";
+  }
 
   var DATA_PROVA = new Date(2026, 10, 29, 9, 0, 0); // 29/11/2026
 
@@ -10829,6 +12131,7 @@ window.BANCO.push(
     $("#vpTitulo").textContent = v.titulo;
 
     var h = '<p class="vp-resumo">' + fmt(v.resumo) + "</p>";
+    if (v.figuras) v.figuras.forEach(function (id) { h += renderFigura(id); });
     if (v.pontos && v.pontos.length) {
       h += '<div class="vp-rotulo">O que precisa estar sabido</div><ul class="vp-lista">' +
         v.pontos.map(function (p) { return "<li>" + fmt(p) + "</li>"; }).join("") + "</ul>";
@@ -10836,6 +12139,13 @@ window.BANCO.push(
     if (v.formulas && v.formulas.length) {
       h += '<div class="vp-rotulo">Fórmulas do assunto</div><div class="vp-formulas">' +
         v.formulas.map(function (f) { return '<div class="vp-f">' + esc(f) + "</div>"; }).join("") + "</div>";
+      // significado e unidade de cada variável que aparece acima
+      var leg = legendaVars(v);
+      if (leg.length) {
+        h += '<dl class="vp-vars">' + leg.map(function (o) {
+          return '<dt>' + esc(o.s) + "</dt><dd>" + esc(o.d) + "</dd>";
+        }).join("") + "</dl>";
+      }
     }
     if (v.armadilhas && v.armadilhas.length) {
       h += '<div class="vp-rotulo">Onde a banca costuma pegar</div><ul class="vp-lista vp-arm">' +
@@ -10883,6 +12193,8 @@ window.BANCO.push(
     h += "</div></div>";
 
     if (q.texto) h += '<p class="qtexto">' + fmtQ(q.texto) + "</p>";
+    // o desenho vem entre o texto e a pergunta, como nas provas da banca
+    if (q.figura) h += renderFigura(q.figura);
     if (q.dados) h += renderDados(q.dados);
     h += '<p class="qpergunta">' + fmtQ(q.enunciado) + "</p>";
 

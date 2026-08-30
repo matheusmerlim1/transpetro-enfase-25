@@ -66,7 +66,7 @@ window.BANCO.push(
   explicacao:"A força tangencial é a que transmite potência; a radial apenas separa as engrenagens e carrega os mancais, sem produzir trabalho. Um ângulo de pressão maior (25°) fortalece o dente na raiz, mas aumenta a força radial sobre os mancais.",
   pegadinha:"Usar o raio em vez do diâmetro dobra o resultado. A relação é Ft = T/r = 2T/d." },
 
-{ id:"ELM-25", tema:"elemmaq", subtema:"Eixos", nivel:"dificil",
+{ id:"ELM-25", figura:"eixo-flexao-torcao", tema:"elemmaq", subtema:"Eixos", nivel:"dificil",
   texto:"Um eixo maciço está submetido simultaneamente a momento fletor de 300 N·m e momento torçor de 400 N·m.",
   dados:"Tensão admissível (critério de Tresca): 80 MPa",
   enunciado:"O diâmetro mínimo do eixo, em mm, é de aproximadamente",

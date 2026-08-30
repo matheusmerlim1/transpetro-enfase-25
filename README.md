@@ -17,7 +17,8 @@ Há também o `transpetro-enfase-25.bundle.html`: a mesma página com tudo embut
   - 24 de Língua Portuguesa e 20 de Língua Inglesa.
   - Distribuição por nível: 21% fáceis, 40% médias e 39% difíceis.
   - As cinco alternativas de cada questão têm comprimento equivalente, para que o tamanho não entregue a resposta.
-- **Resumo do assunto** — cada questão traz um botão que abre o verbete detalhado do assunto de que ela trata: síntese, pontos que precisam estar sabidos, fórmulas e as armadilhas típicas da banca. São 67 verbetes, cobrindo os 640 itens do banco.
+- **Resumo do assunto** — cada questão traz um botão que abre o verbete detalhado do assunto de que ela trata: síntese, pontos que precisam estar sabidos, fórmulas e as armadilhas típicas da banca. São 67 verbetes, cobrindo os 640 itens do banco. Cada fórmula vem acompanhada da legenda das variáveis, com significado e unidade.
+- **Figuras** — 28 desenhos vetoriais desenhados no próprio site (SVG embutido, sem arquivo externo). Aparecem no enunciado quando são dado do problema — viga com o carregamento, elemento de tensões, eixo sob flexão e torção — e no resumo do assunto quando são gráfico de referência, como círculo de Mohr, diagrama Fe-C, ciclos p-V e T-s, curva da bomba e transmissibilidade.
 - **Modo estudo** — filtra por assunto, dificuldade, questões nunca respondidas, questões erradas ou marcadas. Gabarito na hora.
 - **Simulado** — monta a prova real (50 específicas + 10 português + 10 inglês) em 4h30, com folha de navegação, marcação para revisão e relógio. No fim, aplica os três cortes eliminatórios do item 7.1.4.3 do edital e mostra o desempenho por bloco e por assunto.
 - **Revisão** — duas abas: **Resumo da matéria** (síntese dos 20 assuntos, pontos que precisam estar decorados e 40 exemplos resolvidos) e **fila de erros** automática, de onde a questão sai após dois acertos seguidos.
@@ -39,6 +40,8 @@ data/formulario.js               formulário
 data/q-*.js                      questões, um arquivo por assunto (os `-2` são a segunda leva)
 data/resumo.js                   resumo da matéria com exemplos resolvidos
 data/verbetes-*.js               resumos detalhados por assunto (abertos pelo botão da questão)
+data/figuras-*.js                desenhos SVG usados nas questões e nos resumos
+data/simbolos.js                 significado e unidade das variáveis, por assunto
 build.js                         gera a versão de arquivo único
 transpetro-enfase-25.bundle.html versão de arquivo único (gerada por build.js)
 ```

@@ -10,6 +10,43 @@
   var FORMULARIO = window.FORMULARIO || [];
   var RESUMO = window.RESUMO || [];
   var VERBETES = window.VERBETES || [];
+  var FIGURAS = window.FIGURAS || {};
+  var SIMBOLOS = window.SIMBOLOS || {};
+
+  /* ---------- legenda das variáveis de um resumo ----------
+     Varre os símbolos das próprias fórmulas do verbete e devolve os que
+     estiverem definidos no dicionário do tema. O dicionário funciona como
+     lista branca: palavra de texto corrido não está lá e não vira variável.
+     O dicionário é por tema porque o mesmo símbolo muda de significado
+     conforme o assunto (R é constante do gás, resistência ou confiabilidade). */
+  var RE_SIMBOLO = /[A-Za-zÀ-ÿΑ-Ωα-ω][A-Za-zÀ-ÿΑ-Ωα-ω0-9_₀-₉'′]*/g;
+
+  function legendaVars(v) {
+    var dic = SIMBOLOS[v.tema];
+    if (!dic || !v.formulas || !v.formulas.length) return [];
+    var achados = {}, ordem = [];
+    v.formulas.forEach(function (f) {
+      var toks = String(f).match(RE_SIMBOLO) || [];
+      toks.forEach(function (t) {
+        // tenta o símbolo inteiro e, se não houver, a raiz antes do subscrito
+        var chave = dic[t] !== undefined ? t
+          : (t.indexOf("_") > 0 && dic[t.split("_")[0]] !== undefined ? t.split("_")[0] : null);
+        if (chave === null || achados[chave]) return;
+        achados[chave] = true;
+        ordem.push(chave);
+      });
+    });
+    return ordem.map(function (k) { return { s: k, d: dic[k] }; });
+  }
+
+  // desenho da questão ou do resumo: o SVG vem pronto do banco de figuras
+  function renderFigura(id) {
+    var f = FIGURAS[id];
+    if (!f) return "";
+    return '<figure class="qfig">' + f.svg +
+      (f.titulo ? '<figcaption class="qfig-leg">' + esc(f.titulo) + "</figcaption>" : "") +
+      "</figure>";
+  }
 
   var DATA_PROVA = new Date(2026, 10, 29, 9, 0, 0); // 29/11/2026
 
@@ -192,6 +229,7 @@
     $("#vpTitulo").textContent = v.titulo;
 
     var h = '<p class="vp-resumo">' + fmt(v.resumo) + "</p>";
+    if (v.figuras) v.figuras.forEach(function (id) { h += renderFigura(id); });
     if (v.pontos && v.pontos.length) {
       h += '<div class="vp-rotulo">O que precisa estar sabido</div><ul class="vp-lista">' +
         v.pontos.map(function (p) { return "<li>" + fmt(p) + "</li>"; }).join("") + "</ul>";
@@ -199,6 +237,13 @@
     if (v.formulas && v.formulas.length) {
       h += '<div class="vp-rotulo">Fórmulas do assunto</div><div class="vp-formulas">' +
         v.formulas.map(function (f) { return '<div class="vp-f">' + esc(f) + "</div>"; }).join("") + "</div>";
+      // significado e unidade de cada variável que aparece acima
+      var leg = legendaVars(v);
+      if (leg.length) {
+        h += '<dl class="vp-vars">' + leg.map(function (o) {
+          return '<dt>' + esc(o.s) + "</dt><dd>" + esc(o.d) + "</dd>";
+        }).join("") + "</dl>";
+      }
     }
     if (v.armadilhas && v.armadilhas.length) {
       h += '<div class="vp-rotulo">Onde a banca costuma pegar</div><ul class="vp-lista vp-arm">' +
@@ -246,6 +291,8 @@
     h += "</div></div>";
 
     if (q.texto) h += '<p class="qtexto">' + fmtQ(q.texto) + "</p>";
+    // o desenho vem entre o texto e a pergunta, como nas provas da banca
+    if (q.figura) h += renderFigura(q.figura);
     if (q.dados) h += renderDados(q.dados);
     h += '<p class="qpergunta">' + fmtQ(q.enunciado) + "</p>";
 

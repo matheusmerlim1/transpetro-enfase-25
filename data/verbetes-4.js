@@ -125,7 +125,7 @@ window.VERBETES.push(
     "Confundir recuperação com recristalização: a primeira não muda os grãos.",
     "Supor que aço inox austenítico fica frágil a frio. A estrutura CFC não tem transição."] },
 
-{ id:"met-ferro-carbono", tema:"metalurgia", titulo:"Diagrama Fe-C, tratamentos térmicos e temperabilidade",
+{ id:"met-ferro-carbono", figuras:["fe-c"], tema:"metalurgia", titulo:"Diagrama Fe-C, tratamentos térmicos e temperabilidade",
   subtemas:["Diagrama Fe-C","Regra da alavanca","Tratamentos térmicos","Curvas TTT","Curvas TTT e CCT","Temperabilidade","Martensita","Tratamentos termoquímicos","Elementos de liga","Aços inoxidáveis"],
   resumo:"O diagrama Fe-C diz o que se forma no resfriamento lento; as curvas TTT e CCT dizem o que se forma nas demais velocidades. Têmpera é resfriar rápido o bastante para produzir martensita, e revenido é o tratamento que a torna utilizável.",
   pontos:[
@@ -149,7 +149,7 @@ window.VERBETES.push(
     "Confundir temperabilidade com dureza. Aço-carbono simples atinge alta dureza na superfície, mas com baixa temperabilidade.",
     "Esquecer o revenido após a têmpera: a peça pode trincar sozinha."] },
 
-{ id:"met-ensaios", tema:"metalurgia", titulo:"Ensaios mecânicos, fratura e fluência",
+{ id:"met-ensaios", figuras:["tensao-deformacao","charpy"], tema:"metalurgia", titulo:"Ensaios mecânicos, fratura e fluência",
   subtemas:["Ensaios mecânicos","Ensaio de tração","Ensaio de dureza","Ensaio Charpy","Fratura","Tenacidade","Fluência"],
   resumo:"Cada ensaio responde a uma pergunta diferente. Tração dá resistência e ductilidade; dureza é o ensaio rápido e quase não destrutivo; Charpy revela a transição dúctil-frágil; fluência governa componentes que trabalham quentes por anos.",
   pontos:[

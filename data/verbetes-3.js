@@ -3,7 +3,7 @@ window.VERBETES = window.VERBETES || [];
 window.VERBETES.push(
 
 /* ===================== 7. VIBRAÇÕES MECÂNICAS ===================== */
-{ id:"vib-livre", tema:"vibracoes", titulo:"Vibração livre e amortecimento", padrao:true,
+{ id:"vib-livre", figuras:["massa-mola"], tema:"vibracoes", titulo:"Vibração livre e amortecimento", padrao:true,
   subtemas:["Conceitos","Vibração livre","Amortecimento","Decremento logarítmico","Frequência natural","Rigidez equivalente","Viga em balanço","Vibração transiente","Vibração torcional"],
   resumo:"Todo o assunto gira em torno de um único grupo: ωn = √(k/m). Rigidez alta e massa baixa elevam a frequência natural. O amortecimento quase não muda essa frequência — o que ele muda drasticamente é a amplitude na ressonância e a rapidez com que a oscilação livre morre.",
   pontos:[
@@ -28,7 +28,7 @@ window.VERBETES.push(
     "Somar rigidezes de molas em série. Em série, somam-se as flexibilidades.",
     "Achar que amortecer reduz a frequência natural de forma relevante — não reduz."] },
 
-{ id:"vib-forcada", tema:"vibracoes", titulo:"Vibração forçada, ressonância e isolamento",
+{ id:"vib-forcada", figuras:["transmissibilidade"], tema:"vibracoes", titulo:"Vibração forçada, ressonância e isolamento",
   subtemas:["Vibração forçada","Isolamento","Excitação pela base","Dois graus de liberdade","Múltiplos graus de liberdade","Absorvedor dinâmico"],
   resumo:"O que decide tudo é a razão de frequências r = ω/ωn. Abaixo de 1, a resposta acompanha a força; perto de 1, explode na ressonância; acima de √2, começa o isolamento. Esses três regimes explicam por que se projeta isolador mole e por que se atravessa depressa a rotação crítica.",
   pontos:[
@@ -96,7 +96,7 @@ window.VERBETES.push(
     "Julgar a máquina só pela zona, ignorando a taxa de crescimento."] },
 
 /* ===================== 8. MÁQUINAS DE FLUXO ===================== */
-{ id:"mfx-bombas", tema:"maqfluxo", titulo:"Bombas centrífugas: curvas e ponto de operação", padrao:true,
+{ id:"mfx-bombas", figuras:["bomba-sistema"], tema:"maqfluxo", titulo:"Bombas centrífugas: curvas e ponto de operação", padrao:true,
   subtemas:["Bombas centrífugas","Componentes","Ponto de operação","Curva do sistema","Altura de Euler","Escorvamento","Rendimento","Potência","Desempenho","Seleção","Manutenção","Válvulas","Controle de vazão"],
   resumo:"A bomba entrega a vazão em que sua curva cruza a curva do sistema — não a vazão que se deseja. A curva do sistema é a soma da altura estática (fixa) com a perda de carga (que cresce com o quadrado da vazão). Entender esse cruzamento resolve a maioria das questões do tema.",
   pontos:[
@@ -230,7 +230,7 @@ window.VERBETES.push(
     "Escolher Pelton para grande vazão e pequena queda — é exatamente o caso da Kaplan."] },
 
 /* ===================== 9. MOTORES DE COMBUSTÃO INTERNA ===================== */
-{ id:"mci-ciclos", tema:"mci", titulo:"Ciclos Otto e Diesel e o funcionamento do motor", padrao:true,
+{ id:"mci-ciclos", figuras:["ciclo-otto-pv","ciclo-diesel-pv"], tema:"mci", titulo:"Ciclos Otto e Diesel e o funcionamento do motor", padrao:true,
   subtemas:["Ciclo Otto","Ciclo Diesel","Ciclo de trabalho","Dois e quatro tempos","Comparação Otto e Diesel","Taxa de compressão","Diagramas","ICE e ICO","Componentes","Rendimento térmico"],
   resumo:"Otto e Diesel diferem em como o calor entra: a **volume constante** no Otto e a **pressão constante** no Diesel ideal. Para a mesma taxa de compressão, o Otto rende mais; na prática o Diesel vence porque trabalha com taxas muito maiores, limitadas no Otto pela detonação.",
   pontos:[
@@ -326,7 +326,7 @@ window.VERBETES.push(
     "Ler o 'W' de 15W-40 como 'weight'; é winter, comportamento a frio."] },
 
 /* ===================== 10. CICLOS DE POTÊNCIA ===================== */
-{ id:"cip-rankine", tema:"ciclospot", titulo:"Ciclo Rankine e melhorias de rendimento", padrao:true,
+{ id:"cip-rankine", figuras:["rankine-ts"], tema:"ciclospot", titulo:"Ciclo Rankine e melhorias de rendimento", padrao:true,
   subtemas:["Ciclo Rankine","Bomba","Título","Consumo de vapor","Irreversibilidades","Rendimento isentrópico","Equipamentos auxiliares","Ciclos","Cogeração"],
   resumo:"Quatro equipamentos, quatro processos: bomba, caldeira, turbina, condensador. O trabalho da bomba é desprezível perto do da turbina, porque comprimir líquido custa pouco. As melhorias — superaquecimento, reaquecimento e regeneração — atacam pontos diferentes do ciclo.",
   pontos:[

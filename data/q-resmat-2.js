@@ -60,7 +60,7 @@ window.BANCO.push(
   explicacao:"Mesmo sob tração pura existe cisalhamento em planos inclinados. O máximo ocorre em **45°**, valendo σ/2 = 50 MPa — é por isso que corpos de prova dúcteis rompem em cone a 45° e que aparecem as linhas de Lüders nessa inclinação.",
   pegadinha:"Não existe estado de tensão sem cisalhamento em algum plano, exceto o estado hidrostático." },
 
-{ id:"RES-30", tema:"resmat", subtema:"Viga hiperestática", nivel:"dificil",
+{ id:"RES-30", figura:"viga-engastada-apoiada", tema:"resmat", subtema:"Viga hiperestática", nivel:"dificil",
   texto:"Uma viga de vão 4,0 m está engastada em uma extremidade e simplesmente apoiada na outra, suportando carga uniformemente distribuída de 12 kN/m.",
   enunciado:"A reação vertical no apoio simples e o momento fletor no engaste valem, respectivamente,",
   alternativas:[
@@ -128,7 +128,7 @@ window.BANCO.push(
   explicacao:"A energia armazenada é a área sob o diagrama força-deslocamento: U = ½·P·δ. Ela varia com o **quadrado** da carga, o que explica por que impactos são tão mais severos que carregamentos estáticos de mesma intensidade.",
   pegadinha:"Essa é a base do dimensionamento de parafusos de alta resistência sob carga de impacto: parafusos mais longos (maior L) armazenam mais energia elasticamente e resistem melhor ao choque." },
 
-{ id:"RES-36", tema:"resmat", subtema:"Superposição", nivel:"dificil",
+{ id:"RES-36", figura:"viga-biapoiada-qp", tema:"resmat", subtema:"Superposição", nivel:"dificil",
   texto:"Uma viga biapoiada de vão L suporta simultaneamente uma carga distribuída q em todo o vão e uma carga concentrada P no meio do vão.",
   enunciado:"A flecha máxima no meio do vão é dada por",
   alternativas:[
@@ -185,7 +185,7 @@ window.BANCO.push(
   explicacao:"Com a **mesma massa**, o tubo é quase dez vezes mais rígido à flexão, porque o material está afastado da linha neutra e o termo A·y² domina. É a razão de estruturas offshore, torres e lanças de guindaste serem tubulares.",
   pegadinha:"O limite dessa lógica é a **flambagem local** da parede: reduzir demais a espessura leva ao enrugamento do tubo antes de atingir a resistência do material." },
 
-{ id:"RES-41", tema:"resmat", subtema:"Flexão", nivel:"dificil",
+{ id:"RES-41", figura:"viga-biapoiada-q", tema:"resmat", subtema:"Flexão", nivel:"dificil",
   texto:"Uma viga biapoiada de 6,0 m de vão, com seção I de módulo de resistência W = 500 cm³, suporta carga uniformemente distribuída.",
   dados:"Tensão admissível: 160 MPa",
   enunciado:"A carga distribuída máxima admissível, em kN/m, é de aproximadamente",
@@ -230,7 +230,7 @@ window.BANCO.push(
   calculo:"δ = α·L·ΔT = 23×10⁻⁶ × 4.000 × 60\nδ = 23×10⁻⁶ × 240.000 = 5,52 mm",
   explicacao:"Com dilatação **livre** não surge tensão alguma, apenas deslocamento. É quando o movimento é impedido que aparece σ = E·α·ΔT. O alumínio dilata cerca de o dobro do aço (α ≈ 12×10⁻⁶), o que exige atenção em montagens de materiais diferentes." },
 
-{ id:"RES-46", tema:"resmat", subtema:"Diagramas", nivel:"medio",
+{ id:"RES-46", figura:"viga-balanco-p", tema:"resmat", subtema:"Diagramas", nivel:"medio",
   texto:"Uma viga em balanço de 3,0 m de comprimento suporta uma carga concentrada de 15 kN na extremidade livre.",
   enunciado:"O momento fletor máximo e sua posição são",
   alternativas:[
@@ -243,7 +243,7 @@ window.BANCO.push(
   calculo:"M_max = P·L = 15 × 3,0 = 45 kN·m, no engaste\nO cortante é constante e igual a 15 kN em todo o vão",
   explicacao:"No balanço, o momento cresce linearmente da extremidade livre (onde é nulo) até o engaste (onde é máximo). Por isso o engaste é sempre a seção crítica, e é onde se concentram as verificações e os reforços." },
 
-{ id:"RES-47", tema:"resmat", subtema:"Estado plano", nivel:"medio",
+{ id:"RES-47", figura:"cisalhamento-puro", tema:"resmat", subtema:"Estado plano", nivel:"medio",
   texto:"Um elemento está submetido a cisalhamento puro, com τ = 60 MPa e tensões normais nulas.",
   enunciado:"As tensões principais nesse elemento valem",
   alternativas:[

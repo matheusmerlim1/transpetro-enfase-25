@@ -125,7 +125,7 @@ window.BANCO.push(
   calculo:"W = m·g·h = 2.000 × 10 × 15 = 300.000 J\nP = W/t = 300.000/20 = 15.000 W = 15 kW",
   explicacao:"Com velocidade constante, toda a potência vai para vencer o peso. A potência do motor deve ser maior para cobrir o rendimento da transmissão e as fases de aceleração." },
 
-{ id:"DIN-30", tema:"dinamica", subtema:"Momento de inércia", nivel:"medio",
+{ id:"DIN-30", figura:"disco-anel", tema:"dinamica", subtema:"Momento de inércia", nivel:"medio",
   texto:"Compara-se um disco maciço a um anel de parede fina, ambos de mesma massa e mesmo raio.",
   enunciado:"A razão entre os momentos de inércia do anel e do disco, em relação ao eixo central, é de",
   alternativas:["0,5","1,0","1,5","2,0","4,0"],

@@ -141,7 +141,7 @@ window.VERBETES.push(
     "Esquecer a coluna do fluido da linha no manômetro diferencial e usar só γ_Hg·h.",
     "Usar pressão manométrica onde a equação exige absoluta (estado, tabelas, escoamento compressível)."] },
 
-{ id:"flu-escoamento", tema:"mecflu", titulo:"Escoamento em tubulações e perda de carga",
+{ id:"flu-escoamento", figuras:["moody"], tema:"mecflu", titulo:"Escoamento em tubulações e perda de carga",
   subtemas:["Regimes de escoamento","Escoamento laminar","Perda de carga","Perda localizada","Escoamento em tubulações","Associação de tubulações","Diagrama de Moody","Bernoulli","Potência","Camada limite","Sifão"],
   resumo:"O número de Reynolds decide tudo: abaixo de 2.000 o escoamento é laminar e f depende só de Re; acima de 4.000 é turbulento e f depende de Re e da rugosidade relativa. Com f na mão, Darcy-Weisbach fecha a perda distribuída, e o coeficiente K ou o comprimento equivalente fecham as localizadas. Bernoulli com perdas e máquina é a equação que amarra o sistema inteiro.",
   pontos:[

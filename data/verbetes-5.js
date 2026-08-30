@@ -52,7 +52,7 @@ window.VERBETES.push(
     "Confundir mutuamente exclusivo com independente.",
     "Somar confiabilidades em paralelo em vez de trabalhar com as probabilidades de falha."] },
 
-{ id:"est-controle", tema:"estatistica", titulo:"Controle estatístico e capacidade de processo",
+{ id:"est-controle", figuras:["carta-controle","banheira"], tema:"estatistica", titulo:"Controle estatístico e capacidade de processo",
   subtemas:["Controle estatístico","Capacidade de processo","Confiabilidade"],
   resumo:"Carta de controle separa a variação **comum** (inerente ao processo) da **especial** (causa identificável). Índice de capacidade compara a dispersão do processo com a largura da especificação — e Cp ignora a centralização, enquanto Cpk a leva em conta.",
   pontos:[
@@ -76,7 +76,7 @@ window.VERBETES.push(
     "Aplicar preventiva por tempo em item com taxa de falha constante: não reduz falha alguma."] },
 
 /* ===================== 17. ELETROTÉCNICA ===================== */
-{ id:"ele-motores", tema:"eletrotecnica", titulo:"Motores de indução, partida e acionamento", padrao:true,
+{ id:"ele-motores", figuras:["conjugado-motor"], tema:"eletrotecnica", titulo:"Motores de indução, partida e acionamento", padrao:true,
   subtemas:["Motores","Motor de indução","Escorregamento","Conjugado","Curva de conjugado","Partida","Inversor de frequência","Rendimento","Princípios","Geradores","Proteção","Potência trifásica","Fator de potência"],
   resumo:"O motor de indução trifásico é o acionador padrão da indústria. Sua rotação é ditada pela frequência e pelo número de polos, e o escorregamento é o que permite o funcionamento: sem ele não há tensão induzida no rotor e, portanto, não há conjugado.",
   pontos:[

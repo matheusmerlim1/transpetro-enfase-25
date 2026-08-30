@@ -29,7 +29,7 @@ window.BANCO.push(
   explicacao:"Assinaturas típicas: **1× radial dominante e fase estável** → desbalanceamento; **2× com axial alta** → desalinhamento; **muitos harmônicos com pico truncado** → folga; **frequências não múltiplas da rotação** → rolamento; **ruído aleatório de banda larga em alta frequência** → cavitação.",
   pegadinha:"O desbalanceamento gera força m·e·ω², que cresce com o quadrado da rotação — por isso o problema se agrava em máquinas rápidas." },
 
-{ id:"VIB-40", tema:"vibracoes", subtema:"Frequência natural", nivel:"medio",
+{ id:"VIB-40", figura:"equip-isoladores", tema:"vibracoes", subtema:"Frequência natural", nivel:"medio",
   texto:"Um equipamento de 400 kg é montado sobre quatro isoladores iguais, cada um com rigidez de 250 kN/m.",
   enunciado:"A frequência natural vertical do conjunto, em Hz, é de aproximadamente",
   alternativas:["3,98","5,63","7,96","11,25","15,92"],

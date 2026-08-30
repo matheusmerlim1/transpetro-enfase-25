@@ -49,7 +49,7 @@ window.BANCO.push(
   calculo:"I = b·h³/12 = 100 × 200³/12 = 100 × 8×10⁶/12 = 66,7×10⁶ mm⁴\nW = I/y_max = 66,7×10⁶/100 = 6,67×10⁵ mm³\n(ou diretamente W = b·h²/6 = 100×40.000/6)",
   explicacao:"O momento de inércia cresce com o **cubo** da altura: por isso é muito mais eficiente aumentar h do que b. Duplicando a altura, I aumenta 8 vezes e W aumenta 4 vezes." },
 
-{ id:"RES-05", tema:"resmat", subtema:"Flexão", nivel:"medio",
+{ id:"RES-05", figura:"secao-retangular", tema:"resmat", subtema:"Flexão", nivel:"medio",
   texto:"Uma viga de seção retangular 100 mm × 200 mm (altura) está submetida a um momento fletor de 20 kN·m em torno do eixo de maior inércia.",
   enunciado:"A tensão normal máxima de flexão nessa seção, em MPa, é de",
   alternativas:["15","30","60","120","200"],
@@ -57,7 +57,7 @@ window.BANCO.push(
   calculo:"W = b·h²/6 = 100 × 200²/6 = 666.667 mm³\nM = 20 kN·m = 20×10⁶ N·mm\nσ = M/W = 20×10⁶/666.667 = 30 MPa",
   explicacao:"A tensão de flexão varia **linearmente** ao longo da altura, sendo nula na linha neutra (que passa pelo centroide, na flexão pura) e máxima nas fibras extremas, com tração de um lado e compressão do outro." },
 
-{ id:"RES-06", tema:"resmat", subtema:"Diagramas", nivel:"medio",
+{ id:"RES-06", figura:"viga-biapoiada-q", tema:"resmat", subtema:"Diagramas", nivel:"medio",
   texto:"Uma viga biapoiada de vão L = 6,0 m suporta uma carga uniformemente distribuída q = 10 kN/m em todo o vão.",
   enunciado:"O momento fletor máximo e o esforço cortante máximo nessa viga valem, respectivamente,",
   alternativas:[
@@ -106,7 +106,7 @@ window.BANCO.push(
   calculo:"J_vazado = π(D⁴ − d⁴)/32",
   explicacao:"O material próximo ao eixo contribui muito pouco para a resistência à torção, pois ali a tensão é quase nula. Retirando esse material e redistribuindo-o em raios maiores, obtém-se maior J com a mesma massa — é o princípio dos eixos e tubos ocos, largamente usados em eixos de transmissão e estruturas tubulares." },
 
-{ id:"RES-10", tema:"resmat", subtema:"Estado plano de tensões", nivel:"dificil",
+{ id:"RES-10", figura:"elemento-tensao", tema:"resmat", subtema:"Estado plano de tensões", nivel:"dificil",
   texto:"Um elemento estrutural está submetido ao seguinte estado plano de tensões:",
   dados:"σx = 80 MPa (tração)\nσy = 20 MPa (tração)\nτxy = 30 MPa",
   enunciado:"As tensões principais e a tensão de cisalhamento máxima no plano valem, aproximadamente, em MPa,",
