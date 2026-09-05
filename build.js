@@ -21,10 +21,14 @@ if (/<\/script/i.test(js)) throw new Error('algum .js contém </script — abort
 const titulo = (html.match(/<title>([^<]*)<\/title>/) || [, 'Transpetro Ênfase 25'])[1];
 const corpo = html.slice(html.indexOf('<header'), html.indexOf('</footer>') + '</footer>'.length);
 
+// o botao de portfolio fica depois do </footer>, entao o corte acima nao o pega
+const botao = (html.match(/<!-- === Botao de volta ao portfolio[\s\S]*?<!-- === fim do botao === -->/) || [''])[0];
+
 const bundle =
   '<title>' + titulo + '</title>\n' +
   '<style>\n' + css + '\n</style>\n\n' +
   corpo + '\n\n' +
+  botao + '\n\n' +
   '<script>\n' + js + '\n<\/script>\n';
 
 fs.writeFileSync(saida, bundle, 'utf8');
