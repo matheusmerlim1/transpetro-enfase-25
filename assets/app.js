@@ -258,11 +258,14 @@
     $("#verbetePainel").classList.remove("hidden");
     $("#vpCorpo").scrollTop = 0;
     document.body.style.overflow = "hidden";
+    // marca a página: o CSS usa isso para tirar da frente botões fixos de canto
+    document.body.classList.add("com-modal");
   }
 
   function fecharVerbete() {
     $("#verbetePainel").classList.add("hidden");
     document.body.style.overflow = "";
+    document.body.classList.remove("com-modal");
   }
 
   $$("#verbetePainel [data-fechar]").forEach(function (el) { el.onclick = fecharVerbete; });

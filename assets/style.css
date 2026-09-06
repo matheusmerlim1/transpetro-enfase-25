@@ -608,9 +608,33 @@ table.res td.num{text-align:right;font-family:var(--mono);font-variant-numeric:t
   border-radius:0 0 var(--r) var(--r);
 }
 @media(max-width:600px){
-  .vp{padding:0}
-  .vp-caixa{max-height:100vh;height:100vh;border-radius:0;border:0}
+  /* No celular o painel vira folha inferior em vez de ocupar a tela inteira.
+     Ocupando tudo, o ✕ do cabeçalho encostava na barra de URL e caía embaixo
+     do botão flutuante do canto superior direito. Ancorado embaixo, sobra
+     sempre uma faixa livre no topo e o ✕ fica longe dos dois. */
+  .vp{padding:0;align-items:flex-end}
+  .vp-caixa{
+    width:100%;height:auto;
+    max-height:86vh;
+    max-height:86dvh;            /* dvh desconta a barra do navegador */
+    border-radius:var(--r) var(--r) 0 0;border-bottom:0;
+  }
+  /* alça, para a folha se ler como painel que sobe */
+  .vp-topo{padding-top:1.1rem;position:relative}
+  .vp-topo::before{
+    content:"";position:absolute;top:.45rem;left:50%;transform:translateX(-50%);
+    width:36px;height:4px;border-radius:2px;background:var(--line-strong);
+  }
+  /* alvo de toque confortável: 44 px é o mínimo recomendado */
+  #vpFechar{
+    min-width:44px;min-height:44px;font-size:1.05rem;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .vp-rodape{padding-bottom:calc(.7rem + env(safe-area-inset-bottom))}
 }
+/* enquanto o resumo está aberto, o botão fixo do canto sai da frente:
+   ele tem z-index altíssimo e passaria por cima do painel */
+body.com-modal #mr-portfolio-btn{display:none !important}
 @media print{ .vp{display:none !important} }
 /* ============================================================
    CALCULADORA DE APOIO
