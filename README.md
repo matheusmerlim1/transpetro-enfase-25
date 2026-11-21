@@ -2,7 +2,7 @@
 
 **Estudar agora → https://matheusmerlim1.github.io/transpetro-enfase-25/**
 
-Site de estudo para o **Edital nº 04 – TRANSPETRO/PSP/TERRA/NÍVEL SUPERIOR – 2026.4, Ênfase 25: Engenharia Mecânica** (Fundação Cesgranrio, prova em 29/11/2026).
+Site de estudo para o **Edital nº 04 – TRANSPETRO/PSP/TERRA/NÍVEL SUPERIOR – 2026.4, Ênfase 25: Engenharia Mecânica** (Fundação Cesgranrio, prova em 06/12/2026).
 
 ## Como abrir
 

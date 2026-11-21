@@ -28,7 +28,8 @@ window.EDITAL = {
   titulo: "Edital nº 04 — TRANSPETRO/PSP/TERRA/NÍVEL SUPERIOR — 2026.4 · Ênfase 25: Engenharia Mecânica",
   fatos: [
     "Banca: **Fundação Cesgranrio**. Cargo: Profissional Júnior — Ênfase 25: Engenharia Mecânica.",
-    "Prova objetiva: **29/11/2026**, com **4 horas e 30 minutos** de duração.",
+    "Prova objetiva: **06/12/2026** (adiada de 29/11/2026), com **4 horas e 30 minutos** de duração.",
+    "Local, sala e horário: só no **Cartão de Confirmação de Inscrição**, previsto para **01/12/2026** na área do candidato do site da Cesgranrio. Houve retificação dos locais de prova na BA, ES, RJ e SP.",
     "**70 questões**, cada uma valendo 1 ponto, com **cinco alternativas (A a E)** e uma única resposta correta.",
     "Divisão: **50 questões de Conhecimentos Específicos** (Fase 1) + **20 de Conhecimentos Gerais** (Fase 2), sendo 10 de Língua Portuguesa e 10 de Língua Inglesa.",
     "Eliminação (item 7.1.4.3): menos de 50% em Específicas, ou menos de 50% em Gerais, ou **grau zero em qualquer matéria** de Conhecimentos Gerais.",

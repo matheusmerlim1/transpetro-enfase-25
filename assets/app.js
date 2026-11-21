@@ -48,7 +48,7 @@
       "</figure>";
   }
 
-  var DATA_PROVA = new Date(2026, 10, 29, 9, 0, 0); // 29/11/2026
+  var DATA_PROVA = new Date(2026, 11, 6, 9, 0, 0); // 06/12/2026 (adiada de 29/11)
 
   /* ---------- armazenamento ---------- */
   var KEY = "transpetro2026_mec_v1";
@@ -382,7 +382,7 @@
     $("#countdown").innerHTML =
       '<span class="d">' + (dias > 0 ? dias : 0) + "</span>" +
       '<span class="lbl">dias para a prova</span>' +
-      '<div class="date">29/11/2026 · 4h30<br><span class="muted">70 questões · 50 específicas</span></div>';
+      '<div class="date">06/12/2026 · 4h30<br><span class="muted">70 questões · 50 específicas</span></div>';
 
     var feitas = 0, ac = 0, er = 0, rev = 0;
     Object.keys(S.stats).forEach(function (k) {
